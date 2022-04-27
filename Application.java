@@ -44,9 +44,9 @@ public class Application {
     {
         //while (isSimulationActive)
             
-            //bool isAnyRabbit = false
-            //bool isAnyFox = false 
-        
+            //EntityType check = null
+            //bool shouldSimEnd = true
+
             //For each node in grid
                 //entity = node.occupant
                 //if(entity = null) continue
@@ -56,14 +56,14 @@ public class Application {
                         //continue
                     //setup neighboures
                     
-                    //if(entity.Type == FOX) isAnyFox = true
-                    //if(entity.Type == Rabbit) isAnyRabbit = true
+                    //if(check == null) check = entity.GetType()
+                    //else if (check != entity.GetType()) shouldSimEnd = true
 
                     //entity.isOpen = false
                 //
             //
 
-            //if(isAnyRabbit == false || isAnyFox == false)
+            //if(shouldSimEnd)
                 //isSimulationActive = false
                 //continue
 
@@ -72,6 +72,8 @@ public class Application {
                 //if(entity = null) continue
                 //entity.isOpen = true
             //
+
+            //GUI UPDATE
         //
 
         //Some sumarize after sim end??
