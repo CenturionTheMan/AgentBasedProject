@@ -1,6 +1,4 @@
-/**
- * POorowiec
- */
+
 public class POorowiec_Entity extends Entity {
 
     //CTOR
