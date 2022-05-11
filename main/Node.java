@@ -1,20 +1,22 @@
+package main;
 
 public class Node {
     
     //VALUES
-    private TerrainType terrainType;
     private Entity occupant;
+    private Vector2 position;
 
+    
     //SETTERS && GETTERS
-    public TerrainType GetTerrainType(){ return terrainType; }
-    public void SetTerrainType(TerrainType type){ terrainType = type; }
-
     public Entity GetOccupant(){ return occupant; }
     public void SetOccupant(Entity occupant){ this.occupant = occupant; }
 
+    public Vector2 GetPosition(){ return position; }
+    public void SetPosition(Vector2 pos){ position = pos; }
 
+
+    //CTOR
     public Node(Entity occupant) {
-        terrainType = TerrainType.BASIC;
         this.occupant = occupant;
     }
 }
