@@ -9,8 +9,9 @@ public class Debil extends Active_Entity{
         super(position, speed, visionRange, neighbours);
     }
     
+    
     @Override
-    public void Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
-        
+    public Vector2 Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
+        return null;
     }
 }

@@ -1,5 +1,8 @@
 package main;
 
+import main.ActiveSubclass.*;
+import main.StaticSubclass.*;
+
 public class Simulation {
     
     private Node[][] grid;
@@ -18,7 +21,38 @@ public class Simulation {
             //setup neighboures for each entity
 
         //Run Update in new thread (prob)
+
+
+        //Testing();
     }
+
+    //TEMP FUNC
+    private void Testing()
+    {
+        grid = new Node[2][2];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                grid[i][j] = new Node(new Vector2(i, j));
+            }
+        }
+
+        grid[0][0].SetOccupant(new Patus(new Vector2(0, 0), 1, 1, null));
+        Patus t = (Patus)grid[0][0].GetOccupant();
+        t.DoMove(grid);
+        
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if(grid[i][j].GetOccupant() == null) System.out.print("-");
+                else
+                {
+                    System.out.print("x");
+                    //System.out.println(grid[i][j].GetOccupant());
+                }
+            }
+            System.out.println();
+        }
+    }
+
 
     private void Update()
     {

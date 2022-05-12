@@ -9,9 +9,10 @@ public class Licbus extends Active_Entity{
         super(position, speed, visionRange, neighbours);
     }
 
+
     @Override
-    public void Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
-        
+    protected Vector2 Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
+        return null;
     }
     
 }

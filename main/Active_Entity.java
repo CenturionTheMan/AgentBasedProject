@@ -3,7 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Active_Entity extends Entity {
+public abstract class Active_Entity extends Entity {
 
     //VALUES
     private Entity[] neighbours;
@@ -30,19 +30,20 @@ public class Active_Entity extends Entity {
         this.visionRange = visionRange;
     }
 
-
     
     //do not touch
     public void DoMove(Node[][] grid)
     {
-        Logic(grid,GetActiveNeighbours(grid),GetStaticNeighbours(grid));
+        Vector2 move = Logic(grid,GetActiveNeighbours(grid),GetStaticNeighbours(grid));
+        if(move == null) return;
+
+
+        grid[GetPosition().x + move.x][GetPosition().y + move.y].SetOccupant(this); //NWM CZY NIE ROBI Z KAZDEGO OCCUPANTA KLASY ACTIVE_ENTITY -> raczej nie
+        grid[GetPosition().x][GetPosition().y].SetOccupant(null);
+        SetPosition(Vector2.AddVectors(GetPosition(), move));
     }
 
-    public void Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh)
-    {
-        //to overite
-    }
-
+    protected abstract Vector2 Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //TO OVERWRITE
 
     private List<Active_Entity> GetActiveNeighbours(Node[][] grid)
     {

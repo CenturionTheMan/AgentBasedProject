@@ -16,7 +16,20 @@ public class Node {
 
 
     //CTOR
-    public Node(Entity occupant) {
+    public Node(Entity occupant, Vector2 position) {
         this.occupant = occupant;
+        this.position = position;
+    }
+    public Node(Vector2 pos)
+    {
+        position = pos;
+    }
+    public Node(Node node)
+    {
+        occupant = node.occupant;
+        position = node.position;
+    }
+    public Node()
+    {
     }
 }
