@@ -13,13 +13,15 @@ public class Application {
     static void InitApp()
     {
         //GUI
-        SetupBeginCondiotions();
+
+        Simulation sim = new Simulation(/*setup values*/);
+        SetupBeginCondiotions(sim);
     }
 
     //TEMP FUNCION (most likely will be replaced by GUI handling)
-    static void SetupBeginCondiotions()
+    static void SetupBeginCondiotions(Simulation sim)
     {
         //setup values
-        Simulation sim = new Simulation(/*setup values*/);
+        
     }
 }
