@@ -6,9 +6,9 @@ import java.util.List;
 public abstract class Active_Entity extends Entity {
 
     //VALUES
-    private Entity[] neighbours;
-    private int speed;
-    private int visionRange;
+    private Entity[] neighbours;    //entities in neighbourhood
+    private int speed;  //amount of squares can unit travel in round
+    private int visionRange;    //range of awarness
 
 
     //GETTERS && SETTERS
@@ -31,20 +31,28 @@ public abstract class Active_Entity extends Entity {
     }
 
     
-    //do not touch
-    public void DoMove(Node[][] grid)
+    //METHODS
+    public final void DoMove(Node[][] grid) //HUB used for moving entities
     {
-        Vector2 move = Logic(grid,GetActiveNeighbours(grid),GetStaticNeighbours(grid));
+        if(!GetIsOpen()) return; //if entity moved in round -> prevent from moving again
+
+
+        Vector2 move = Logic(grid,GetActiveNeighbours(grid),GetStaticNeighbours(grid)); //do logic and get movement vec
         if(move == null) return;
 
-
-        grid[GetPosition().x + move.x][GetPosition().y + move.y].SetOccupant(this); //NWM CZY NIE ROBI Z KAZDEGO OCCUPANTA KLASY ACTIVE_ENTITY -> raczej nie
+        //change position
+        grid[GetPosition().x + move.x][GetPosition().y + move.y].SetOccupant(this);
         grid[GetPosition().x][GetPosition().y].SetOccupant(null);
         SetPosition(Vector2.AddVectors(GetPosition(), move));
+        //
+
+
+        SetIsOpen(false); //close entity -> to prevent moving again in this round
     }
 
-    protected abstract Vector2 Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //TO OVERWRITE
+    protected abstract Vector2 Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Logic to change for each subEntity
 
+    //GET ACTIVE NEIGHBOURS BASED ON VISION RANGE
     private List<Active_Entity> GetActiveNeighbours(Node[][] grid)
     {
         List<Active_Entity> arr = new ArrayList<Active_Entity>();
@@ -69,6 +77,7 @@ public abstract class Active_Entity extends Entity {
         return arr;
     }
 
+    //GET STATIC NEIGHBOURS BASED ON VISION RANGE
     private List<Static_Entity> GetStaticNeighbours(Node[][] grid)
     {
         List<Static_Entity> arr = new ArrayList<Static_Entity>();

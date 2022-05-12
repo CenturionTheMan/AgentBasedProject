@@ -65,11 +65,8 @@ public class Simulation {
 
                 //if(entity == null || !(entity instanceof Active_Entity)) continue
                 //Active_Entity active = (Active_Entity)entity; 
-                
-                //if(!Active_Entity.GetIsOpen()) continue;
                
                 //Active_Entity.DoMove();
-                //Active_Entity.SetIsOpen(false);
 
                 //GUI UPDATE
             //
