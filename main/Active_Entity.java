@@ -3,7 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Active_Entity extends Entity {
+public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     //VALUES
     private Entity[] neighbours;    //entities in neighbourhood
