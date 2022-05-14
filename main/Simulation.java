@@ -17,7 +17,7 @@ public class Simulation {
 
     private boolean isRunning = false;
 
-    
+
     //SETTERS && GETTERS
     public void SetGridSize(Vector2 size) { gridSize = size; }
 
@@ -60,20 +60,21 @@ public class Simulation {
 
         isRunning = true;
         Update(); //Run Update in new thread (prob)
+
+        //Testing(grid);
     }
 
     //TEMP FUNC
     private void Testing(Node[][] grid)
     {
-        grid = new Node[2][2];
         for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid.length; j++) {
+            for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j] = new Node(new Vector2(i, j));
             }
         }
 
-        grid[0][0].SetOccupant(new Patus(new Vector2(0, 0), 1, 1, null));
-        Patus t = (Patus)grid[0][0].GetOccupant();
+        grid[1][1].SetOccupant(new Patus(new Vector2(1, 1), 1, 1, null));
+        Patus t = (Patus)grid[1][1].GetOccupant();
         t.DoMove(grid);
         
         for (int i = 0; i < grid.length; i++) {

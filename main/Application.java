@@ -18,8 +18,8 @@ public class Application {
 
 
         simulation = new Simulation();
-        //TEMP
-        OnRunSimulation();
+
+        OnRunSimulation(); //TEMP
     }
 
     public static void OnRunSimulation()

@@ -47,6 +47,10 @@ public abstract class Active_Entity extends Entity {
         Vector2 move = Logic(grid,GetActiveNeighbours(grid),GetStaticNeighbours(grid)); //do logic and get movement vec
         if(move == null) return;
 
+        int swap = move.x;
+        move.x = -move.y;
+        move.y = swap;
+
         //change position
         grid[GetPosition().x + move.x][GetPosition().y + move.y].SetOccupant(this);
         grid[GetPosition().x][GetPosition().y].SetOccupant(null);
@@ -72,7 +76,7 @@ public abstract class Active_Entity extends Entity {
                 
                 if(relativePos.Compare(GetPosition())) continue;
                 if(relativePos.x <0 || relativePos.x > grid.length) continue;
-                if(relativePos.y <0 || relativePos.y > grid[x].length) continue;
+                if(relativePos.y <0 || relativePos.y > grid[relativePos.x].length) continue;
 
                 if(grid[relativePos.x][relativePos.y].GetOccupant() == null) continue;
                 if(!(grid[relativePos.x][relativePos.y].GetOccupant() instanceof Active_Entity)) continue;
@@ -97,7 +101,7 @@ public abstract class Active_Entity extends Entity {
                 
                 if(relativePos.Compare(GetPosition())) continue;
                 if(relativePos.x <0 || relativePos.x > grid.length) continue;
-                if(relativePos.y <0 || relativePos.y > grid[x].length) continue;
+                if(relativePos.y <0 || relativePos.y > grid[relativePos.x].length) continue;
 
                 if(grid[relativePos.x][relativePos.y].GetOccupant() == null) continue;
                 if(!(grid[relativePos.x][relativePos.y].GetOccupant() instanceof Static_Entity)) continue;
