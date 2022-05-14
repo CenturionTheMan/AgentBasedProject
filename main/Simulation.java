@@ -8,6 +8,8 @@ public class Simulation {
     //VALUES
     private Vector2 gridSize;
 
+    //setup pod grida
+
     private Vector2 Debil_speedANDvision;
     private Vector2 Gimbus_speedANDvision;
     private Vector2 Licbus_speedANDvision;
@@ -61,7 +63,7 @@ public class Simulation {
         isRunning = true;
         Update(); //Run Update in new thread (prob)
 
-        //Testing(grid);
+        Testing(grid);
     }
 
     //TEMP FUNC
@@ -73,13 +75,15 @@ public class Simulation {
             }
         }
 
-        grid[1][1].SetOccupant(new Patus(new Vector2(1, 1), 1, 1, null));
-        Patus t = (Patus)grid[1][1].GetOccupant();
+        Patus t = new Patus(new Vector2(2, 2), 1, 1, null);
+        grid[2][2].SetOccupant(t);
+
         t.DoMove(grid);
         
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if(grid[i][j].GetOccupant() == null) System.out.print("-");
+                if(i == 2 && j == 2) System.out.print("B");
+                else if(grid[i][j].GetOccupant() == null) System.out.print("-");
                 else
                 {
                     System.out.print("x");
