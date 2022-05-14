@@ -5,29 +5,65 @@ import main.StaticSubclass.*;
 
 public class Simulation {
     
-    private Node[][] grid;
+    //VALUES
+    private Vector2 gridSize;
+
+    private Vector2 Debil_speedANDvision;
+    private Vector2 Gimbus_speedANDvision;
+    private Vector2 Licbus_speedANDvision;
+    private Vector2 Patus_speedANDvision;
+    private Vector2 Podbus_speedANDvision;
+    private Vector2 Student_speedANDvision;
+
+    private boolean isRunning = false;
+
+    
+    //SETTERS && GETTERS
+    public void SetGridSize(Vector2 size) { gridSize = size; }
+
+    public void SetDebil_speedANDvision(Vector2 speedANDvision) { Debil_speedANDvision = speedANDvision; }
+    public void SetGimbus_speedANDvision(Vector2 speedANDvision) { Gimbus_speedANDvision = speedANDvision; }
+    public void SetLicbus_speedANDvision(Vector2 speedANDvision) { Licbus_speedANDvision = speedANDvision; }
+    public void SetPatus_speedANDvision(Vector2 speedANDvision) { Patus_speedANDvision = speedANDvision; }
+    public void SetPodbus_speedANDvision(Vector2 speedANDvision) { Podbus_speedANDvision = speedANDvision; }
+    public void SetStudent_speedANDvision(Vector2 speedANDvision) { Student_speedANDvision = speedANDvision; }
+
+    public boolean IsRunning() { return isRunning; }
 
 
-    public Simulation(/*setup values, sth to handle gui: GUI class/pointer to func in gui class/delegates -> sth have to be choosen */) {
-
-        // Entity base = new Gimbaza(new Vector2(0, 0));
-        // Gimbus temp = new Gimbus(new Vector2(0, 0), 0, 0, null);
+    //CTOR
+    public Simulation(/*sth to handle gui: GUI class/pointer to func in gui class/delegates -> sth have to be choosen */) {
         
-        //Setup grid 
-            //set size
+        //BASE VALUES
+        SetGridSize(new Vector2(10, 10));
+        
+        SetDebil_speedANDvision(new Vector2(1, 1));
+        SetGimbus_speedANDvision(new Vector2(1, 1));
+        SetLicbus_speedANDvision(new Vector2(1, 1));
+        SetPatus_speedANDvision(new Vector2(1, 1));
+        SetPodbus_speedANDvision(new Vector2(1, 1));
+        SetStudent_speedANDvision(new Vector2(1, 1));
+    }
+
+    public void RunSimulation()
+    {
+        if(isRunning)
+        {
+            //end previus simulation and create new one
+        }
+
+        Node[][] grid = new Node[gridSize.x][gridSize.y]; // tu albo publiczne, zależnie od potrzeb GUI
         
         //For each node in grid
             //spawn entities with some probability
             //setup neighboures for each entity
 
-        //Run Update in new thread (prob)
-
-
-        //Testing();
+        isRunning = true;
+        Update(); //Run Update in new thread (prob)
     }
 
     //TEMP FUNC
-    private void Testing()
+    private void Testing(Node[][] grid)
     {
         grid = new Node[2][2];
         for (int i = 0; i < grid.length; i++) {
@@ -81,5 +117,7 @@ public class Simulation {
         //
 
         //Some sumarize after sim end??
+
+        isRunning = false;
     }
 }

@@ -6,6 +6,8 @@ package main;
  */
 public class Application {
 
+    static Simulation simulation;
+
     public static void main(String[] args) {
         InitApp();
     }
@@ -14,14 +16,14 @@ public class Application {
     {
         //GUI
 
-        Simulation sim = new Simulation(/*setup values*/);
-        SetupBeginCondiotions(sim);
+
+        simulation = new Simulation();
+        //TEMP
+        OnRunSimulation();
     }
 
-    //TEMP FUNCION (most likely will be replaced by GUI handling)
-    static void SetupBeginCondiotions(Simulation sim)
+    public static void OnRunSimulation()
     {
-        //setup values
-        
+        simulation.RunSimulation();
     }
 }

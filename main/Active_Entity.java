@@ -23,6 +23,13 @@ public abstract class Active_Entity extends Entity {
 
 
     //CTOR
+    public Active_Entity(Vector2 position, Vector2 speedANDvision, Entity[] neighbours) {
+        super(position);
+        this.neighbours = neighbours;
+        this.speed = speedANDvision.x;
+        this.visionRange = speedANDvision.y;
+    }
+
     public Active_Entity(Vector2 position,int speed, int visionRange, Entity[] neighbours) {
         super(position);
         this.neighbours = neighbours;
