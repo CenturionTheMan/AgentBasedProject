@@ -7,15 +7,14 @@ package main;
 public class Application {
 
     static Simulation simulation;
-
+    static GUI gui;
     public static void main(String[] args) {
         InitApp();
     }
 
     static void InitApp()
     {
-        //GUI
-
+        gui = new GUI(); //GUI
 
         simulation = new Simulation();
 
