@@ -60,8 +60,6 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         //
 
         StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
-
-        SetToOpen(); //close entity -> to prevent moving again in this round
     }
 
     protected abstract Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Get MovementVector to change unit position

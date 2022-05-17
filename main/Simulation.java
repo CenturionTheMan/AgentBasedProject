@@ -6,6 +6,7 @@ import main.StaticSubclass.*;
 public class Simulation {
     
     //VALUES
+    private Node[][] grid; // tu albo w funkcji, zależnie od potrzeb GUI
     private Vector2 gridSize;
 
     //setup pod grida
@@ -54,7 +55,7 @@ public class Simulation {
             //end previus simulation and create new one
         }
 
-        Node[][] grid = new Node[gridSize.x][gridSize.y]; // tu albo publiczne, zależnie od potrzeb GUI
+        grid = new Node[gridSize.x][gridSize.y];
         
         //For each node in grid
             //spawn entities with some probability

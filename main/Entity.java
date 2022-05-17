@@ -10,7 +10,15 @@ public class Entity {
     public Vector2 GetPosition() { return position; }
     public void SetPosition(Vector2 pos) { position = pos; }
 
-    public boolean IsOpen() { return isOpen; }
+    public boolean IsOpen() { 
+        if(isOpen) 
+        {
+            isOpen = false;
+            return true;
+        }
+        else
+            return false;
+    }
     public void SetToOpen() { isOpen = true; }
 
     //CTOR
