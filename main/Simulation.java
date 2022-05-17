@@ -62,8 +62,7 @@ public class Simulation {
 
         isRunning = true;
         Update(); //Run Update in new thread (prob)
-
-        Testing(grid);
+        //Testing(grid);
     }
 
     //TEMP FUNC
@@ -78,6 +77,9 @@ public class Simulation {
         Patus t = new Patus(new Vector2(2, 2), 1, 1, null);
         grid[2][2].SetOccupant(t);
 
+
+        t.DoMove(grid);
+        t.SetIsOpen(true);
         t.DoMove(grid);
         
         for (int i = 0; i < grid.length; i++) {
