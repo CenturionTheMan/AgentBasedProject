@@ -11,7 +11,13 @@ public class Debil extends Active_Entity{
     
     
     @Override
-    public Vector2 Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
+    public Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         return null;
+    }
+
+
+    @Override
+    protected void StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
+        
     }
 }

@@ -11,9 +11,13 @@ public class Patus extends Active_Entity{
 
 
     @Override
-    protected Vector2 Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
+    protected Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         
         return null;
     }
     
+    @Override
+    protected void StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
+        
+    }
 }

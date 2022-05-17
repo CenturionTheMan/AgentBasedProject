@@ -79,7 +79,7 @@ public class Simulation {
 
 
         t.DoMove(grid);
-        t.SetIsOpen(true);
+        t.SetToOpen();
         t.DoMove(grid);
         
         for (int i = 0; i < grid.length; i++) {

@@ -41,27 +41,32 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
     //METHODS
     public final void DoMove(Node[][] grid) //HUB used for moving entities
     {
-        if(!GetIsOpen()) return; //if entity moved in round -> prevent from moving again
+        if(!IsOpen()) return; //if entity moved in round -> prevent from moving again
 
+        List<Active_Entity> activeNeigh = GetActiveNeighbours(grid);
+        List<Static_Entity> staticNeigh = GetStaticNeighbours(grid);
 
-        Vector2 move = Logic(grid,GetActiveNeighbours(grid),GetStaticNeighbours(grid)); //do logic and get movement vec
+        Vector2 move = MovementLogic(grid,activeNeigh,staticNeigh); //do MovementLogic and get movement vec
         if(move == null) return;
 
         int swap = move.x;
         move.x = -move.y;
         move.y = swap;
-
+        
         //change position
         grid[GetPosition().x + move.x][GetPosition().y + move.y].SetOccupant(this);
         grid[GetPosition().x][GetPosition().y].SetOccupant(null);
         SetPosition(Vector2.AddVectors(GetPosition(), move));
         //
 
+        StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
 
-        SetIsOpen(false); //close entity -> to prevent moving again in this round
+        SetToOpen(); //close entity -> to prevent moving again in this round
     }
 
-    protected abstract Vector2 Logic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Logic to change for each subEntity
+    protected abstract Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Get MovementVector to change unit position
+    
+    protected abstract void StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Check status if needed
 
     //GET ACTIVE NEIGHBOURS BASED ON VISION RANGE
     private List<Active_Entity> GetActiveNeighbours(Node[][] grid)
