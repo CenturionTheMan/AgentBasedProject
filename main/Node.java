@@ -23,6 +23,7 @@ public class Node {
     public Node(Vector2 pos)
     {
         position = pos;
+        occupant = null;
     }
     public Node(Node node)
     {

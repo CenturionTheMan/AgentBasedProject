@@ -5,8 +5,8 @@ import main.*;
 
 public class Student extends Active_Entity{
 
-    public Student(Vector2 position, int speed, int visionRange, Entity[] neighbours) {
-        super(position, speed, visionRange, neighbours);
+    public Student(Vector2 position, Vector2 speedANDvision, Entity[] neighbours) {
+        super(position, speedANDvision, neighbours);
     }
 
 
@@ -16,7 +16,14 @@ public class Student extends Active_Entity{
     }
     
     @Override
-    protected void StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
+    protected boolean StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         
+        /*
+        if(piwo was eaten)
+            return true;
+        else
+            return false
+        */
+        return false;
     }
 }

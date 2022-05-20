@@ -39,15 +39,15 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     
     //METHODS
-    public final void DoMove(Node[][] grid) //HUB used for moving entities
+    public final boolean DoMove(Node[][] grid) //HUB used for moving entities
     {
-        if(!IsOpen()) return; //if entity moved in round -> prevent from moving again
+        if(!IsOpen()) return false; //if entity moved in round -> prevent from moving again
 
         List<Active_Entity> activeNeigh = GetActiveNeighbours(grid);
         List<Static_Entity> staticNeigh = GetStaticNeighbours(grid);
 
         Vector2 move = MovementLogic(grid,activeNeigh,staticNeigh); //do MovementLogic and get movement vec
-        if(move == null) return;
+        if(move == null) return false;
 
         int swap = move.x;
         move.x = -move.y;
@@ -59,32 +59,24 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         SetPosition(Vector2.AddVectors(GetPosition(), move));
         //
 
-        StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
+        boolean isEndConMeet = StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
+        return isEndConMeet;
     }
 
     protected abstract Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Get MovementVector to change unit position
     
-    protected abstract void StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Check status if needed
+    protected abstract boolean StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Check status if needed; should return true if enticy = student and piwo was eatn in turn
 
     //GET ACTIVE NEIGHBOURS BASED ON VISION RANGE
     private List<Active_Entity> GetActiveNeighbours(Node[][] grid)
     {
-        List<Active_Entity> arr = new ArrayList<Active_Entity>();
+        List<Active_Entity> arr = new ArrayList<Active_Entity>();   
+        List<Node> nodes = GridMap.GetNeighbourNodes(GetPosition(), visionRange);
         
-        for (int x = -visionRange; x < visionRange +1; x++) {
-            for (int y = -visionRange; y < visionRange +1; y++) {
-                
-                Vector2 inRange = new Vector2(x, y);
-                Vector2 relativePos = Vector2.AddVectors(GetPosition(), inRange);
-                
-                if(relativePos.Compare(GetPosition())) continue;
-                if(relativePos.x <0 || relativePos.x > grid.length) continue;
-                if(relativePos.y <0 || relativePos.y > grid[relativePos.x].length) continue;
-
-                if(grid[relativePos.x][relativePos.y].GetOccupant() == null) continue;
-                if(!(grid[relativePos.x][relativePos.y].GetOccupant() instanceof Active_Entity)) continue;
-
-                arr.add((Active_Entity)grid[relativePos.x][relativePos.y].GetOccupant());
+        for (Node node : nodes) {
+            if(node.GetOccupant() instanceof Active_Entity)
+            {
+                arr.add((Active_Entity)node.GetOccupant());
             }
         }
 
@@ -95,23 +87,15 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
     private List<Static_Entity> GetStaticNeighbours(Node[][] grid)
     {
         List<Static_Entity> arr = new ArrayList<Static_Entity>();
+        List<Node> nodes = GridMap.GetNeighbourNodes(GetPosition(), visionRange);
         
-        for (int x = -visionRange; x < visionRange +1; x++) {
-            for (int y = -visionRange; y < visionRange +1; y++) {
-                
-                Vector2 inRange = new Vector2(x, y);
-                Vector2 relativePos = Vector2.AddVectors(GetPosition(), inRange);
-                
-                if(relativePos.Compare(GetPosition())) continue;
-                if(relativePos.x <0 || relativePos.x > grid.length) continue;
-                if(relativePos.y <0 || relativePos.y > grid[relativePos.x].length) continue;
-
-                if(grid[relativePos.x][relativePos.y].GetOccupant() == null) continue;
-                if(!(grid[relativePos.x][relativePos.y].GetOccupant() instanceof Static_Entity)) continue;
-
-                arr.add((Static_Entity)grid[relativePos.x][relativePos.y].GetOccupant());
+        for (Node node : nodes) {
+            if(node.GetOccupant() instanceof Static_Entity)
+            {
+                arr.add((Static_Entity)node.GetOccupant());
             }
         }
+        
 
         return arr;
     }
