@@ -1,8 +1,5 @@
 package main;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.ExecutorService;
-
 import main.ActiveSubclass.*;
 import main.StaticSubclass.*;
 
@@ -23,17 +20,17 @@ public class Simulation {
     private Vector2 Podbus_speedANDvision;
     private Vector2 Student_speedANDvision;
 
-    private int DebilInitAmount = 1;
-    private int GimbusInitAmount = 0;
-    private int LicbusInitAmount = 0;
+    private int DebilInitAmount = 0;
+    private int GimbusInitAmount = 2;
+    private int LicbusInitAmount = 2;
     private int PatusInitAmount = 0;
-    private int PodbusInitAmount = 0;
+    private int PodbusInitAmount = 5;
     private int StudentInitAmount = 0;
 
     private int GimbazaInitAmount = 2;
-    private int LicbazaInitAmount = 0;
-    private int PodbazaInitAmount = 0;
-    private int UczelniaInitAmount = 0;
+    private int LicbazaInitAmount = 1;
+    private int PodbazaInitAmount = 1;
+    private int UczelniaInitAmount = 1;
 
     private boolean isRunning = false;
 
@@ -73,7 +70,7 @@ public class Simulation {
     public Simulation() {
 
         //BASE VALUES (ON APP RUN)
-        SetGridSize(new Vector2(10, 15));
+        SetGridSize(new Vector2(5, 7));
         
         SetDebil_speedANDvision(new Vector2(1, 1));
         SetGimbus_speedANDvision(new Vector2(1, 1));
@@ -143,6 +140,9 @@ public class Simulation {
         }
         //
 
+        //SETUP NEIGHB OURS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        gridMap.SetupNeighbours();
+
 
         //print fin grid
         GUI.PrintGrid(gridMap.GetGrid());
@@ -153,6 +153,8 @@ public class Simulation {
     }
 
 
+
+    //Class for handling multithreading
     class UpdateThread implements Runnable
     {
         @Override

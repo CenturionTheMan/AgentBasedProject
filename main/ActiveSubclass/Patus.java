@@ -5,7 +5,7 @@ import main.*;
 
 public class Patus extends Active_Entity{
 
-    public Patus(Vector2 position, Vector2 speedANDvision, Entity[] neighbours) {
+    public Patus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
 

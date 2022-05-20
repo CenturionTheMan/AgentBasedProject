@@ -5,7 +5,7 @@ import main.*;
 
 public class Debil extends Active_Entity{
 
-    public Debil(Vector2 position, Vector2 speedANDvision, Entity[] neighbours) {
+    public Debil(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
     

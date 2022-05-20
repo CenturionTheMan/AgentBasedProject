@@ -56,6 +56,8 @@ public class Entity {
 
 
     //METHODS
+
+    //Changes position of entitiy 
     public void ChangePosition(Vector2 pos, Node[][] grid)
     {
         grid[GetPosition().x][GetPosition().y].SetOccupant(null);

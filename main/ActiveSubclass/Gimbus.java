@@ -5,7 +5,7 @@ import main.*;
 
 public class Gimbus extends Active_Entity {
 
-    public Gimbus(Vector2 position, Vector2 speedANDvision, Entity[] neighbours) {
+    public Gimbus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
 

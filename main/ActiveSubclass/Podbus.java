@@ -5,7 +5,7 @@ import main.*;
 
 public class Podbus extends Active_Entity{
 
-    public Podbus(Vector2 position, Vector2 speedANDvision, Entity[] neighbours) {
+    public Podbus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
 

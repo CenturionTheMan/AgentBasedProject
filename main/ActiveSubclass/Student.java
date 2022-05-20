@@ -5,7 +5,7 @@ import main.*;
 
 public class Student extends Active_Entity{
 
-    public Student(Vector2 position, Vector2 speedANDvision, Entity[] neighbours) {
+    public Student(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
 

@@ -1,8 +1,5 @@
 package main;
 
-import java.lang.ProcessBuilder.Redirect.Type;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,7 +11,6 @@ public class GridMap {
 
 
     //GETTERS && SETTERS
-    public void SetGrid(Node[][] grid) { GridMap.grid = grid; }
     public Node[][] GetGrid() { return grid; }
 
 
@@ -25,7 +21,7 @@ public class GridMap {
 
 
     //METHODS
-    public void InitGrid(Vector2 gridSize)
+    public void InitGrid(Vector2 gridSize) //setup
     {
         grid = new Node[gridSize.x][gridSize.y];
 
@@ -38,12 +34,39 @@ public class GridMap {
         }
     }
 
+    //setup neighbours for all entities on the grid
+    public void SetupNeighbours()
+    {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                
+                Entity ent = grid[i][j].GetOccupant();
+
+                if(ent instanceof Active_Entity)
+                {
+                    Active_Entity act = (Active_Entity)ent;
+                    List<Entity> ents = new ArrayList<Entity>();
+                    List<Node> nodes = GetNeighbourNodes(act.GetPosition(), act.GetVisionRange()); 
+
+                    for (Node node : nodes) {
+                        if(node.GetOccupant() != null) ents.add(node.GetOccupant()); 
+                    }
+
+                    act.SetNeighbours(ents);
+                }
+
+            }
+        }
+    }
+
+    //Sets unit on position
     public void PlaceUnitOnMap(Vector2 pos, Entity unit)
     {
         grid[pos.x][pos.y].SetOccupant(unit);
         unit.SetPosition(pos);
     }
 
+    //Returns position of random empty node in grid
     public static Vector2 GetEmptyPositionInMap()
     {
         Random rand = new Random();
@@ -72,7 +95,7 @@ public class GridMap {
         }
     }
 
-
+    //Returns list of nodes which surrounds node with given cords
     public static List<Node> GetNeighbourNodes(Vector2 center, int deepness)
     {
         List<Node> neigh = new ArrayList<Node>();
@@ -82,7 +105,7 @@ public class GridMap {
                 
                 if(center.x + i < 0 || center.x + i >= grid.length - 1) { continue; }
                 if(center.y + j < 0 || center.y + j >= grid[i + center.x].length - 1) { continue; }
-                if(center.x == i && center.y == j) continue;
+                if(0 == i && 0 == j) continue;
 
                 neigh.add(grid[center.x + i][center.y + j]);
             }

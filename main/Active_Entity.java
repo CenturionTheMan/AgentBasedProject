@@ -6,14 +6,14 @@ import java.util.List;
 public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     //VALUES
-    private Entity[] neighbours;    //entities in neighbourhood
+    private List<Entity> neighbours;    //entities in neighbourhood
     private int speed;  //amount of squares can unit travel in round
     private int visionRange;    //range of awarness
 
 
     //GETTERS && SETTERS
-    public Entity[] GetNeighbours() { return neighbours; }
-    public void SetNeighbours(Entity[] neighbours) { this.neighbours = neighbours; }
+    public List<Entity> GetNeighbours() { return neighbours; }
+    public void SetNeighbours(List<Entity> neighbours) { this.neighbours = neighbours; }
 
     public int GetSpeed() { return speed; }
     public void SetSpeed(int speed) { this.speed = speed; }
@@ -23,14 +23,14 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
 
     //CTOR
-    public Active_Entity(Vector2 position, Vector2 speedANDvision, Entity[] neighbours) {
+    public Active_Entity(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position);
         this.neighbours = neighbours;
         this.speed = speedANDvision.x;
         this.visionRange = speedANDvision.y;
     }
 
-    public Active_Entity(Vector2 position,int speed, int visionRange, Entity[] neighbours) {
+    public Active_Entity(Vector2 position,int speed, int visionRange, List<Entity> neighbours) {
         super(position);
         this.neighbours = neighbours;
         this.speed = speed;
