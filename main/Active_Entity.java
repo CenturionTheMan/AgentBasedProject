@@ -59,12 +59,6 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         //change position
         ChangePosition(Vector2.AddVectors(GetPosition(), move), grid);
 
-
-        // grid[GetPosition().x + move.x][GetPosition().y + move.y].SetOccupant(this);
-        // grid[GetPosition().x][GetPosition().y].SetOccupant(null);
-        // SetPosition(Vector2.AddVectors(GetPosition(), move));
-        //
-
         boolean isEndConMeet = StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
         return isEndConMeet;
     }

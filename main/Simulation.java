@@ -23,7 +23,7 @@ public class Simulation {
     private Vector2 Podbus_speedANDvision;
     private Vector2 Student_speedANDvision;
 
-    private int DebilInitAmount = 0;
+    private int DebilInitAmount = 1;
     private int GimbusInitAmount = 0;
     private int LicbusInitAmount = 0;
     private int PatusInitAmount = 0;
@@ -109,24 +109,24 @@ public class Simulation {
         //Set nodes in grid
         gridMap.InitGrid(gridSize);
 
-        //Puts units on map
+        //Put units on map
         for (int i = 0; i < DebilInitAmount; i++) {
             gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Debil(null,Debil_speedANDvision,null));
         }
         for (int i = 0; i < GimbusInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Gimbus(null,Debil_speedANDvision,null));
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Gimbus(null,Gimbus_speedANDvision,null));
         }
         for (int i = 0; i < LicbusInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbus(null,Debil_speedANDvision,null));
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbus(null,Licbus_speedANDvision,null));
         }
         for (int i = 0; i < PatusInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Patus(null,Debil_speedANDvision,null));
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Patus(null,Patus_speedANDvision,null));
         }
         for (int i = 0; i < PodbusInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbus(null,Debil_speedANDvision,null));
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbus(null,Podbus_speedANDvision,null));
         }
         for (int i = 0; i < StudentInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Student(null,Debil_speedANDvision,null));
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Student(null,Student_speedANDvision,null));
         }
 
         for (int i = 0; i < GimbazaInitAmount; i++) {
