@@ -51,4 +51,10 @@ public class Vector2 {
     {
         return new Vector2(first.x + second.x, first.y + second.y);
     }
+
+    @Override
+    public String toString() {
+        
+        return "[" + x + ","+y+"]";
+    }
 }

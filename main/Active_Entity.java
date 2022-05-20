@@ -36,6 +36,9 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         this.speed = speed;
         this.visionRange = visionRange;
     }
+    public Active_Entity() 
+    {
+    }
 
     
     //METHODS
@@ -54,9 +57,12 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         move.y = swap;
         
         //change position
-        grid[GetPosition().x + move.x][GetPosition().y + move.y].SetOccupant(this);
-        grid[GetPosition().x][GetPosition().y].SetOccupant(null);
-        SetPosition(Vector2.AddVectors(GetPosition(), move));
+        ChangePosition(Vector2.AddVectors(GetPosition(), move), grid);
+
+
+        // grid[GetPosition().x + move.x][GetPosition().y + move.y].SetOccupant(this);
+        // grid[GetPosition().x][GetPosition().y].SetOccupant(null);
+        // SetPosition(Vector2.AddVectors(GetPosition(), move));
         //
 
         boolean isEndConMeet = StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
@@ -66,6 +72,8 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
     protected abstract Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Get MovementVector to change unit position
     
     protected abstract boolean StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Check status if needed; should return true if enticy = student and piwo was eatn in turn
+
+
 
     //GET ACTIVE NEIGHBOURS BASED ON VISION RANGE
     private List<Active_Entity> GetActiveNeighbours(Node[][] grid)

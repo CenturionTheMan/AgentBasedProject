@@ -1,8 +1,7 @@
 package main;
 
-import java.util.Random;
-
-import javax.lang.model.util.ElementScanner14;
+import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.ExecutorService;
 
 import main.ActiveSubclass.*;
 import main.StaticSubclass.*;
@@ -11,8 +10,10 @@ public class Simulation {
     
     //VALUES
     private Vector2 gridSize;
-    
     private GridMap gridMap;
+    
+    private Thread updateThread;
+    private int timeBetweenSteps = 1000;
 
     //setup pod grida
     private Vector2 Debil_speedANDvision;
@@ -23,16 +24,16 @@ public class Simulation {
     private Vector2 Student_speedANDvision;
 
     private int DebilInitAmount = 0;
-    private int GimbusInitAmount = 3;
-    private int LicbusInitAmount = 2;
+    private int GimbusInitAmount = 0;
+    private int LicbusInitAmount = 0;
     private int PatusInitAmount = 0;
-    private int PodbusInitAmount = 5;
+    private int PodbusInitAmount = 0;
     private int StudentInitAmount = 0;
 
-    private int GimbazaInitAmount = 4;
-    private int LicbazaInitAmount = 3;
-    private int PodbazaInitAmount = 5;
-    private int UczelniaInitAmount = 2;
+    private int GimbazaInitAmount = 2;
+    private int LicbazaInitAmount = 0;
+    private int PodbazaInitAmount = 0;
+    private int UczelniaInitAmount = 0;
 
     private boolean isRunning = false;
 
@@ -83,6 +84,9 @@ public class Simulation {
 
 
         gridMap = new GridMap(gridSize);
+
+        UpdateThread u = new UpdateThread();
+        updateThread = new Thread(u);
     }
 
 
@@ -90,27 +94,53 @@ public class Simulation {
     //Methods
     public void RunSimulation()
     {
+        if(GetAllUnitsInitAmount() > gridSize.x*gridSize.y)
+        {
+            System.err.println("Unites summarized amount can not be larger than amount of nodes in map!!");
+            return;
+        }
+
         if(isRunning)
         {
-            //end previus simulation and create new one
+            isRunning = false;
+            updateThread.stop();
         }
 
         //Set nodes in grid
         gridMap.InitGrid(gridSize);
 
-
         //Puts units on map
-        gridMap.SetUnitsOnMap(DebilInitAmount, new Debil(null,Debil_speedANDvision,null),gridSize);
-        gridMap.SetUnitsOnMap(GimbusInitAmount, new Gimbus(null,Gimbus_speedANDvision,null),gridSize);
-        gridMap.SetUnitsOnMap(LicbusInitAmount, new Licbus(null,Licbus_speedANDvision,null),gridSize);
-        gridMap.SetUnitsOnMap(PatusInitAmount, new Patus(null,Patus_speedANDvision,null),gridSize);
-        gridMap.SetUnitsOnMap(PodbusInitAmount, new Podbus(null,Podbus_speedANDvision,null),gridSize);
-        gridMap.SetUnitsOnMap(StudentInitAmount, new Student(null,Student_speedANDvision,null),gridSize);
-        
-        gridMap.SetUnitsOnMap(GimbazaInitAmount, new Gimbaza(null),gridSize);
-        gridMap.SetUnitsOnMap(LicbazaInitAmount, new Licbaza(null),gridSize);
-        gridMap.SetUnitsOnMap(PodbazaInitAmount, new Podbaza(null),gridSize);
-        gridMap.SetUnitsOnMap(UczelniaInitAmount, new Uczelnia(null),gridSize);
+        for (int i = 0; i < DebilInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Debil(null,Debil_speedANDvision,null));
+        }
+        for (int i = 0; i < GimbusInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Gimbus(null,Debil_speedANDvision,null));
+        }
+        for (int i = 0; i < LicbusInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbus(null,Debil_speedANDvision,null));
+        }
+        for (int i = 0; i < PatusInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Patus(null,Debil_speedANDvision,null));
+        }
+        for (int i = 0; i < PodbusInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbus(null,Debil_speedANDvision,null));
+        }
+        for (int i = 0; i < StudentInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Student(null,Debil_speedANDvision,null));
+        }
+
+        for (int i = 0; i < GimbazaInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Gimbaza(null));
+        }
+        for (int i = 0; i < LicbazaInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbaza(null));
+        }
+        for (int i = 0; i < PodbazaInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbaza(null));
+        }
+        for (int i = 0; i < UczelniaInitAmount; i++) {
+            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Uczelnia(null));
+        }
         //
 
 
@@ -118,59 +148,74 @@ public class Simulation {
         GUI.PrintGrid(gridMap.GetGrid());
 
 
-
         isRunning = true;
-        Update(); //Run Update in new thread (prob)
+        updateThread.start();
     }
 
 
-    private void Update()
+    class UpdateThread implements Runnable
     {
-        int tempRoundCount = 2;
-
-        while(/*isRunning*/tempRoundCount >0)
+        @Override
+        public void run() {
+            Update();
+        }
+        
+        private void Update()
         {
-            tempRoundCount--;
+            int tempRoundCount = 1;
 
+            while(/*isRunning*/tempRoundCount >0)
+            {
+                tempRoundCount--;
 
-            for (int i = 0; i < gridMap.GetGrid().length; i++) {
-                for (int j = 0; j < gridMap.GetGrid()[i].length; j++) {
-
-                    Entity current = gridMap.GetGrid()[i][j].GetOccupant(); //get entity
-
-                    if(current == null) continue; //if none cont
-
-                    if(current instanceof Static_Entity) //if static 
+                for (int i = 0; i < gridMap.GetGrid().length; i++) 
+                {
+                    for (int j = 0; j < gridMap.GetGrid()[i].length; j++) 
                     {
+                        Entity current = gridMap.GetGrid()[i][j].GetOccupant(); //get entity
 
-                    }
+                        if(current == null) continue; //if none cont
 
-                    if(current instanceof Active_Entity) //if active
-                    {
-                        Active_Entity active = (Active_Entity)current; //casting
-                        
-                        if(active.DoMove(gridMap.GetGrid())) //do move
+                        if(current instanceof Gimbaza) //if static 
                         {
-                            isRunning = false; //end if cond met
+                            Gimbaza gim = (Gimbaza)current;
+                            gim.DoMove(gridMap.GetGrid());;
                         }
+
+
+                        if(current instanceof Active_Entity) //if active
+                        {
+                            Active_Entity active = (Active_Entity)current; //casting
+                            
+                            if(active.DoMove(gridMap.GetGrid())) //do move
+                            {
+                                isRunning = false; //end if cond met
+                            }
+                        }
+
+
+                        //GUI UPDATE
+                        if(current.HasMoved())GUI.PrintGrid(gridMap.GetGrid());
+
+
+                        try { Thread.sleep(timeBetweenSteps); } 
+                        catch (InterruptedException e) { e.printStackTrace(); }
                     }
-
-
-                    //GUI UPDATE
                 }
-            }
 
-            GUI.PrintGrid(gridMap.GetGrid());
 
-            //Set all active entities as open for next round
-            for (Node[] nodes : gridMap.GetGrid()) {
-                for (Node node : nodes) {
-                    if(node.GetOccupant() != null)
-                    {
-                        node.GetOccupant().SetToOpen();
+                //Set all active entities as open for next round
+                for (Node[] nodes : gridMap.GetGrid()) {
+                    for (Node node : nodes) {
+                        if(node.GetOccupant() != null)
+                        {
+                            node.GetOccupant().SetToOpen();
+                        }
                     }
                 }
             }
         }
     }
+
+
 }

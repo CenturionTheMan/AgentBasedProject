@@ -5,6 +5,7 @@ public class Entity {
     //VALUES
     private Vector2 position;
     private boolean isOpen = true;  //says wether unit is able to move in given round
+    private boolean hasMoved = false;
 
     //GETTERS && SETTERS
     public Vector2 GetPosition() { return position; }
@@ -13,21 +14,52 @@ public class Entity {
     public boolean IsOpen() { 
         if(isOpen) 
         {
+            hasMoved = true;
             isOpen = false;
             return true;
         }
         else
             return false;
     }
-    public void SetToOpen() { isOpen = true; }
+    public void SetToOpen() { isOpen = true; hasMoved = false; }
+
+    public boolean HasMoved()
+    {
+        if(hasMoved == true)
+        {
+            hasMoved = false;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     //CTOR
     public Entity(Vector2 position) {
         this.position = position;
+        isOpen = true;
     }
 
     public Entity()
     {
-        
+    }
+
+    public Entity(Entity copy)
+    {
+        this.position = copy.position;
+    }
+
+
+
+
+    //METHODS
+    public void ChangePosition(Vector2 pos, Node[][] grid)
+    {
+        grid[GetPosition().x][GetPosition().y].SetOccupant(null);
+        grid[pos.x][pos.y].SetOccupant(this);
+        SetPosition(pos);
     }
 }

@@ -1,5 +1,8 @@
 package main;
 
+import java.lang.ProcessBuilder.Redirect.Type;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +14,7 @@ public class GridMap {
 
 
     //GETTERS && SETTERS
-    public void SetGrid(Node[][] grid) { this.grid = grid; }
+    public void SetGrid(Node[][] grid) { GridMap.grid = grid; }
     public Node[][] GetGrid() { return grid; }
 
 
@@ -35,36 +38,36 @@ public class GridMap {
         }
     }
 
-    public void SetUnitsOnMap(int amount, Entity ent, Vector2 gridSize)
+    public void PlaceUnitOnMap(Vector2 pos, Entity unit)
+    {
+        grid[pos.x][pos.y].SetOccupant(unit);
+        unit.SetPosition(pos);
+    }
+
+    public static Vector2 GetEmptyPositionInMap()
     {
         Random rand = new Random();
 
-        for (int i = 0; i < amount; i++) 
+        Vector2 r = new Vector2(rand.nextInt(grid.length), rand.nextInt(grid[0].length));
+
+        if(grid[r.x][r.y].GetOccupant() == null)
         {
-            Vector2 r = new Vector2(rand.nextInt(gridSize.x), rand.nextInt(gridSize.y));
+            return r;
+        }
+        else
+        {
+            int x = r.x;
+            int y = r.y + 1;
+            while (true) {
+                
+                if(y == grid[0].length) { y = 0; x++; }
+                if(x == grid.length) x = 0;
 
-            if(grid[r.x][r.y].GetOccupant() == null)
-            {
-                ent.SetPosition(r);
-                grid[r.x][r.y].SetOccupant(ent);
-            }
-            else
-            {
-                int x = r.x;
-                int y = r.y + 1;
-                while (true) {
-                    
-                    if(y == gridSize.y) { y = 0; x++; }
-                    if(x == gridSize.x) x = 0;
-
-                    if(grid[x][y].GetOccupant() == null)
-                    {
-                        ent.SetPosition(new Vector2(x, y));
-                        grid[x][y].SetOccupant(ent);
-                        break;
-                    }
-                    y++;
+                if(grid[x][y].GetOccupant() == null)
+                {
+                    return new Vector2(x, y);
                 }
+                y++;
             }
         }
     }
