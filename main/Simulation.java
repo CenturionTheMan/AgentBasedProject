@@ -14,13 +14,13 @@ public class Simulation {
     private boolean isRunning = false;
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(20, 20);
+    private Vector2 gridSize = new Vector2(10, 20);
 
     private static Vector2 Debil_speedANDvision = new Vector2(1, 2);
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2);
     private static Vector2 Licbus_speedANDvision = new Vector2(1, 2);
     private static Vector2 Patus_speedANDvision = new Vector2(1, 2);
-    private static Vector2 Podbus_speedANDvision = new Vector2(1, 20);
+    private static Vector2 Podbus_speedANDvision = new Vector2(1, 2);
     private static Vector2 Student_speedANDvision = new Vector2(1, 2);
 
     private int DebilInitAmount = 0;
@@ -33,7 +33,7 @@ public class Simulation {
     private int GimbazaInitAmount = 0;
     private int LicbazaInitAmount = 0;
     private int PodbazaInitAmount = 2;
-    private int UczelniaInitAmount = 30;
+    private int UczelniaInitAmount = 0;
     //=========================================================================================
 
     //SETTERS && GETTERS
