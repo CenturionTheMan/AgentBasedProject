@@ -60,6 +60,12 @@ public class Entity {
     //Changes position of entitiy 
     public void ChangePosition(Vector2 pos, Node[][] grid)
     {
+        
+        if(grid[pos.x][pos.y].GetOccupant() != null) 
+        {
+            //System.err.println("ERROR: Entity at position " + GetPosition().toString() +" tried to move to occupied node at pos " + pos.toString());
+            return;
+        }
         grid[GetPosition().x][GetPosition().y].SetOccupant(null);
         grid[pos.x][pos.y].SetOccupant(this);
         SetPosition(pos);

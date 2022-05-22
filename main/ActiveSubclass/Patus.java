@@ -8,6 +8,10 @@ public class Patus extends Active_Entity{
     public Patus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
+    public Patus(Vector2 speedANDvision)
+    {
+        super(speedANDvision);
+    }
 
 
     @Override

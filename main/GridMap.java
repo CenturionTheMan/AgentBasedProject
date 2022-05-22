@@ -60,7 +60,7 @@ public class GridMap {
     }
 
     //Sets unit on position
-    public void PlaceUnitOnMap(Vector2 pos, Entity unit)
+    public static void PlaceUnitOnMap(Vector2 pos, Entity unit)
     {
         grid[pos.x][pos.y].SetOccupant(unit);
         unit.SetPosition(pos);
@@ -93,6 +93,54 @@ public class GridMap {
                 y++;
             }
         }
+    }
+
+    public static Vector2 GetTheClosestPointToTargetFromPoints(List<Vector2> points, Vector2 target)
+    {
+        Vector2 res = points.get(0);
+
+        for (int i = 1; i < points.size(); i++) {
+            if(points.get(i).SubtractVector(target).GetLenght() < res.SubtractVector(target).GetLenght())
+            {
+                res = points.get(i);
+            }
+        }
+
+        return res;
+    }
+
+    public static Node GetClosestToPointNodeInUnitSquare(Vector2 center, Vector2 targetPos)
+    {
+        List<Node> neigh = GridMap.GetNeighbourNodes(center, 1);
+        List<Node> sorted = new ArrayList<Node>();
+
+        Node c = null;
+        for (int i = 0; i < neigh.size(); i++) {
+            c = neigh.get(0);
+            for (int j = 1; j < neigh.size(); j++) {
+                if(neigh.get(j).GetPosition().SubtractVector(targetPos).GetLenght() < c.GetPosition().SubtractVector(targetPos).GetLenght())
+                {
+                    c = neigh.get(j);
+                }
+            }
+            sorted.add(c);
+            neigh.remove(c);
+        }
+
+        for (int i = 0; i < sorted.size(); i++) {
+            if(sorted.get(i).GetOccupant() == null) 
+            {
+                return sorted.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static boolean IsOnGrid(Vector2 pos)
+    {
+        if(pos.x < 0 || pos.x >= grid.length) { return false; }
+        if(pos.y < 0 || pos.y >= grid[0].length) { return false; }
+        return true;
     }
 
     public static Vector2 FindFreePositionInNeighbourhood(Vector2 position)

@@ -13,28 +13,19 @@ public class Vector2 {
         this.y = y;
     }
 
-    public void AddVector(Vector2 vec)
+    public Vector2 AddVector(Vector2 vec)
     {
-        x += vec.x;
-        y += vec.y;
+        return new Vector2(x + vec.x, y + vec.y);
     }
 
-    public void SubtractVector(Vector2 vec)
+    public Vector2 SubtractVector(Vector2 vec)
     {
-        x -= vec.x;
-        y -= vec.y;
+        return new Vector2(x - vec.x, y - vec.y);
     }
 
-    public void MultiplyVector(int multi)
+    public Vector2 MultiplyVector(int multi)
     {
-        x *= multi;
-        y *= multi;
-    }
-
-    public void MultiplyVector(Vector2 multi)
-    {
-        x *= multi.x;
-        y *= multi.y;
+        return new Vector2(x*multi, y*multi);
     }
 
     public double GetLenght()

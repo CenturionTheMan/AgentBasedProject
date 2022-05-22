@@ -11,4 +11,5 @@ public class Static_Entity extends Entity {
     {
         grid[GetPosition().x][GetPosition().y].SetOccupant(null);
     }
+
 }

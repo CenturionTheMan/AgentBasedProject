@@ -9,42 +9,48 @@ public class Simulation {
     private GridMap gridMap;
     
     private Thread updateThread;
-    private int timeBetweenSteps = 1000;
+    private int timeBetweenSteps = 100;
 
     private boolean isRunning = false;
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(4, 4);
+    private Vector2 gridSize = new Vector2(20, 20);
 
-    private Vector2 Debil_speedANDvision = new Vector2(1, 1);
-    private Vector2 Gimbus_speedANDvision = new Vector2(1, 1);
-    private Vector2 Licbus_speedANDvision = new Vector2(1, 1);
-    private Vector2 Patus_speedANDvision = new Vector2(1, 1);
-    private Vector2 Podbus_speedANDvision = new Vector2(1, 1);
-    private Vector2 Student_speedANDvision = new Vector2(1, 1);
+    private static Vector2 Debil_speedANDvision = new Vector2(1, 2);
+    private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2);
+    private static Vector2 Licbus_speedANDvision = new Vector2(1, 2);
+    private static Vector2 Patus_speedANDvision = new Vector2(1, 2);
+    private static Vector2 Podbus_speedANDvision = new Vector2(1, 20);
+    private static Vector2 Student_speedANDvision = new Vector2(1, 2);
 
     private int DebilInitAmount = 0;
     private int GimbusInitAmount = 0;
     private int LicbusInitAmount = 0;
     private int PatusInitAmount = 0;
-    private int PodbusInitAmount = 0;
+    private int PodbusInitAmount = 1;
     private int StudentInitAmount = 0;
 
     private int GimbazaInitAmount = 0;
     private int LicbazaInitAmount = 0;
-    private int PodbazaInitAmount = 0;
-    private int UczelniaInitAmount = 0;
+    private int PodbazaInitAmount = 2;
+    private int UczelniaInitAmount = 30;
     //=========================================================================================
 
     //SETTERS && GETTERS
     public void SetGridSize(Vector2 size) { gridSize = size; }
 
     public void SetDebil_speedANDvision(Vector2 speedANDvision) { Debil_speedANDvision = speedANDvision; }
+    public static Vector2 GetDebil_speedANDvision() {return Debil_speedANDvision; }
     public void SetGimbus_speedANDvision(Vector2 speedANDvision) { Gimbus_speedANDvision = speedANDvision; }
+    public static Vector2 GetGimbus_speedANDvision() {return Gimbus_speedANDvision; }
     public void SetLicbus_speedANDvision(Vector2 speedANDvision) { Licbus_speedANDvision = speedANDvision; }
+    public static Vector2 GetLicbus_speedANDvision() {return Licbus_speedANDvision; }
     public void SetPatus_speedANDvision(Vector2 speedANDvision) { Patus_speedANDvision = speedANDvision; }
+    public static Vector2 GetPatus_speedANDvision() { return Patus_speedANDvision; }
     public void SetPodbus_speedANDvision(Vector2 speedANDvision) { Podbus_speedANDvision = speedANDvision; }
+    public static Vector2 GetPodbus_speedANDvision() { return Podbus_speedANDvision; }
     public void SetStudent_speedANDvision(Vector2 speedANDvision) { Student_speedANDvision = speedANDvision; }
+    public static Vector2 GetStudent_speedANDvision() { return Student_speedANDvision; }
 
     public void SetDebilInitAmount(int amount) { DebilInitAmount = amount; }
     public void SetGimbusInitAmount(int amount) { GimbusInitAmount = amount; }
@@ -97,39 +103,37 @@ public class Simulation {
 
         //Put units on map
         for (int i = 0; i < DebilInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Debil(null,Debil_speedANDvision,null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Debil(Debil_speedANDvision));
         }
         for (int i = 0; i < GimbusInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Gimbus(null,Gimbus_speedANDvision,null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Gimbus(Gimbus_speedANDvision));
         }
         for (int i = 0; i < LicbusInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbus(null,Licbus_speedANDvision,null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbus(Licbus_speedANDvision));
         }
         for (int i = 0; i < PatusInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Patus(null,Patus_speedANDvision,null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Patus(Patus_speedANDvision));
         }
         for (int i = 0; i < PodbusInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbus(null,Podbus_speedANDvision,null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbus(Podbus_speedANDvision));
         }
         for (int i = 0; i < StudentInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Student(null,Student_speedANDvision,null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Student(Student_speedANDvision));
         }
 
         for (int i = 0; i < GimbazaInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Gimbaza(null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Gimbaza(null));
         }
         for (int i = 0; i < LicbazaInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbaza(null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbaza(null));
         }
         for (int i = 0; i < PodbazaInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbaza(null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbaza(null));
         }
         for (int i = 0; i < UczelniaInitAmount; i++) {
-            gridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Uczelnia(null));
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Uczelnia(null));
         }
         //
-
-        gridMap.PlaceUnitOnMap(new Vector2(0, 0), new Podbus(null,Podbus_speedANDvision,null));
 
         //SETUP NEIGHB.
         gridMap.SetupNeighbours();
@@ -154,7 +158,7 @@ public class Simulation {
         
         private void Update()
         {
-            int tempRoundCount = 1;
+            int tempRoundCount = 100;
 
             while(/*isRunning*/tempRoundCount >0)
             {

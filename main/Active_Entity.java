@@ -36,6 +36,11 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         this.speed = speed;
         this.visionRange = visionRange;
     }
+    public Active_Entity(Vector2 speedANDvision) 
+    {
+        speed = speedANDvision.x;
+        visionRange = speedANDvision.y;
+    }
     public Active_Entity() 
     {
     }
@@ -50,6 +55,21 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         List<Static_Entity> staticNeigh = GetStaticNeighbours(grid);
 
         Vector2 move = MovementLogic(grid,activeNeigh,staticNeigh); //do MovementLogic and get movement vec
+        if(move == null) return false;
+        
+        //change position
+        ChangePosition(Vector2.AddVectors(GetPosition(), move), grid); 
+
+        boolean isEndConMeet = StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
+        return isEndConMeet;
+    }
+    public final boolean DoMove(Node[][] grid, Vector2 move) //HUB used for moving entities
+    {
+        if(!IsOpen()) return false; //if entity moved in round -> prevent from moving again
+
+        List<Active_Entity> activeNeigh = GetActiveNeighbours(grid);
+        List<Static_Entity> staticNeigh = GetStaticNeighbours(grid);
+
         if(move == null) return false;
         
         //change position

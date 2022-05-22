@@ -8,6 +8,10 @@ public class Debil extends Active_Entity{
     public Debil(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
+    public Debil(Vector2 speedANDvision)
+    {
+        super(speedANDvision);
+    }
     
     
     @Override
