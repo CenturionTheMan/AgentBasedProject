@@ -19,6 +19,12 @@ public class Vector2 {
         y += vec.y;
     }
 
+    public void SubtractVector(Vector2 vec)
+    {
+        x -= vec.x;
+        y -= vec.y;
+    }
+
     public void MultiplyVector(int multi)
     {
         x *= multi;
@@ -42,6 +48,13 @@ public class Vector2 {
         else return false;
     }
 
+    public void Invert()
+    {
+        int a = x;
+        x = y;
+        y = a;
+    }
+
     public static Vector2 MultiplyVecotrs(Vector2 first, Vector2 second)
     {
         return new Vector2(first.x * second.x, first.y * second.y);
@@ -50,6 +63,13 @@ public class Vector2 {
     public static Vector2 AddVectors(Vector2 first, Vector2 second)
     {
         return new Vector2(first.x + second.x, first.y + second.y);
+    }
+
+    public static Vector2 InvertVector(Vector2 vector)
+    {
+        int a = vector.x;
+        int b = vector.y;
+        return new Vector2(b, a);
     }
 
     @Override

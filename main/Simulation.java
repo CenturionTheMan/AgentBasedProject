@@ -6,34 +6,35 @@ import main.StaticSubclass.*;
 public class Simulation {
     
     //VALUES
-    private Vector2 gridSize;
     private GridMap gridMap;
     
     private Thread updateThread;
     private int timeBetweenSteps = 1000;
 
-    //setup pod grida
-    private Vector2 Debil_speedANDvision;
-    private Vector2 Gimbus_speedANDvision;
-    private Vector2 Licbus_speedANDvision;
-    private Vector2 Patus_speedANDvision;
-    private Vector2 Podbus_speedANDvision;
-    private Vector2 Student_speedANDvision;
-
-    private int DebilInitAmount = 0;
-    private int GimbusInitAmount = 2;
-    private int LicbusInitAmount = 2;
-    private int PatusInitAmount = 0;
-    private int PodbusInitAmount = 5;
-    private int StudentInitAmount = 0;
-
-    private int GimbazaInitAmount = 2;
-    private int LicbazaInitAmount = 1;
-    private int PodbazaInitAmount = 1;
-    private int UczelniaInitAmount = 1;
-
     private boolean isRunning = false;
 
+    //======================= INIT VALUES ===================================================
+    private Vector2 gridSize = new Vector2(2, 2);
+
+    private Vector2 Debil_speedANDvision = new Vector2(1, 1);
+    private Vector2 Gimbus_speedANDvision = new Vector2(1, 1);
+    private Vector2 Licbus_speedANDvision = new Vector2(1, 1);
+    private Vector2 Patus_speedANDvision = new Vector2(1, 1);
+    private Vector2 Podbus_speedANDvision = new Vector2(1, 1);
+    private Vector2 Student_speedANDvision = new Vector2(1, 1);
+
+    private int DebilInitAmount = 0;
+    private int GimbusInitAmount = 0;
+    private int LicbusInitAmount = 0;
+    private int PatusInitAmount = 0;
+    private int PodbusInitAmount = 1;
+    private int StudentInitAmount = 0;
+
+    private int GimbazaInitAmount = 0;
+    private int LicbazaInitAmount = 0;
+    private int PodbazaInitAmount = 0;
+    private int UczelniaInitAmount = 0;
+    //=========================================================================================
 
     //SETTERS && GETTERS
     public void SetGridSize(Vector2 size) { gridSize = size; }
@@ -68,18 +69,6 @@ public class Simulation {
 
     //CTOR
     public Simulation() {
-
-        //BASE VALUES (ON APP RUN)
-        SetGridSize(new Vector2(5, 7));
-        
-        SetDebil_speedANDvision(new Vector2(1, 1));
-        SetGimbus_speedANDvision(new Vector2(1, 1));
-        SetLicbus_speedANDvision(new Vector2(1, 1));
-        SetPatus_speedANDvision(new Vector2(1, 1));
-        SetPodbus_speedANDvision(new Vector2(1, 1));
-        SetStudent_speedANDvision(new Vector2(1, 1));
-
-
         gridMap = new GridMap(gridSize);
 
         UpdateThread u = new UpdateThread();

@@ -95,6 +95,22 @@ public class GridMap {
         }
     }
 
+    public static Vector2 FindFreePositionInNeighbourhood(Vector2 position)
+    {
+        List<Node> neigh = GetNeighbourNodes(position, 1);
+        List<Node> filtred = new ArrayList<Node>();
+        neigh.forEach( (k) -> {
+            if(k.GetOccupant() == null)
+            {
+                filtred.add(k);
+            }
+        }); 
+
+        if(filtred.size() == 0) return new Vector2(0, 0);
+        return filtred.get(new Random().nextInt(filtred.size())).GetPosition();
+    }
+
+
     //Returns list of nodes which surrounds node with given cords
     public static List<Node> GetNeighbourNodes(Vector2 center, int deepness)
     {
@@ -103,8 +119,8 @@ public class GridMap {
         for (int i = -deepness; i < deepness + 1; i++) {
             for (int j = -deepness; j < deepness + 1; j++) {
                 
-                if(center.x + i < 0 || center.x + i >= grid.length - 1) { continue; }
-                if(center.y + j < 0 || center.y + j >= grid[i + center.x].length - 1) { continue; }
+                if(center.x + i < 0 || center.x + i >= grid.length) { continue; }
+                if(center.y + j < 0 || center.y + j >= grid[i + center.x].length) { continue; }
                 if(0 == i && 0 == j) continue;
 
                 neigh.add(grid[center.x + i][center.y + j]);

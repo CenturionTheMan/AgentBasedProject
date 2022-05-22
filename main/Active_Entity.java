@@ -51,13 +51,9 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
         Vector2 move = MovementLogic(grid,activeNeigh,staticNeigh); //do MovementLogic and get movement vec
         if(move == null) return false;
-
-        int swap = move.x;
-        move.x = -move.y;
-        move.y = swap;
         
         //change position
-        ChangePosition(Vector2.AddVectors(GetPosition(), move), grid);
+        ChangePosition(Vector2.AddVectors(GetPosition(), move), grid); 
 
         boolean isEndConMeet = StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
         return isEndConMeet;
