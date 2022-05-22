@@ -14,7 +14,7 @@ public class Simulation {
     private boolean isRunning = false;
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(2, 2);
+    private Vector2 gridSize = new Vector2(4, 4);
 
     private Vector2 Debil_speedANDvision = new Vector2(1, 1);
     private Vector2 Gimbus_speedANDvision = new Vector2(1, 1);
@@ -27,7 +27,7 @@ public class Simulation {
     private int GimbusInitAmount = 0;
     private int LicbusInitAmount = 0;
     private int PatusInitAmount = 0;
-    private int PodbusInitAmount = 1;
+    private int PodbusInitAmount = 0;
     private int StudentInitAmount = 0;
 
     private int GimbazaInitAmount = 0;
@@ -129,13 +129,14 @@ public class Simulation {
         }
         //
 
-        //SETUP NEIGHB OURS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        gridMap.PlaceUnitOnMap(new Vector2(0, 0), new Podbus(null,Podbus_speedANDvision,null));
+
+        //SETUP NEIGHB.
         gridMap.SetupNeighbours();
 
 
         //print fin grid
         GUI.PrintGrid(gridMap.GetGrid());
-
 
         isRunning = true;
         updateThread.start();

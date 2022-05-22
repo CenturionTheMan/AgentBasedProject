@@ -21,7 +21,7 @@ public class GUI {
             System.out.print("===");
         }
         System.out.print("\n");
-        for (int i = 0; i < grid.length; i++) {
+        for (int i = grid.length-1; i >=0; i--) {
             for (int j = 0; j < grid[i].length; j++) {
                 
                 Entity temp = grid[i][j].GetOccupant();

@@ -20,6 +20,7 @@ public class Podbus extends Active_Entity{
             scaredMoves--;
             Vector2 t = GridMap.FindFreePositionInNeighbourhood(GetPosition());
             t.SubtractVector(GetPosition());
+            t = new Vector2(2, 1);
             return t;
         }
 
