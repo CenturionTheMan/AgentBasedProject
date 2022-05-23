@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.text.Position;
+
+import main.StaticSubclass.Egzamin;
+import main.StaticSubclass.Piwo;
+
 public class GridMap {
     
     //PROPERTIES
@@ -95,8 +100,11 @@ public class GridMap {
         }
     }
 
+    //returns the closest position (from positions list) to given target
     public static Vector2 GetTheClosestPointToTargetFromPoints(List<Vector2> points, Vector2 target)
     {
+        if(points == null || points.size() < 1)return null;
+        
         Vector2 res = points.get(0);
 
         for (int i = 1; i < points.size(); i++) {
@@ -109,6 +117,7 @@ public class GridMap {
         return res;
     }
 
+    //returns closest (free) node from neighbors nodes
     public static Node GetClosestToPointNodeInUnitSquare(Vector2 center, Vector2 targetPos)
     {
         List<Node> neigh = GridMap.GetNeighbourNodes(center, 1);
@@ -132,10 +141,19 @@ public class GridMap {
             {
                 return sorted.get(i);
             }
+
+            if(!targetPos.Compare(sorted.get(i).GetPosition()))
+            {
+                if(sorted.get(i).GetOccupant() instanceof Egzamin || sorted.get(i).GetOccupant() instanceof Piwo)
+                {
+                    return sorted.get(i);
+                }
+            }
         }
         return null;
     }
 
+    //Checks whether posiotin is on grid
     public static boolean IsOnGrid(Vector2 pos)
     {
         if(pos.x < 0 || pos.x >= grid.length) { return false; }
@@ -143,12 +161,17 @@ public class GridMap {
         return true;
     }
 
-    public static Vector2 FindFreePositionInNeighbourhood(Vector2 position)
+    //returns random (free) position from neighbor nodes
+    public static Vector2 GetFreePositionInNeighbourhood(Vector2 position)
     {
         List<Node> neigh = GetNeighbourNodes(position, 1);
         List<Node> filtred = new ArrayList<Node>();
         neigh.forEach( (k) -> {
             if(k.GetOccupant() == null)
+            {
+                filtred.add(k);
+            }
+            else if (k.GetOccupant() instanceof Egzamin || k.GetOccupant() instanceof Piwo)
             {
                 filtred.add(k);
             }

@@ -12,46 +12,44 @@ Co ustaloną ilość rund pojawia się nowy zestaw Entitów;
 Entity spoza cyklu same w sobie nie mają specjalnych właściwości i będą kręcić się po planszy w poszukiwaniu najbliższej Podbazy;
 Entit ma zasięg wzroku 2 pola i jeśli zauważy odpowiedni byt nieruchomy, uda się w jego kierunku;
 Aby Entit wszedł w cykl, musi zacząć od stanięcia na Podbazie (inny byt nieruchomy nie zadziała);
-Gimbazy będą pojawiać się i znikać co ustaloną z góry liczbę rund.
+Gimbazy będą pojawiać się i znikać co ustaloną z góry liczbę rund (5).
 Każdy Entit wewnątrz cyklu ma specjalne właściwości:
-
-Podbus:
-- Jeśli zauważy innego Podbusa, staną koło siebie i zaczną poruszać się razem (jakby połączą się). 
-  Grupa taka może rosnąć i rosnąć. 
-  Zacznie rozpadać się dopiero gdy kolejne Podbusy wejdą na pola z Gimbazami, zamienią się w Gimbusy i odłączą się
-- Jeśli Podbus lub grupa do trzech Podbusów włącznie zauważy Gimbusa, 
-  każdy Podbus z danej grupy od tego momentu przez następne pięć rund będzie poruszał się w losowym kierunku dwa razy szybciej. 
+Podbus: [done]
+- Jeśli stanie obok innego Podbusa, zaczną poruszać się razem (jakby połączą się). 
+  Grupa zacznie rozpadać się dopiero gdy kolejne Podbusy wejdą na pola obok Gimbaz, zamienią się w Gimbusy i odłączą się
+- Jeśli Podbus lub grupa do dwóch Podbusów włącznie stanie obok Gimbusa lub Patusa, 
+  każdy Podbus z danej grupy od tego momentu przez następne 2 rundy będzie poruszał się w losowym kierunku [dwa razy szybciej -> TEGO NIE MA JESZCZE]. 
   Nie może wtedy ewoluować w Gimbusa (przestraszą się).
-  Podczas ucieczki są odporni na nowe przestraszenia.
-- Jeśli Podbus lub dowolna grupa Podbusów zauważy Studenta / Debila, przestrasza się.
+- Jeśli Podbus lub dowolna grupa Podbusów stanie obok Studenta / Debila, przestrasza się.
   
-Gimbus:
+Gimbus: [done]
 - Po zostaniu Gimbusem, przez pierwsze 10 rund nie może przestraszyć ani być przestraszonym przez Podbusów.
-- Jeśli zauważy grupę od czterech wzwyż Podbusów, przestrasza się.
-- Jeśli dwa Gimbusy staną na jednym polu, mają 50% szans na zlikwidowanie się nawzajem (znikają z mapy) lub zostanie Patusami (więcej w: Patus)
+- Jeśli zauważy grupę od trzech wzwyż Podbusów, przestrasza się.
+- Jeśli dwa Gimbusy staną obok siebie, mają 33% szans na zlikwidowanie się nawzajem (znikają z mapy) i 33% na zostanie Patusami (więcej w: Patus)
 - Jeśli Gimbus zauważy Studenta / Debila, przestrasza się.
 
-Licbus:
-- Licbus porusza się tak samo jak pozostałe Entity, jednak ma co rundę 20% szans na pozostawienie po sobie na polu bytu nieruchomego, Egzaminu (więcej w: Patus)
+Licbus: [done]
+- Licbus porusza się tak samo jak pozostałe Entity, jednak ma co rundę 20% szans na pozostawienie obok siebie na polu bytu nieruchomego, Egzaminu (więcej w: Patus)
 - Jeśli Licbus zauważy Studenta / Debila, przestrasza się.
 
 Student:
 - Porusza się losowo, aż zauważy byt nieruchomy, Piwo (więcej w: Patus). 
   Od tego momentu zbliża się do niego. 
-  Po wejściu na pole z Piwem, likwiduje się sam, a Piwo znika.
 - Każdy Student ma 10% szans, by na początku rundy stać się Debilem (więcej w: Debil)
 
 Patus:
 - Patusy mogą pojawić się gdy dwa Gimbusy staną na jednym polu (50% szans, więcej w: Gimbus) bądź gdy znikną Gimbazy.
-  Gdy Gimbazy znikną, wszystkie Gimbusy automatycznie stają się Patusami.
+  Gdy Gimbazy znikną, wszystkie Gimbusy automatycznie stają się Patusami. -->> DOGADAJ TO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 - Poruszając się ma 20% szans na pozostawienie po sobie na polu Piwa.
-- Aby wyjść ze stadium Patusa, musi on wejść na pole z Egzaminem. Staje się wtedy Licbusem, a Egzamin znika.
+- Aby wyjść ze stadium Patusa, musi on wejść na pole obok Egzaminu. Staje się wtedy Licbusem, a Egzamin znika.
 - Patus posiada te same właściwości straszenia i bycia przestraszonym, co Gimbus.
 
 Debil:
 - Debilem ma szansę (10%) stać się Student co rundę.
 - Debil nie obcuje z polem z piwem, jak Student. Aby z powrotem stać się Studentem, musi wejść na pole z Egzaminem.
   Egzamin po tym znika.
+
+Dodatkowo jeżeli jakakolwiek jednostka wchodząc na pole na którym jest piwo lub egzamin, sprawia że ów znika
 
 Warunek końcowy: Symulacja kończy się gdy jakiś Student skonsumuje Piwo.
 

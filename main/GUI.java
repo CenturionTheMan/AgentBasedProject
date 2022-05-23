@@ -10,7 +10,7 @@ import main.StaticSubclass.Egzamin;
 import main.StaticSubclass.Gimbaza;
 import main.StaticSubclass.Licbaza;
 import main.StaticSubclass.Piwo;
-import main.StaticSubclass.Podbaza;
+
 
 public class GUI {
     
@@ -69,10 +69,6 @@ public class GUI {
                 else if(temp instanceof Piwo)
                 {
                     System.out.print(" PI");
-                }
-                else if(temp instanceof Podbaza)
-                {
-                    System.out.print(" PO");
                 }
                 else
                 {

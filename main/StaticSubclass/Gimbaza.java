@@ -3,7 +3,7 @@ import main.*;
 
 public class Gimbaza extends Static_Entity{
 
-    private final int roundsToPositionChange = 0;
+    private final int roundsToPositionChange = 5;
     private int roundsLeft;
 
     public Gimbaza(Vector2 position) {

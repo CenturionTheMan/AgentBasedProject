@@ -1,5 +1,8 @@
 package main;
 
+import main.StaticSubclass.Egzamin;
+import main.StaticSubclass.Piwo;
+
 public class Entity {
 
     //VALUES
@@ -61,13 +64,17 @@ public class Entity {
     public void ChangePosition(Vector2 pos, Node[][] grid)
     {
         
-        if(grid[pos.x][pos.y].GetOccupant() != null) 
+        if(grid[pos.x][pos.y].GetOccupant() == null || (grid[pos.x][pos.y].GetOccupant() instanceof Piwo) || (grid[pos.x][pos.y].GetOccupant() instanceof Egzamin)) 
         {
-            //System.err.println("ERROR: Entity at position " + GetPosition().toString() +" tried to move to occupied node at pos " + pos.toString());
-            return;
+            grid[GetPosition().x][GetPosition().y].SetOccupant(null);
+            grid[pos.x][pos.y].SetOccupant(this);
+            SetPosition(pos);
         }
+    }
+
+    //removes this unit from grid
+    public void RemoveFromGrid(Node[][] grid)
+    {
         grid[GetPosition().x][GetPosition().y].SetOccupant(null);
-        grid[pos.x][pos.y].SetOccupant(this);
-        SetPosition(pos);
     }
 }

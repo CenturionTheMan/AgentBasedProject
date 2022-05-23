@@ -9,12 +9,12 @@ public class Simulation {
     private GridMap gridMap;
     
     private Thread updateThread;
-    private int timeBetweenSteps = 100;
+    private int timeBetweenSteps = 200;
 
     private boolean isRunning = false;
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(10, 20);
+    private Vector2 gridSize = new Vector2(15, 30);
 
     private static Vector2 Debil_speedANDvision = new Vector2(1, 2);
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2);
@@ -27,13 +27,12 @@ public class Simulation {
     private int GimbusInitAmount = 0;
     private int LicbusInitAmount = 0;
     private int PatusInitAmount = 0;
-    private int PodbusInitAmount = 1;
+    private int PodbusInitAmount = 30;
     private int StudentInitAmount = 0;
 
-    private int GimbazaInitAmount = 0;
-    private int LicbazaInitAmount = 0;
-    private int PodbazaInitAmount = 2;
-    private int UczelniaInitAmount = 0;
+    private int GimbazaInitAmount = 1;
+    private int LicbazaInitAmount = 2;
+    private int UczelniaInitAmount = 1;
     //=========================================================================================
 
     //SETTERS && GETTERS
@@ -61,12 +60,11 @@ public class Simulation {
 
     public void SetGimbazaInitAmount(int amount) { GimbazaInitAmount = amount; }
     public void SetLicbazaInitAmount(int amount) { LicbazaInitAmount = amount; }
-    public void SetPodbazaInitAmount(int amount) { PodbazaInitAmount = amount; }
     public void SetUczelniaInitAmount(int amount) { UczelniaInitAmount = amount; }
 
     public int GetAllUnitsInitAmount()
     {
-        return DebilInitAmount + GimbusInitAmount + LicbazaInitAmount + PatusInitAmount + PodbusInitAmount + StudentInitAmount + GimbazaInitAmount + LicbazaInitAmount + PodbazaInitAmount + UczelniaInitAmount;
+        return DebilInitAmount + GimbusInitAmount + LicbazaInitAmount + PatusInitAmount + PodbusInitAmount + StudentInitAmount + GimbazaInitAmount + LicbazaInitAmount + UczelniaInitAmount;
     }
 
     public boolean IsRunning() { return isRunning; }
@@ -127,9 +125,6 @@ public class Simulation {
         for (int i = 0; i < LicbazaInitAmount; i++) {
             GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Licbaza(null));
         }
-        for (int i = 0; i < PodbazaInitAmount; i++) {
-            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Podbaza(null));
-        }
         for (int i = 0; i < UczelniaInitAmount; i++) {
             GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Uczelnia(null));
         }
@@ -158,12 +153,10 @@ public class Simulation {
         
         private void Update()
         {
-            int tempRoundCount = 100;
-
-            while(/*isRunning*/tempRoundCount >0)
+            int counter =0;
+            while(isRunning)
             {
-                tempRoundCount--;
-
+                counter++;
                 for (int i = 0; i < gridMap.GetGrid().length; i++) 
                 {
                     for (int j = 0; j < gridMap.GetGrid()[i].length; j++) 
@@ -191,13 +184,16 @@ public class Simulation {
 
 
                         //GUI UPDATE
-                        if(current.HasMoved())GUI.PrintGrid(gridMap.GetGrid());
-
-
-                        try { Thread.sleep(timeBetweenSteps); } 
-                        catch (InterruptedException e) { e.printStackTrace(); }
+                        // if(current.HasMoved())GUI.PrintGrid(gridMap.GetGrid());
+                        // try { Thread.sleep(timeBetweenSteps); } 
+                        // catch (InterruptedException e) { e.printStackTrace(); }
                     }
                 }
+                System.out.println("Round: [" + counter + "]");
+
+                GUI.PrintGrid(gridMap.GetGrid());
+                try { Thread.sleep(timeBetweenSteps); } 
+                catch (InterruptedException e) { e.printStackTrace(); }
 
 
                 //Set all active entities as open for next round
@@ -210,6 +206,7 @@ public class Simulation {
                     }
                 }
             }
+            System.out.println("SIM END");
         }
     }
 

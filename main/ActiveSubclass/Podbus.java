@@ -4,11 +4,20 @@ import java.util.List;
 import java.util.Vector;
 
 import main.*;
-import main.StaticSubclass.Podbaza;
+import main.StaticSubclass.Gimbaza;
 
 public class Podbus extends Active_Entity{
 
+    private int maxScaredMoves = 2;
     private int scaredMoves = 0;
+    private List<Podbus> group;
+
+    public void SetScaredMoves(int val) { scaredMoves = val; }
+
+    public int GetGroupSize() { 
+        if(group == null) return 0;   
+        return group.size(); 
+    }
 
     public Podbus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
@@ -24,48 +33,43 @@ public class Podbus extends Active_Entity{
 
         Vector2 dir = new Vector2(0,0);
 
+        boolean isThread = false;
+
+        if(activeNeigh != null && activeNeigh.size() >0)
+        {
+            for (Active_Entity a : activeNeigh) {
+                if((a instanceof Gimbus || a instanceof Student || a instanceof Debil || a instanceof Patus) && a.GetPosition().SubtractVector(GetPosition()).GetLenght()<2) isThread = true;
+            }
+        }
+
         if(scaredMoves > 0)
         {
-            dir = GridMap.FindFreePositionInNeighbourhood(GetPosition());
+            dir = GridMap.GetFreePositionInNeighbourhood(GetPosition());
             dir = dir.SubtractVector(GetPosition());
             scaredMoves--;
             return dir;
         }
-        else
+        else if(isThread && GetGroupSize() < 3)
         {
-            //KIEDY COS TO SIE BOJA!!!!! --->>> DOKONCZ
-        }
+            scaredMoves = maxScaredMoves;
 
-        Vector2 baza = null;
-        if(staticNeigh.size() > 0)
-        {
-            List<Vector2> schoolsPos = new ArrayList<Vector2>();
-            for (Static_Entity static_Entity : staticNeigh) {
-                if(static_Entity instanceof Podbaza)
-                {
-                    schoolsPos.add(static_Entity.GetPosition());
-                }
+            if(group != null && group.size() > 0)
+            {
+                group.forEach(k -> k.SetScaredMoves(maxScaredMoves) );
             }
-
-            baza = GridMap.GetTheClosestPointToTargetFromPoints(schoolsPos, GetPosition());
         }
 
-        if(baza == null)
-        {
-            dir = GridMap.FindFreePositionInNeighbourhood(GetPosition()).SubtractVector(GetPosition());
-        }
-        else
-        {
-            Node target = GridMap.GetClosestToPointNodeInUnitSquare(GetPosition(), baza);
-            if(target != null) dir = target.GetPosition().SubtractVector(GetPosition());
-        }
+        dir = GetMovementVectorToStaticEntity(staticNeigh,Gimbaza.class);
+        if(dir.Compare(new Vector2(0, 0))) return dir;
 
+        group = new ArrayList<Podbus>();
         if(activeNeigh.size() > 0)
         {
             for (Active_Entity a : activeNeigh) {
                 if(a instanceof Podbus && GetPosition().SubtractVector(a.GetPosition()).GetLenght()<2)
                 {
                     Podbus p = (Podbus)a;
+                    group.add(p);
                     if(GridMap.IsOnGrid(dir.AddVector(p.GetPosition())))
                     {
                         p.DoMove(grid,dir);
@@ -82,15 +86,9 @@ public class Podbus extends Active_Entity{
         
         if(scaredMoves > 0) return false;
 
-        if(staticNeigh.size() > 0)
-        {
-            for (Static_Entity s : staticNeigh) {
-                if(s instanceof Podbaza && GetPosition().SubtractVector(s.GetPosition()).GetLenght()<2)
-                {
-                    GridMap.PlaceUnitOnMap(GetPosition(), new Gimbus(Simulation.GetGimbus_speedANDvision()));
-                }
-            }
-        }
+        if(IsStaticEntityInNeighborhood(staticNeigh, Gimbaza.class))
+            GridMap.PlaceUnitOnMap(GetPosition(), new Gimbus(Simulation.GetGimbus_speedANDvision()));
+
 
         return false;
     }

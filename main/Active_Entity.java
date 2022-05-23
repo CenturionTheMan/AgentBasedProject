@@ -3,13 +3,14 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.StaticSubclass.Gimbaza;
+
 public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     //VALUES
     private List<Entity> neighbours;    //entities in neighbourhood
     private int speed;  //amount of squares can unit travel in round
     private int visionRange;    //range of awarness
-
 
     //GETTERS && SETTERS
     public List<Entity> GetNeighbours() { return neighbours; }
@@ -70,6 +71,8 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         List<Active_Entity> activeNeigh = GetActiveNeighbours(grid);
         List<Static_Entity> staticNeigh = GetStaticNeighbours(grid);
 
+        //MovementLogic(grid,activeNeigh,staticNeigh);
+
         if(move == null) return false;
         
         //change position
@@ -117,4 +120,51 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
         return arr;
     }
+
+
+    protected boolean IsStaticEntityInNeighborhood(List<Static_Entity> staticNeigh ,Class<? extends Static_Entity> target)
+    {
+        if(staticNeigh != null && staticNeigh.size() > 0)
+        {
+            for (Static_Entity s : staticNeigh) {
+                if(target.isInstance(s))
+                {
+                    if(GetPosition().SubtractVector(s.GetPosition()).GetLenght() < 2) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //RETURNS LOCAL VECTOR TO CHOOSEN STATIC ENTITY OR RANDOM VECTOR TO FREE NODE IF NO CHOOSEN STATIC ENT IN NEIGHBORHOOD
+    protected Vector2 GetMovementVectorToStaticEntity(List<Static_Entity>staticNeigh, Class<? extends Static_Entity> targetClass)
+    {
+        Vector2 baza = null;
+        Vector2 dir = new Vector2(0, 0);
+        if(staticNeigh != null && staticNeigh.size() > 0)
+        {
+            List<Vector2> schoolsPos = new ArrayList<Vector2>();
+            for (Static_Entity static_Entity : staticNeigh) {
+                if(targetClass.isInstance(static_Entity))
+                {
+                    schoolsPos.add(static_Entity.GetPosition());
+                }
+            }
+
+            baza = GridMap.GetTheClosestPointToTargetFromPoints(schoolsPos, GetPosition());
+        }
+        
+        if(baza == null)
+        {
+            dir = GridMap.GetFreePositionInNeighbourhood(GetPosition()).SubtractVector(GetPosition());
+        }
+        else
+        {
+            Node target = GridMap.GetClosestToPointNodeInUnitSquare(GetPosition(), baza);
+            if(target != null) dir = target.GetPosition().SubtractVector(GetPosition());
+        }
+
+        return dir;
+    }
+
 }
