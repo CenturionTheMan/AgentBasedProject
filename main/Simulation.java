@@ -20,7 +20,7 @@ public class Simulation {
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2);
     private static Vector2 Licbus_speedANDvision = new Vector2(1, 2);
     private static Vector2 Patus_speedANDvision = new Vector2(1, 2);
-    private static Vector2 Podbus_speedANDvision = new Vector2(1, 2);
+    private static Vector2 Podbus_speedANDvision = new Vector2(1, 4);
     private static Vector2 Student_speedANDvision = new Vector2(1, 2);
 
     private int DebilInitAmount = 0;
