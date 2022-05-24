@@ -9,7 +9,7 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
     private List<Entity> neighbours;    //entities in neighbourhood
     private int speed;  //amount of squares can unit travel in round
     private int visionRange;    //range of awarness
-    private int movesLeft =0;
+    private int movesLeft =0;   //moves left in given round
 
     //GETTERS && SETTERS
     public List<Entity> GetNeighbours() { return neighbours; }

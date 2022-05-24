@@ -7,8 +7,7 @@ public class Entity {
 
     //VALUES
     private Vector2 position;
-    private boolean isOpen = true;  //says wether unit is able to move in given round
-    private boolean hasMoved = false;
+    private boolean isOpen = true;  //says wether unit moves in round should be set to speed value
 
     //GETTERS && SETTERS
     public Vector2 GetPosition() { return position; }
@@ -17,27 +16,13 @@ public class Entity {
     public boolean IsOpen() { 
         if(isOpen) 
         {
-            hasMoved = true;
             isOpen = false;
             return true;
         }
         else
             return false;
     }
-    public void SetToOpen() { isOpen = true; hasMoved = false; }
-
-    public boolean HasMoved()
-    {
-        if(hasMoved == true)
-        {
-            hasMoved = false;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    public void SetToOpen() { isOpen = true; }
 
 
     //CTOR
