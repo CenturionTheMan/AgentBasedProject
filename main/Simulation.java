@@ -9,12 +9,12 @@ public class Simulation {
     private GridMap gridMap;
     
     private Thread updateThread;
-    private int timeBetweenSteps = 100;
+    private int timeBetweenSteps = 400;
 
     private boolean isRunning = false;
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(15, 40);
+    private Vector2 gridSize = new Vector2(15, 20);
 
     private static Vector2 Debil_speedANDvision = new Vector2(1, 2);
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2);
