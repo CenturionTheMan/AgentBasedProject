@@ -13,27 +13,27 @@ public class Simulation {
 
     private boolean isRunning = false; //says whether simualtion is running
 
-    
+
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(15, 20);
+    private Vector2 gridSize = new Vector2(15, 20); //size of map
 
-    private static Vector2 Debil_speedANDvision = new Vector2(1, 2);
-    private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2);
-    private static Vector2 Licbus_speedANDvision = new Vector2(1, 2);
-    private static Vector2 Patus_speedANDvision = new Vector2(1, 2);
-    private static Vector2 Podbus_speedANDvision = new Vector2(1, 4);
-    private static Vector2 Student_speedANDvision = new Vector2(1, 2);
+    private static Vector2 Debil_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Debil
+    private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Gimbus
+    private static Vector2 Licbus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Licbus
+    private static Vector2 Patus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Patus
+    private static Vector2 Podbus_speedANDvision = new Vector2(1, 4); //idicates speed(amound of moves in one round) and vision range of Podbus
+    private static Vector2 Student_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Student
 
-    private int DebilInitAmount = 0;
-    private int GimbusInitAmount = 0;
-    private int LicbusInitAmount = 0;
-    private int PatusInitAmount = 0;
-    private int PodbusInitAmount = 40;
-    private int StudentInitAmount = 0;
+    private int DebilInitAmount = 0; //amount of Debils units placed on map at the beginning of simulation
+    private int GimbusInitAmount = 0; //amount of Gimbus units placed on map at the beginning of simulation
+    private int LicbusInitAmount = 0; //amount of Licbis units placed on map at the beginning of simulation
+    private int PatusInitAmount = 0; //amount of Patus units placed on map at the beginning of simulation
+    private int PodbusInitAmount = 40; //amount of Podbus units placed on map at the beginning of simulation
+    private int StudentInitAmount = 0; //amount of Student units placed on map at the beginning of simulation
 
-    private int GimbazaInitAmount = 4;
-    private int LicbazaInitAmount = 3;
-    private int UczelniaInitAmount = 2;
+    private int GimbazaInitAmount = 4; //amount of Gimbaza units placed on map at the beginning of simulation
+    private int LicbazaInitAmount = 3; //amount of Licbaza units placed on map at the beginning of simulation
+    private int UczelniaInitAmount = 2; //amount of Uczelnia units placed on map at the beginning of simulation
 
 
     //===============================================================SETTERS && GETTERS
