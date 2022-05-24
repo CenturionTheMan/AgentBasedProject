@@ -7,6 +7,7 @@ import main.StaticSubclass.Piwo;
 
 public class Student extends Active_Entity{
 
+    //CTOR
     public Student(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
@@ -16,6 +17,7 @@ public class Student extends Active_Entity{
     }
 
 
+    //METHODS
     @Override
     protected Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         

@@ -14,6 +14,9 @@ import main.StaticSubclass.Piwo;
 
 public class GUI {
     
+    //*Prints grid in console and put thred to sleep for given amount
+    //Node[][] grid - double array with nodes used for simulation
+    //int timeBetweenSteps - idicates how long should thred sleep after printing grid
     public static void PrintGrid(Node[][] gridMap, int timeBetweenSteps)
     {
         GUI.GridCreator(gridMap);
@@ -21,6 +24,8 @@ public class GUI {
         catch (InterruptedException e) { e.printStackTrace(); }
     }
     
+    //*Prints grid console
+    //Node[][] grid - double array with nodes used for simulation
     private static void GridCreator(Node[][] grid)
     {
         for (int i = 0; i < grid[0].length; i++) {

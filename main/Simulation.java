@@ -5,14 +5,15 @@ import main.StaticSubclass.*;
 
 public class Simulation {
     
-    //VALUES
-    private GridMap gridMap;
+    //===============================================================VALUES
+    private GridMap gridMap; //class used for handling grid
     
-    private Thread updateThread;
-    private int timeBetweenSteps = 400;
+    private Thread updateThread; //thread used for performing simulation
+    private int timeBetweenSteps = 400; //time [in ms] between printing grid
 
-    private boolean isRunning = false;
+    private boolean isRunning = false; //says whether simualtion is running
 
+    
     //======================= INIT VALUES ===================================================
     private Vector2 gridSize = new Vector2(15, 20);
 
@@ -33,9 +34,9 @@ public class Simulation {
     private int GimbazaInitAmount = 4;
     private int LicbazaInitAmount = 3;
     private int UczelniaInitAmount = 2;
-    //=========================================================================================
 
-    //SETTERS && GETTERS
+
+    //===============================================================SETTERS && GETTERS
     public void SetGridSize(Vector2 size) { gridSize = size; }
 
     public void SetDebil_speedANDvision(Vector2 speedANDvision) { Debil_speedANDvision = speedANDvision; }
@@ -71,7 +72,7 @@ public class Simulation {
 
 
 
-    //CTOR
+    //==================================================CTOR
     public Simulation() {
         gridMap = new GridMap(gridSize);
 
@@ -81,7 +82,9 @@ public class Simulation {
 
 
 
-    //Methods
+    //==================================================METHODS
+
+    //*Inits simulation and runs it in new thread
     public void RunSimulation()
     {
         if(GetAllUnitsInitAmount() > gridSize.x*gridSize.y)
@@ -147,10 +150,13 @@ public class Simulation {
     class UpdateThread implements Runnable
     {
         @Override
+
+        //*Buffer for running Update
         public void run() {
             Update();
         }
         
+        //*Handle turns cycles
         private void Update()
         {
             int counter =0;

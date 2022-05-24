@@ -7,23 +7,30 @@ import main.StaticSubclass.Gimbaza;
 
 public class Podbus extends Active_Entity{
 
-    private int maxScaredMoves = 2;
-    private int scaredMoves = 0;
-    private List<Podbus> group;
+    //VALUES
+    private int maxScaredMoves = 2; //indicates how many moves should entity last feared
+    private int scaredMoves = 0; //how moves to stopped being feard is left
+    private List<Podbus> group; //list of Posbus'es in surranding
 
+    //GETTERS && SETTERS
     public void SetScaredMoves(int val) { scaredMoves = val; }
 
-    public int GetGroupSize() { 
-        if(group == null) return 0;   
-        return group.size(); 
-    }
-
+    //CTOR
     public Podbus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
     public Podbus(Vector2 speedANDvision)
     {
         super(speedANDvision);
+    }
+
+
+    //METHODS
+
+    //*Returns size of List<Podbus> group in Podbus class
+    public int GetGroupSize() { 
+        if(group == null) return 0;   
+        return group.size(); 
     }
 
 

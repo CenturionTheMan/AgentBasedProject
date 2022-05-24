@@ -12,6 +12,8 @@ public class Application {
         InitApp();
     }
 
+
+    //*Inits application
     static void InitApp()
     {
         gui = new GUI(); //GUI
@@ -21,6 +23,8 @@ public class Application {
         OnRunSimulation(); //TEMP
     }
 
+
+    //*Hub for running application from gui site
     public static void OnRunSimulation()
     {
         simulation.RunSimulation();

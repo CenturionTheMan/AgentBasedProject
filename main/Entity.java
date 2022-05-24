@@ -45,10 +45,11 @@ public class Entity {
 
     //METHODS
 
-    //Changes position of entitiy 
+    //*Changes position of entitiy
+    //Node[][] grid - double array with nodes used for simulation
+    //Vector2 pos - position to which will entity go
     public void ChangePosition(Vector2 pos, Node[][] grid)
     {
-        
         if(grid[pos.x][pos.y].GetOccupant() == null || (grid[pos.x][pos.y].GetOccupant() instanceof Piwo) || (grid[pos.x][pos.y].GetOccupant() instanceof Egzamin)) 
         {
             grid[GetPosition().x][GetPosition().y].SetOccupant(null);
@@ -57,7 +58,8 @@ public class Entity {
         }
     }
 
-    //removes this unit from grid
+    //*Removes this unit from grid
+    //Node[][] grid - double array with nodes used for simulation
     public void RemoveFromGrid(Node[][] grid)
     {
         grid[GetPosition().x][GetPosition().y].SetOccupant(null);

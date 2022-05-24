@@ -25,6 +25,9 @@ public class GridMap {
 
 
     //METHODS
+
+    //*Inits grid size and inicialize each node
+    //Vector2 gridSize - indicates grid size
     public void InitGrid(Vector2 gridSize) //setup
     {
         grid = new Node[gridSize.x][gridSize.y];
@@ -38,7 +41,7 @@ public class GridMap {
         }
     }
 
-    //setup neighbours for all entities on the grid
+    //*Setup neighbours for all entities on the grid
     public void SetupNeighbours()
     {
         for (int i = 0; i < grid.length; i++) {
@@ -63,14 +66,16 @@ public class GridMap {
         }
     }
 
-    //Sets unit on position
+    //*Sets unit on given position position
+    //Vector2 pos - point on map where entity will be placed
+    //Entity unit - instanciated Entity object
     public static void PlaceUnitOnMap(Vector2 pos, Entity unit)
     {
         grid[pos.x][pos.y].SetOccupant(unit);
         unit.SetPosition(pos);
     }
 
-    //Returns position of random empty node in grid
+    //*Returns global position of random node (without any occupant) in grid
     public static Vector2 GetEmptyPositionInMap()
     {
         Random rand = new Random();
@@ -99,7 +104,9 @@ public class GridMap {
         }
     }
 
-    //returns the closest position (from positions list) to given target
+    //*Returns the closest position to given target from positions list
+    //List<Vector2> points - list of points to choose from
+    //Vector2 target - position to choose the smallest distance to
     public static Vector2 GetTheClosestPointToTargetFromPoints(List<Vector2> points, Vector2 target)
     {
         if(points == null || points.size() < 1)return null;
@@ -116,7 +123,11 @@ public class GridMap {
         return res;
     }
 
-    //returns closest (free) node from neighbors nodes
+    //*Returns closest (free) node to target position from nodes which surrounds given point (center).
+    //*Nodes occupied by Egzamin or Piwo are treated as free. 
+    //*Will return null if there is no free node in surrounding
+    //Vector2 center - point from which surranding nodes are being choosen
+    //Vector2 targetPos - position to choose the smallest distance to
     public static Node GetClosestToPointNodeInUnitSquare(Vector2 center, Vector2 targetPos)
     {
         List<Node> neigh = GridMap.GetNeighbourNodes(center, 1);
@@ -152,7 +163,8 @@ public class GridMap {
         return null;
     }
 
-    //Checks whether posiotin is on grid
+    //*Checks whether position is iside grid boundries
+    //Vector2 pos - position to check
     public static boolean IsOnGrid(Vector2 pos)
     {
         if(pos.x < 0 || pos.x >= grid.length) { return false; }
@@ -160,7 +172,10 @@ public class GridMap {
         return true;
     }
 
-    //returns random (free) position from neighbor nodes
+    //*Returns position of random free node from nodes in surrounding of node with given position.
+    //*Nodes occupied by Egzamin or Piwo are treated as free. 
+    //*Returns Vector2 = [0,0] if there is no free node
+    //Vector2 position - point from which surranding nodes are being choosen
     public static Vector2 GetFreePositionInNeighbourhood(Vector2 position)
     {
         List<Node> neigh = GetNeighbourNodes(position, 1);
@@ -181,7 +196,11 @@ public class GridMap {
     }
 
 
-    //Returns list of nodes which surrounds node with given cords
+    //*Returns list of nodes which surrounds node with given cords (center)
+    //*Deepness indicates to which extends nodes as treated as surranding 
+    //*deepness = n: returns list of nodes which distance to center is smaller or equal to sqrt(2*n)
+    //Vector2 center - point from which surranding nodes are being choosen
+    //int deepness - indicates how many neighbours should be taken into consideration
     public static List<Node> GetNeighbourNodes(Vector2 center, int deepness)
     {
         List<Node> neigh = new ArrayList<Node>();

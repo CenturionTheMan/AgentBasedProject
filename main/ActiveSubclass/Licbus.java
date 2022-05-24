@@ -8,9 +8,11 @@ import main.StaticSubclass.Uczelnia;
 
 public class Licbus extends Active_Entity{
 
-    private int maxScaredMoves = 2;
-    private int scaredMoves = 0;
+    //VALUES
+    private int maxScaredMoves = 2;//indicates how many moves should Licbus last feared
+    private int scaredMoves = 0; //how moves to stopped being feard is left
 
+    //CTOR
     public Licbus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
@@ -19,6 +21,8 @@ public class Licbus extends Active_Entity{
         super(speedANDvision);
     }
 
+
+    //METHODS
 
     @Override
     protected Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {

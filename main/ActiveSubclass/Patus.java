@@ -8,13 +8,15 @@ import main.StaticSubclass.Piwo;
 
 public class Patus extends Active_Entity{
 
-    private int fearlessTime = 10;
-    private int maxScaredMoves = 2;
-    private int scaredMoves = 0;
+    //VALUES
+    private int fearlessTime = 10; //how many moves should Patus be immune to fear
+    private int maxScaredMoves = 2; //how many moves should patus stay feard
+    private int scaredMoves = 0; //how moves to stopped being feard is left
 
+    //SETTERS && GETTERS
     public void SetScaredMoves(int val) { scaredMoves = val; }
 
-
+    //CTOR
     public Patus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
@@ -23,6 +25,8 @@ public class Patus extends Active_Entity{
         super(speedANDvision);
     }
 
+
+    //METHODS
 
     @Override
     protected Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {

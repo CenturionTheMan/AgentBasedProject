@@ -7,6 +7,7 @@ import main.StaticSubclass.Egzamin;
 
 public class Debil extends Active_Entity{
 
+    //CTOR
     public Debil(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }
@@ -16,6 +17,7 @@ public class Debil extends Active_Entity{
     }
     
     
+    //METHODS
     @Override
     public Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         Vector2 dir = GetMovementVectorToStaticEntity(staticNeigh, Egzamin.class);

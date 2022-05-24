@@ -2,12 +2,12 @@ package main;
 
 public class Node {
     
-    //VALUES
+    //==================================================================VALUES
     private Entity occupant;
     private Vector2 position;
 
     
-    //SETTERS && GETTERS
+    //================================================================SETTERS && GETTERS
     public Entity GetOccupant(){ return occupant; }
     public void SetOccupant(Entity occupant){ this.occupant = occupant; }
 
@@ -15,7 +15,7 @@ public class Node {
     public void SetPosition(Vector2 pos){ position = pos; }
 
 
-    //CTOR
+    //=================================================================CTOR
     public Node(Entity occupant, Vector2 position) {
         this.occupant = occupant;
         this.position = position;
