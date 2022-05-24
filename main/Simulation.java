@@ -9,12 +9,12 @@ public class Simulation {
     private GridMap gridMap;
     
     private Thread updateThread;
-    private int timeBetweenSteps = 200;
+    private int timeBetweenSteps = 100;
 
     private boolean isRunning = false;
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(15, 30);
+    private Vector2 gridSize = new Vector2(15, 40);
 
     private static Vector2 Debil_speedANDvision = new Vector2(1, 2);
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2);
@@ -27,12 +27,12 @@ public class Simulation {
     private int GimbusInitAmount = 0;
     private int LicbusInitAmount = 0;
     private int PatusInitAmount = 0;
-    private int PodbusInitAmount = 30;
+    private int PodbusInitAmount = 40;
     private int StudentInitAmount = 0;
 
-    private int GimbazaInitAmount = 1;
-    private int LicbazaInitAmount = 2;
-    private int UczelniaInitAmount = 1;
+    private int GimbazaInitAmount = 4;
+    private int LicbazaInitAmount = 3;
+    private int UczelniaInitAmount = 2;
     //=========================================================================================
 
     //SETTERS && GETTERS
@@ -135,7 +135,7 @@ public class Simulation {
 
 
         //print fin grid
-        GUI.PrintGrid(gridMap.GetGrid());
+        GUI.PrintGrid(gridMap.GetGrid(),3000);
 
         isRunning = true;
         updateThread.start();
@@ -176,24 +176,17 @@ public class Simulation {
                         {
                             Active_Entity active = (Active_Entity)current; //casting
                             
-                            if(active.DoMove(gridMap.GetGrid())) //do move
+                            if(active.DoMove(gridMap.GetGrid(),null)) //do move
                             {
                                 isRunning = false; //end if cond met
                             }
                         }
-
-
-                        //GUI UPDATE
-                        // if(current.HasMoved())GUI.PrintGrid(gridMap.GetGrid());
-                        // try { Thread.sleep(timeBetweenSteps); } 
-                        // catch (InterruptedException e) { e.printStackTrace(); }
                     }
                 }
+                
+                
                 System.out.println("Round: [" + counter + "]");
-
-                GUI.PrintGrid(gridMap.GetGrid());
-                try { Thread.sleep(timeBetweenSteps); } 
-                catch (InterruptedException e) { e.printStackTrace(); }
+                GUI.PrintGrid(gridMap.GetGrid(),timeBetweenSteps);
 
 
                 //Set all active entities as open for next round

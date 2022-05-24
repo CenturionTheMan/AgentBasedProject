@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Random;
 
 import main.*;
-import main.StaticSubclass.Gimbaza;
 import main.StaticSubclass.Licbaza;
 
 public class Gimbus extends Active_Entity {

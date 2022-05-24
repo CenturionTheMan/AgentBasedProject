@@ -1,7 +1,6 @@
 package main.ActiveSubclass;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import main.*;
 import main.StaticSubclass.Gimbaza;
@@ -42,14 +41,7 @@ public class Podbus extends Active_Entity{
             }
         }
 
-        if(scaredMoves > 0)
-        {
-            dir = GridMap.GetFreePositionInNeighbourhood(GetPosition());
-            dir = dir.SubtractVector(GetPosition());
-            scaredMoves--;
-            return dir;
-        }
-        else if(isThread && GetGroupSize() < 3)
+        if(isThread && GetGroupSize() < 3)
         {
             scaredMoves = maxScaredMoves;
 
@@ -58,6 +50,17 @@ public class Podbus extends Active_Entity{
                 group.forEach(k -> k.SetScaredMoves(maxScaredMoves) );
             }
         }
+
+        if(scaredMoves > 0)
+        {            
+            AddMoves(Simulation.GetPodbus_speedANDvision().x);
+
+            dir = GridMap.GetFreePositionInNeighbourhood(GetPosition());
+            dir = dir.SubtractVector(GetPosition());
+            scaredMoves--;
+            return dir;
+        }
+
 
         dir = GetMovementVectorToStaticEntity(staticNeigh,Gimbaza.class);
         if(dir.Compare(new Vector2(0, 0))) return dir;

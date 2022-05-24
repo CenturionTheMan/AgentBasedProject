@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.text.Position;
 
 import main.StaticSubclass.Egzamin;
 import main.StaticSubclass.Piwo;

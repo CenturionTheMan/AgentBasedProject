@@ -4,7 +4,6 @@ import java.util.Random;
 
 import main.*;
 import main.StaticSubclass.Egzamin;
-import main.StaticSubclass.Licbaza;
 import main.StaticSubclass.Uczelnia;
 
 public class Licbus extends Active_Entity{

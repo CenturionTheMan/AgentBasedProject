@@ -3,14 +3,13 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.StaticSubclass.Gimbaza;
-
 public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     //VALUES
     private List<Entity> neighbours;    //entities in neighbourhood
     private int speed;  //amount of squares can unit travel in round
     private int visionRange;    //range of awarness
+    private int movesLeft =0;
 
     //GETTERS && SETTERS
     public List<Entity> GetNeighbours() { return neighbours; }
@@ -22,6 +21,7 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
     public int GetVisionRange() { return visionRange; }
     public void SetVisionRange(int visionRange) { this.visionRange = visionRange; }
 
+    public void AddMoves(int amount) { movesLeft += amount; }
 
     //CTOR
     public Active_Entity(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
@@ -48,39 +48,31 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     
     //METHODS
-    public final boolean DoMove(Node[][] grid) //HUB used for moving entities
+    public final boolean DoMove(Node[][] grid, Vector2 forcedDir) //HUB used for moving entities
     {
-        if(!IsOpen()) return false; //if entity moved in round -> prevent from moving again
+        if(IsOpen()) movesLeft = speed;
+    
+        if(movesLeft <= 0)return false;
+        else
+            movesLeft--;
 
         List<Active_Entity> activeNeigh = GetActiveNeighbours(grid);
         List<Static_Entity> staticNeigh = GetStaticNeighbours(grid);
 
-        Vector2 move = MovementLogic(grid,activeNeigh,staticNeigh); //do MovementLogic and get movement vec
+        Vector2 move =(forcedDir == null)? MovementLogic(grid,activeNeigh,staticNeigh) : forcedDir; //do MovementLogic and get movement vec
         if(move == null) return false;
         
+
         //change position
         ChangePosition(Vector2.AddVectors(GetPosition(), move), grid); 
 
         boolean isEndConMeet = StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
+
+        //GUI.PrintGrid(grid, 1000); //TEMP EACH MOVE GUI UPDATE
+
         return isEndConMeet;
     }
-    public final boolean DoMove(Node[][] grid, Vector2 move) //HUB used for moving entities
-    {
-        if(!IsOpen()) return false; //if entity moved in round -> prevent from moving again
 
-        List<Active_Entity> activeNeigh = GetActiveNeighbours(grid);
-        List<Static_Entity> staticNeigh = GetStaticNeighbours(grid);
-
-        //MovementLogic(grid,activeNeigh,staticNeigh);
-
-        if(move == null) return false;
-        
-        //change position
-        ChangePosition(Vector2.AddVectors(GetPosition(), move), grid); 
-
-        boolean isEndConMeet = StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
-        return isEndConMeet;
-    }
 
     protected abstract Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Get MovementVector to change unit position
     

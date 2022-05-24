@@ -14,8 +14,14 @@ import main.StaticSubclass.Piwo;
 
 public class GUI {
     
+    public static void PrintGrid(Node[][] gridMap, int timeBetweenSteps)
+    {
+        GUI.GridCreator(gridMap);
+        try { Thread.sleep(timeBetweenSteps); } 
+        catch (InterruptedException e) { e.printStackTrace(); }
+    }
     
-    public static void PrintGrid(Node[][] grid)
+    private static void GridCreator(Node[][] grid)
     {
         for (int i = 0; i < grid[0].length; i++) {
             System.out.print("===");
