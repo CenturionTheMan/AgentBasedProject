@@ -7,6 +7,9 @@ import main.StaticSubclass.Egzamin;
 
 public class Debil extends Active_Entity{
 
+    //VALUES
+    public static int amount =0;
+
     //CTOR
     public Debil(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
@@ -48,7 +51,7 @@ public class Debil extends Active_Entity{
             }
             
 
-            GridMap.PlaceUnitOnMap(GetPosition(), new Licbus(Simulation.GetLicbus_speedANDvision()));
+            GridMap.PlaceUnitOnMap(GetPosition(), new Student(Simulation.GetStudent_speedANDvision()));
         }
 
         return false;

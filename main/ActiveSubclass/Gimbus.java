@@ -12,6 +12,8 @@ public class Gimbus extends Active_Entity {
     private int maxScaredMoves = 2; //indicates how many moves should entity last feared
     private int scaredMoves = 0; //how moves to stopped being feard is left
 
+    public static int amount =0;
+
     //SETTERS && GETTERS
     public void SetScaredMoves(int val) { scaredMoves = val; }
 

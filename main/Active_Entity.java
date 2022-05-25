@@ -3,6 +3,17 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.ActiveSubclass.Debil;
+import main.ActiveSubclass.Gimbus;
+import main.ActiveSubclass.Licbus;
+import main.ActiveSubclass.Patus;
+import main.ActiveSubclass.Podbus;
+import main.ActiveSubclass.Student;
+import main.StaticSubclass.Egzamin;
+import main.StaticSubclass.Gimbaza;
+import main.StaticSubclass.Licbaza;
+import main.StaticSubclass.Piwo;
+
 public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     //=======================================================================VALUES
@@ -75,6 +86,22 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
         //GUI.PrintGrid(grid, 1000); //TEMP EACH MOVE GUI UPDATE
 
+        if(Piwo.amount == 0 && Gimbus.amount == 0 && Podbus.amount == 0 && Patus.amount == 0) 
+        {
+            isEndConMeet = true;
+        }
+        if(Egzamin.amount ==0 && Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0)
+        {
+            isEndConMeet = true;
+        }
+        if(Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0 && Patus.amount == 0)
+        {
+            isEndConMeet = true;
+        }
+        if(Simulation.RoundCount > 500)
+        {
+            isEndConMeet = true;
+        }
         return isEndConMeet;
     }
 

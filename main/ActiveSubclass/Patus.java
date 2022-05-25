@@ -13,6 +13,8 @@ public class Patus extends Active_Entity{
     private int maxScaredMoves = 2; //how many moves should patus stay feard
     private int scaredMoves = 0; //how moves to stopped being feard is left
 
+    public static int amount =0;
+
     //SETTERS && GETTERS
     public void SetScaredMoves(int val) { scaredMoves = val; }
 
@@ -80,7 +82,6 @@ public class Patus extends Active_Entity{
                     }
                 }
             }
-            
 
             GridMap.PlaceUnitOnMap(GetPosition(), new Licbus(Simulation.GetLicbus_speedANDvision()));
         }

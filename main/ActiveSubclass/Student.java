@@ -7,6 +7,9 @@ import main.StaticSubclass.Piwo;
 
 public class Student extends Active_Entity{
 
+    //VALUES
+    public static int amount =0;
+
     //CTOR
     public Student(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);

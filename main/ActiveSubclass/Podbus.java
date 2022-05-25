@@ -12,6 +12,8 @@ public class Podbus extends Active_Entity{
     private int scaredMoves = 0; //how moves to stopped being feard is left
     private List<Podbus> group; //list of Posbus'es in surranding
 
+    public static int amount =0;
+
     //GETTERS && SETTERS
     public void SetScaredMoves(int val) { scaredMoves = val; }
 
@@ -23,7 +25,6 @@ public class Podbus extends Active_Entity{
     {
         super(speedANDvision);
     }
-
 
     //METHODS
 
@@ -98,8 +99,6 @@ public class Podbus extends Active_Entity{
 
         if(IsStaticEntityInNeighborhood(staticNeigh, Gimbaza.class))
             GridMap.PlaceUnitOnMap(GetPosition(), new Gimbus(Simulation.GetGimbus_speedANDvision()));
-
-
         return false;
     }
 }

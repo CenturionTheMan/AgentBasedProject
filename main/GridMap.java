@@ -71,6 +71,9 @@ public class GridMap {
     //Entity unit - instanciated Entity object
     public static void PlaceUnitOnMap(Vector2 pos, Entity unit)
     {
+        Entity.ChangeAmountOfGivenSubclass(grid[pos.x][pos.y].GetOccupant(), -1);
+        Entity.ChangeAmountOfGivenSubclass(unit, 1);
+
         grid[pos.x][pos.y].SetOccupant(unit);
         unit.SetPosition(pos);
     }
@@ -198,7 +201,7 @@ public class GridMap {
 
     //*Returns list of nodes which surrounds node with given cords (center)
     //*Deepness indicates to which extends nodes as treated as surranding 
-    //*deepness = n: returns list of nodes which distance to center is smaller or equal to sqrt(2*n)
+    //*deepness = n: returns list of nodes which distance to center is smaller or equal to sqrt(2*n^2)
     //Vector2 center - point from which surranding nodes are being choosen
     //int deepness - indicates how many neighbours should be taken into consideration
     public static List<Node> GetNeighbourNodes(Vector2 center, int deepness)

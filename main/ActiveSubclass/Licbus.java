@@ -12,6 +12,8 @@ public class Licbus extends Active_Entity{
     private int maxScaredMoves = 2;//indicates how many moves should Licbus last feared
     private int scaredMoves = 0; //how moves to stopped being feard is left
 
+    public static int amount =0;
+
     //CTOR
     public Licbus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);

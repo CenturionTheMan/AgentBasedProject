@@ -13,9 +13,10 @@ public class Simulation {
 
     private boolean isRunning = false; //says whether simualtion is running
 
+    public static int RoundCount = 0; //says how many round was already performed
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(15, 20); //size of map
+    private Vector2 gridSize = new Vector2(5, 5); //size of map
 
     private static Vector2 Debil_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Debil
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Gimbus
@@ -28,12 +29,12 @@ public class Simulation {
     private int GimbusInitAmount = 0; //amount of Gimbus units placed on map at the beginning of simulation
     private int LicbusInitAmount = 0; //amount of Licbis units placed on map at the beginning of simulation
     private int PatusInitAmount = 0; //amount of Patus units placed on map at the beginning of simulation
-    private int PodbusInitAmount = 40; //amount of Podbus units placed on map at the beginning of simulation
+    private int PodbusInitAmount = 10; //amount of Podbus units placed on map at the beginning of simulation
     private int StudentInitAmount = 0; //amount of Student units placed on map at the beginning of simulation
 
-    private int GimbazaInitAmount = 4; //amount of Gimbaza units placed on map at the beginning of simulation
-    private int LicbazaInitAmount = 3; //amount of Licbaza units placed on map at the beginning of simulation
-    private int UczelniaInitAmount = 2; //amount of Uczelnia units placed on map at the beginning of simulation
+    private int GimbazaInitAmount = 1; //amount of Gimbaza units placed on map at the beginning of simulation
+    private int LicbazaInitAmount = 0; //amount of Licbaza units placed on map at the beginning of simulation
+    private int UczelniaInitAmount = 0; //amount of Uczelnia units placed on map at the beginning of simulation
 
 
     //===============================================================SETTERS && GETTERS
@@ -87,6 +88,9 @@ public class Simulation {
     //*Inits simulation and runs it in new thread
     public void RunSimulation()
     {
+        Entity.ResetAmountOfAllSubclasses();
+        RoundCount =0;
+
         if(GetAllUnitsInitAmount() > gridSize.x*gridSize.y)
         {
             System.err.println("Unites summarized amount can not be larger than amount of nodes in map!!");
@@ -159,10 +163,8 @@ public class Simulation {
         //*Handle turns cycles
         private void Update()
         {
-            int counter =0;
             while(isRunning)
             {
-                counter++;
                 for (int i = 0; i < gridMap.GetGrid().length; i++) 
                 {
                     for (int j = 0; j < gridMap.GetGrid()[i].length; j++) 
@@ -190,8 +192,8 @@ public class Simulation {
                     }
                 }
                 
-                
-                System.out.println("Round: [" + counter + "]");
+                RoundCount++;
+                System.out.println("Round: [" + RoundCount + "]");
                 GUI.PrintGrid(gridMap.GetGrid(),timeBetweenSteps);
 
 

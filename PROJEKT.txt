@@ -43,18 +43,18 @@ Każdy Entit wewnątrz cyklu ma specjalne właściwości:
 - Jeżeli w zasięgu jego wzroku znajdzie się Egzamin, uda się w jego stronę.
 
 -> Debil:
-- Debilem ma szansę (10%) stać się Student co rundę.
+- Debil ma szansę (10%) stać się Student co rundę.
 - Jeżeli w zasięgu jego wzroku znajdzie się Egzamin, uda się w jego stronę.
 - Debil nie obcuje z polem z piwem, jak Student. Aby z powrotem stać się Studentem, musi wejść na pole z Egzaminem.
 
 Dodatkowo jeżeli jakakolwiek jednostka wchodząc na pole na którym jest piwo lub egzamin, sprawia że ów znika.
 
 Warunki końca symulacji: 
--> Student konsumuje piwo
--> Na mapie nie ma żadnego piwa a zostali tylko Studenci, Licbusy i Debile 
--> Na mapie zostały same Patusy i nie ma na niej żadnych Egzaminów
--> Na mapie nie ma żadnych Entit'ów
--> Minęło 500 rund a żaden z powyższych warunków nie został spełniony
+-> (1) Student konsumuje piwo
+-> (2) Na mapie nie ma żadnego Piwa, Gimbusa, Podbusa ani Patusa
+-> (3) Na mapie zostały same Patusy i nie ma na niej żadnych Egzaminów
+-> (4) Na mapie nie ma żadnych Entit'ów ruchomych
+-> (5) Minęło 500 rund a żaden z powyższych warunków nie został spełniony
 
 
 
