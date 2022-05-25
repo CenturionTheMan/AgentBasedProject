@@ -9,14 +9,14 @@ public class Simulation {
     private GridMap gridMap; //class used for handling grid
     
     private Thread updateThread; //thread used for performing simulation
-    private int timeBetweenSteps = 400; //time [in ms] between printing grid
+    private int timeBetweenSteps = 100; //time [in ms] between printing grid
 
     private boolean isRunning = false; //says whether simualtion is running
 
     public static int RoundCount = 0; //says how many round was already performed
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(5, 5); //size of map
+    private Vector2 gridSize = new Vector2(15, 40); //size of map
 
     private static Vector2 Debil_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Debil
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Gimbus
@@ -29,12 +29,12 @@ public class Simulation {
     private int GimbusInitAmount = 0; //amount of Gimbus units placed on map at the beginning of simulation
     private int LicbusInitAmount = 0; //amount of Licbis units placed on map at the beginning of simulation
     private int PatusInitAmount = 0; //amount of Patus units placed on map at the beginning of simulation
-    private int PodbusInitAmount = 10; //amount of Podbus units placed on map at the beginning of simulation
+    private int PodbusInitAmount = 596; //amount of Podbus units placed on map at the beginning of simulation
     private int StudentInitAmount = 0; //amount of Student units placed on map at the beginning of simulation
 
     private int GimbazaInitAmount = 1; //amount of Gimbaza units placed on map at the beginning of simulation
-    private int LicbazaInitAmount = 0; //amount of Licbaza units placed on map at the beginning of simulation
-    private int UczelniaInitAmount = 0; //amount of Uczelnia units placed on map at the beginning of simulation
+    private int LicbazaInitAmount = 1; //amount of Licbaza units placed on map at the beginning of simulation
+    private int UczelniaInitAmount = 1; //amount of Uczelnia units placed on map at the beginning of simulation
 
 
     //===============================================================SETTERS && GETTERS
@@ -93,7 +93,13 @@ public class Simulation {
 
         if(GetAllUnitsInitAmount() > gridSize.x*gridSize.y)
         {
-            System.err.println("Unites summarized amount can not be larger than amount of nodes in map!!");
+            System.err.println("Unites summarized amount must be smaller than amount of nodes in map!");
+            return;
+        }
+
+        if(GimbazaInitAmount < 1 || UczelniaInitAmount < 1 || LicbazaInitAmount < 1)
+        {
+            System.err.println("There must be at least one school of each type on map!");
             return;
         }
 

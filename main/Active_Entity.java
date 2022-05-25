@@ -86,22 +86,31 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
         //GUI.PrintGrid(grid, 1000); //TEMP EACH MOVE GUI UPDATE
 
+        if(isEndConMeet)
+        {
+            System.out.println("End condition nr (1) was met");
+        }
         if(Piwo.amount == 0 && Gimbus.amount == 0 && Podbus.amount == 0 && Patus.amount == 0) 
         {
             isEndConMeet = true;
+            System.out.println("End condition nr (2) was met");
         }
         if(Egzamin.amount ==0 && Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0)
         {
             isEndConMeet = true;
+            System.out.println("End condition nr (3) was met");
         }
         if(Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0 && Patus.amount == 0)
         {
             isEndConMeet = true;
+            System.out.println("End condition nr (4) was met");
         }
         if(Simulation.RoundCount > 500)
         {
             isEndConMeet = true;
+            System.out.println("End condition nr (5) was met");
         }
+
         return isEndConMeet;
     }
 
