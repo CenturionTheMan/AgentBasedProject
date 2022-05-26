@@ -22,19 +22,8 @@ public class Application {
         simulation = new Simulation();
         simulation.InitSimulation();
 
-        gui = new GUI(simulation.GetGridMap().GetGrid()); //GUI 
+        gui = new GUI(simulation); //GUI 
         
         dataGahtering = new DataGathering(simulation);
-
-        //simulation.RunSimulation();
-        //simulation.RunSimulationWithoutNewThred();
-    }
-
-
-    //*Hub for running application from gui site
-    public static void OnRunSimulation()
-    {
-        simulation.InitSimulation();
-        simulation.RunSimulation();
     }
 }

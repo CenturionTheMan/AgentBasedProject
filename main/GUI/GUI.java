@@ -2,12 +2,16 @@ package main.GUI;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.Graphics;
+import javax.swing.GroupLayout.Alignment;
+
+import java.awt.event.*;
 
 import main.Entity;
 import main.Node;
+import main.Simulation;
 import main.Vector2;
 import main.ActiveSubclass.*;
+import main.GUI.CustomActionListener.ActionType;
 import main.StaticSubclass.*;
 
 
@@ -17,11 +21,13 @@ public class GUI {
     private static JFrame frame;
     private static JPanel left;
     private static JPanel right;
-    private static JLayeredPane gridHolder;
+    public static JLayeredPane gridHolder;
     private static JPanel gridBackground;
 
     private static JPanel[][] nodes;
 
+
+    private Simulation simulation;
 
     static final Color EMPTY = new Color(192,192,192);
     static final Color PODBUS = new Color(102,255,255);
@@ -37,8 +43,9 @@ public class GUI {
     static final Color EGZAMIN= new Color(58,108,245);
 
     //CTOR
-    public GUI(Node[][] gridMap) {
-        InitGUI(gridMap);
+    public GUI(Simulation sim) {
+        simulation = sim;
+        InitGUI(sim.GetGridMap().GetGrid());
     }
 
 
@@ -50,30 +57,149 @@ public class GUI {
         gridHolder = new JLayeredPane();
 
         //left.setBackground(Color.BLUE);
-        left.setBounds(0,0,700,700);
+        left.setPreferredSize(new Dimension(400,700));
         left.setLayout(null);
         left.add(gridHolder);
 
-        //right.setBackground(Color.RED);
-        right.setSize(400,700);
+        //right.setBackground(new Color(26,13,0));
+        right.setPreferredSize(new Dimension(170,700));
+        right.setSize(new Dimension(170,700));
+        right.setLayout(new BoxLayout(right, BoxLayout.PAGE_AXIS));
 
         gridHolder.setBounds(0,0,700,700);
-
         InicializeNodeGridGui(gridMap);
+
+        SetupButtons();
 
         frame.add(left);
         frame.add(right);
 
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.LINE_AXIS));
         frame.setTitle("Unit Based Simulation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1100,740);
+        frame.setSize(1200,740);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
 
     }
 
-    public void InicializeNodeGridGui(Node[][] gridMap)
+    private void SetupButtons()
+    {
+        Dimension d = new Dimension(100,30);
+        Dimension activeEnt = new Dimension(50,30);
+        
+        //! ROW 1
+        var line1 = new JPanel();
+        line1.setLayout(new FlowLayout());
+
+        var gridSizeLabel = new JLabel("Grid Size [width | height]:");
+        gridSizeLabel.setFont(new Font("Serif",Font.BOLD,15));
+        gridSizeLabel.setPreferredSize(new Dimension(210,30));
+
+        var gridYField = new JTextField(Integer.toString(simulation.GetGridSize().x)); 
+        gridYField.setPreferredSize(d);
+        gridYField.addFocusListener(new CustomActionListener(ActionType.CHANGE_GRIDSIZE_X, simulation,gridYField));
+
+        var gridXField = new JTextField(Integer.toString(simulation.GetGridSize().y)); 
+        gridXField.setPreferredSize(d);
+        gridXField.addFocusListener(new CustomActionListener(ActionType.CHANGE_GRIDSIZE_Y, simulation,gridXField));
+
+        line1.add(gridSizeLabel);
+        line1.add(gridXField);
+        line1.add(gridYField);
+        right.add(line1);
+
+        //! ROW 2
+        right.add(SetupSchoolInterface(d, ActionType.CHANGE_GIMBAZA, "Gimbaza's amount", simulation.GetGimbazaInitAmount()));
+
+        //! ROW 3
+        right.add(SetupSchoolInterface(d, ActionType.CHANGE_LICBAZA, "Licbaza's amount", simulation.GetLicbazaInitAmount()));
+
+        //! ROW 4
+        right.add(SetupSchoolInterface(d, ActionType.CHANGE_UCZELNIA, "Uczelnia's amount", simulation.GetUczelniaInitAmount()));
+
+        //! ROW 5
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_PODBUS, "Podbus settings [amount | speed | vision]:", simulation.GetPodbusInitAmount(), Simulation.GetPodbus_speedANDvision()));
+        //! ROW 6
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_GIMBUS, "Gimbus settings [amount | speed | vision]:", simulation.GetGimbusInitAmount(), Simulation.GetGimbus_speedANDvision()));
+        //! ROW 7
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_PATUS, "Patus settings [amount | speed | vision]:", simulation.GetPatusInitAmount(), Simulation.GetPatus_speedANDvision()));
+        //! ROW 8
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_LICBUS, "Licbus settings [amount | speed | vision]:", simulation.GetLicbusInitAmount(), Simulation.GetLicbus_speedANDvision()));
+        //! ROW 9
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_STUDENT, "Student settings [amount | speed | vision]:", simulation.GetStudentInitAmount(), Simulation.GetStudent_speedANDvision()));
+        //! ROW 10
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_DEBIL, "Debil settings [amount | speed | vision]:", simulation.GetDebilInitAmount(), Simulation.GetDebil_speedANDvision()));
+
+        //! ROW 11
+        var line11 = new JPanel();
+        line11.setLayout(new FlowLayout());
+
+        var inicializeButton = new JButton("Inicialize Grid");
+        inicializeButton.addActionListener(new CustomActionListener(ActionType.INICIALIZE_GRID, simulation));
+
+        var pauseButton = new JButton("Pause Simulation");
+        pauseButton.addActionListener(new CustomActionListener(ActionType.PAUSE_SIMULATION, simulation));
+
+        var startButton = new JButton("Run Simulation");
+        startButton.addActionListener(new CustomActionListener(ActionType.RUN_SIMULATION, simulation));
+
+        line11.add(inicializeButton);
+        line11.add(pauseButton);
+        line11.add(startButton);
+
+
+        right.add(line11);
+    }
+
+    private JPanel SetupActiveEntityInterface(Dimension activeEnt, ActionType type, String text, int amount, Vector2 set)
+    {
+        var line = new JPanel();
+        line.setLayout(new FlowLayout());
+
+        var label = new JLabel(text);
+        label.setFont(new Font("Serif",Font.BOLD,14));
+        label.setPreferredSize(new Dimension(250,30));
+
+        var amountTF = new JTextField(Integer.toString(amount)); 
+        amountTF.setPreferredSize(activeEnt);
+        amountTF.addFocusListener(new CustomActionListener(type, simulation, amountTF,null,null));
+        
+        var speedTF = new JTextField(Integer.toString(set.x)); 
+        speedTF.setPreferredSize(activeEnt);
+        speedTF.addFocusListener(new CustomActionListener(type, simulation, null,speedTF,null));
+
+        var visionTF = new JTextField(Integer.toString(set.y)); 
+        visionTF.setPreferredSize(activeEnt);
+        visionTF.addFocusListener(new CustomActionListener(type, simulation, null,null,visionTF));
+
+        line.add(label);
+        line.add(amountTF);
+        line.add(speedTF);
+        line.add(visionTF);
+        return line;
+    }
+
+    private JPanel SetupSchoolInterface(Dimension d, ActionType type, String text, int amount)
+    {
+        var line = new JPanel();
+        line.setLayout(new FlowLayout());
+
+        var label = new JLabel(text);
+        label.setFont(new Font("Serif",Font.BOLD,15));
+        label.setPreferredSize(new Dimension(210,30));
+
+        var tF = new JTextField(Integer.toString(amount)); 
+        tF.setPreferredSize(d);
+        tF.addFocusListener(new CustomActionListener(type, simulation, tF,null,null));
+        
+        line.add(label);
+        line.add(tF);
+        return line;
+    }
+
+    public static void InicializeNodeGridGui(Node[][] gridMap)
     {
         if(gridBackground != null)
         {

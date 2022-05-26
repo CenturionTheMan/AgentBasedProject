@@ -45,6 +45,8 @@ public class Simulation {
 
     //===============================================================SETTERS && GETTERS
     public void SetGridSize(Vector2 size) { gridSize = size; }
+    public Vector2 GetGridSize() { return gridSize; }
+    
     public GridMap GetGridMap() { return gridMap; }
 
     public SimulationResult GetResult() { return result; }
@@ -68,15 +70,24 @@ public class Simulation {
     public static Vector2 GetStudent_speedANDvision() { return Student_speedANDvision; }
 
     public void SetDebilInitAmount(int amount) { DebilInitAmount = amount; }
+    public int GetDebilInitAmount() { return DebilInitAmount; }
     public void SetGimbusInitAmount(int amount) { GimbusInitAmount = amount; }
+    public int GetGimbusInitAmount() { return GimbusInitAmount; }
     public void SetLicbusInitAmount(int amount) { LicbusInitAmount = amount; }
+    public int GetLicbusInitAmount() { return LicbusInitAmount; }
     public void SetPatusInitAmount(int amount) { PatusInitAmount = amount; }
+    public int GetPatusInitAmount() { return PatusInitAmount; }
     public void SetPodbusInitAmount(int amount) { PodbusInitAmount = amount; }
+    public int GetPodbusInitAmount() { return PodbusInitAmount; }
     public void SetStudentInitAmount(int amount) { StudentInitAmount = amount; }
+    public int GetStudentInitAmount() { return StudentInitAmount; }
 
     public void SetGimbazaInitAmount(int amount) { GimbazaInitAmount = amount; }
+    public int GetGimbazaInitAmount() { return GimbazaInitAmount; }
     public void SetLicbazaInitAmount(int amount) { LicbazaInitAmount = amount; }
+    public int GetLicbazaInitAmount() { return LicbazaInitAmount; }
     public void SetUczelniaInitAmount(int amount) { UczelniaInitAmount = amount; }
+    public int GetUczelniaInitAmount() { return UczelniaInitAmount; }
 
     public int GetAllUnitsInitAmount()
     {
@@ -92,7 +103,6 @@ public class Simulation {
         gridMap = new GridMap(gridSize);
 
         UpdateThread u = new UpdateThread();
-        updateThread = new Thread(u);
         updateThreadClassObject = u;
     }
 
@@ -106,6 +116,12 @@ public class Simulation {
     {
         Entity.ResetAmountOfAllSubclasses();
         RoundCount =0;
+
+        if(isRunning)
+        {
+            updateThread.interrupt();
+            isRunning = false;
+        }
 
         if(GetAllUnitsInitAmount() > gridSize.x*gridSize.y)
         {
@@ -171,6 +187,7 @@ public class Simulation {
 
         //print fin grid
         if(isPrintingGrid)GUI.PrintGridInConsole(gridMap.GetGrid(),0);
+        if(GUI.gridHolder != null && isPrintingGrid)GUI.InicializeNodeGridGui(gridMap.GetGrid());
     }
 
     //*Runs simulation without awaking new thread
@@ -183,14 +200,25 @@ public class Simulation {
     //*Runs simulation in new thread
     public void RunSimulation()
     {
+        if(!isRunning)
+        {
+            updateThread = new Thread(updateThreadClassObject);
+            isRunning = true;
+            updateThread.start();
+        }
+        else
+        {
+            if(updateThread.isAlive())updateThread.resume();
+        }
+    }
+
+    //*Will pause simulation if any is currently running
+    public void PauseSimulation()
+    {
         if(isRunning)
         {
-            isRunning = false;
-            updateThread.stop();
+            updateThread.suspend();
         }
-
-        isRunning = true;
-        updateThread.start();
     }
 
     //*Will setup values used as begin conditions for simulation
@@ -266,11 +294,11 @@ public class Simulation {
                     }
                 }
                 
-                RoundCount++;
-                System.out.println("Round: [" + RoundCount + "]");
-                
+                RoundCount++;        
+                    
                 if(isPrintingGrid)
                 {
+                    System.out.println("Round: [" + RoundCount + "]");
                     GUI.PrintGridInConsole(gridMap.GetGrid(),timeBetweenSteps);
                     GUI.UpdateGridGui(gridMap.GetGrid());
                 }
