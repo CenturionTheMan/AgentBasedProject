@@ -357,7 +357,7 @@ public class Simulation {
                 System.out.println("End condition nr (4) was met");
                 return 4;
             }
-            if(Simulation.RoundCount == 500)
+            if(Simulation.RoundCount == 600)
             {
                 System.out.println("End condition nr (5) was met");
                 return 5;

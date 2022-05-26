@@ -159,7 +159,7 @@ public class GUI {
         line.setLayout(new FlowLayout());
 
         var label = new JLabel(text);
-        label.setFont(new Font("Serif",Font.BOLD,14));
+        label.setFont(new Font("Serif",Font.BOLD,13));
         label.setPreferredSize(new Dimension(250,30));
 
         var amountTF = new JTextField(Integer.toString(amount)); 

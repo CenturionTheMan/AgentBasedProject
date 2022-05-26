@@ -54,7 +54,7 @@ Warunki końca symulacji:
 -> (2) Na mapie nie ma żadnego Piwa, Gimbusa, Podbusa ani Patusa
 -> (3) Na mapie zostały same Patusy i nie ma na niej żadnych Egzaminów
 -> (4) Na mapie nie ma żadnych Entit'ów ruchomych
--> (5) Minęło 500 rund a żaden z powyższych warunków nie został spełniony
+-> (5) Minęło 600 rund a żaden z powyższych warunków nie został spełniony
 
 
 

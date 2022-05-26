@@ -12,26 +12,51 @@ public class DataGathering {
     
     public DataGathering(Simulation sim) {
         this.sim = sim;
+
+        //PodbusScenario();
     }
 
 
-    public void TryScenarious()
+    public void PodbusScenario()
     {
         Simulation.SetIsPrintingGrid(false);
         String result = "gridSize.x,gridSize.y,numberOfEndCondition,numberOfRounds,inicialNumberOfGimbaza,inicialNumberOfLicbaza,inicialNumberOfUczelnia,inicialNumberOfPodbus,inicialNumberOfGimbus,inicialNumberOfPatus,inicialNumberOfLicbus,inicialNumberStudent,inicialNumberOfDebil,finNumberOfPodbus,finNumberOfGimbus,finNumberOfPatus,finNumberOfLicbus,finNumberStudent,finNumberOfDebil,finNumberOfPiwo,finNumberOfEgzamin";
+        int repeatAmount = 10;
 
-        for(int i=0;i<10;i++){
+        for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 1, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 10, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){ 
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 50, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){    
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 100, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 200, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){ 
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 300, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 400, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 500, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 600, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 700, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 800, 0, 3, 2, 1);
+        }
+        for(int i=0;i<repeatAmount;i++){ 
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 900, 0, 3, 2, 1);
         }
         
@@ -54,7 +79,6 @@ public class DataGathering {
 
     private void WriteToFile(String path, String result)
     {
-
         try {
         FileWriter myWriter = new FileWriter(path);
         myWriter.write(result);
@@ -63,6 +87,5 @@ public class DataGathering {
         System.out.println("An error occurred.");
         e.printStackTrace();
         }
-
     }
 }
