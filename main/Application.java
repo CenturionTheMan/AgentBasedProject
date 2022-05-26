@@ -1,5 +1,6 @@
 package main;
 
+import main.GUI.GUI;
 
 /**
  * Application
@@ -16,17 +17,20 @@ public class Application {
     //*Inits application
     static void InitApp()
     {
-        gui = new GUI(); //GUI
-
         simulation = new Simulation();
 
-        OnRunSimulation(); //TEMP
+        simulation.InitSimulation();
+
+        gui = new GUI(simulation.GetGridMap().GetGrid()); //GUI 
+        
+        simulation.RunSimulation();
     }
 
 
     //*Hub for running application from gui site
     public static void OnRunSimulation()
     {
+        simulation.InitSimulation();
         simulation.RunSimulation();
     }
 }

@@ -1,6 +1,7 @@
 package main;
 
 import main.ActiveSubclass.*;
+import main.GUI.GUI;
 import main.StaticSubclass.*;
 
 public class Simulation {
@@ -16,7 +17,7 @@ public class Simulation {
     public static int RoundCount = 0; //says how many round was already performed
 
     //======================= INIT VALUES ===================================================
-    private Vector2 gridSize = new Vector2(15, 40); //size of map
+    private static Vector2 gridSize = new Vector2(5, 5); //size of map
 
     private static Vector2 Debil_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Debil
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Gimbus
@@ -25,20 +26,22 @@ public class Simulation {
     private static Vector2 Podbus_speedANDvision = new Vector2(1, 4); //idicates speed(amound of moves in one round) and vision range of Podbus
     private static Vector2 Student_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Student
 
-    private int DebilInitAmount = 0; //amount of Debils units placed on map at the beginning of simulation
-    private int GimbusInitAmount = 0; //amount of Gimbus units placed on map at the beginning of simulation
-    private int LicbusInitAmount = 0; //amount of Licbis units placed on map at the beginning of simulation
-    private int PatusInitAmount = 0; //amount of Patus units placed on map at the beginning of simulation
-    private int PodbusInitAmount = 596; //amount of Podbus units placed on map at the beginning of simulation
-    private int StudentInitAmount = 0; //amount of Student units placed on map at the beginning of simulation
+    private static int DebilInitAmount = 0; //amount of Debils units placed on map at the beginning of simulation
+    private static int GimbusInitAmount = 0; //amount of Gimbus units placed on map at the beginning of simulation
+    private static int LicbusInitAmount = 1; //amount of Licbis units placed on map at the beginning of simulation
+    private static int PatusInitAmount = 1; //amount of Patus units placed on map at the beginning of simulation
+    private static int PodbusInitAmount = 2; //amount of Podbus units placed on map at the beginning of simulation
+    private static int StudentInitAmount = 1; //amount of Student units placed on map at the beginning of simulation
 
-    private int GimbazaInitAmount = 1; //amount of Gimbaza units placed on map at the beginning of simulation
-    private int LicbazaInitAmount = 1; //amount of Licbaza units placed on map at the beginning of simulation
-    private int UczelniaInitAmount = 1; //amount of Uczelnia units placed on map at the beginning of simulation
+    private static int GimbazaInitAmount = 1; //amount of Gimbaza units placed on map at the beginning of simulation
+    private static int LicbazaInitAmount = 1; //amount of Licbaza units placed on map at the beginning of simulation
+    private static int UczelniaInitAmount = 1; //amount of Uczelnia units placed on map at the beginning of simulation
 
 
     //===============================================================SETTERS && GETTERS
     public void SetGridSize(Vector2 size) { gridSize = size; }
+
+    public GridMap GetGridMap() { return gridMap; }
 
     public void SetDebil_speedANDvision(Vector2 speedANDvision) { Debil_speedANDvision = speedANDvision; }
     public static Vector2 GetDebil_speedANDvision() {return Debil_speedANDvision; }
@@ -84,9 +87,10 @@ public class Simulation {
 
 
     //==================================================METHODS
-
-    //*Inits simulation and runs it in new thread
-    public void RunSimulation()
+    
+    
+    //*Inits grid for simulation
+    public void InitSimulation()
     {
         Entity.ResetAmountOfAllSubclasses();
         RoundCount =0;
@@ -101,12 +105,6 @@ public class Simulation {
         {
             System.err.println("There must be at least one school of each type on map!");
             return;
-        }
-
-        if(isRunning)
-        {
-            isRunning = false;
-            updateThread.stop();
         }
 
         //Set nodes in grid
@@ -148,10 +146,46 @@ public class Simulation {
 
 
         //print fin grid
-        GUI.PrintGrid(gridMap.GetGrid(),3000);
+        GUI.PrintGridInConsole(gridMap.GetGrid(),500);
+    }
+
+    //*Runs simulation in new thread
+    public void RunSimulation()
+    {
+        if(isRunning)
+        {
+            isRunning = false;
+            updateThread.stop();
+        }
 
         isRunning = true;
         updateThread.start();
+    }
+
+    //*Will setup values used as begin conditions for simulation
+    public static void SetupSimulationProperties(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision, 
+    Vector2 patus_speedANDvision, Vector2 podbus_speedANDvision, Vector2 student_speedANDvision, int debilInitAmount, int gimbusInitAmount, int licbusInitAmount, 
+    int patusInitAmount, int podbusInitAmount, int studentInitAmount, int gimbazaInitAmount, int licbazaInitAmount, int uczelniaInitAmount)
+    {
+        Simulation.gridSize = gridSize;
+
+        Simulation.Debil_speedANDvision = debil_speedANDvision;
+        Simulation.Gimbus_speedANDvision = gimbus_speedANDvision;
+        Simulation.Licbus_speedANDvision = licbus_speedANDvision;
+        Simulation.Patus_speedANDvision = patus_speedANDvision;
+        Simulation.Podbus_speedANDvision = podbus_speedANDvision;
+        Simulation.Student_speedANDvision = student_speedANDvision;
+    
+        Simulation.DebilInitAmount = debilInitAmount;
+        Simulation.GimbusInitAmount = gimbusInitAmount;
+        Simulation.LicbusInitAmount = licbusInitAmount;
+        Simulation.PatusInitAmount = patusInitAmount;
+        Simulation.PodbusInitAmount = podbusInitAmount;
+        Simulation.StudentInitAmount = studentInitAmount;
+    
+        Simulation.GimbazaInitAmount = gimbazaInitAmount;
+        Simulation.LicbazaInitAmount = licbazaInitAmount;
+        Simulation.UczelniaInitAmount = uczelniaInitAmount;
     }
 
 
@@ -195,13 +229,19 @@ public class Simulation {
                                 isRunning = false; //end if cond met
                             }
                         }
+                        else if(Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0 && Patus.amount == 0)
+                        {
+                            isRunning = false;
+                            System.out.println("End condition nr (4) was met");
+                        }
                     }
                 }
                 
                 RoundCount++;
                 System.out.println("Round: [" + RoundCount + "]");
-                GUI.PrintGrid(gridMap.GetGrid(),timeBetweenSteps);
-
+                
+                GUI.PrintGridInConsole(gridMap.GetGrid(),timeBetweenSteps);
+                GUI.UpdateGridGui(gridMap.GetGrid());
 
                 //Set all active entities as open for next round
                 for (Node[] nodes : gridMap.GetGrid()) {

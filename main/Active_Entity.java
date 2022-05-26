@@ -10,8 +10,6 @@ import main.ActiveSubclass.Patus;
 import main.ActiveSubclass.Podbus;
 import main.ActiveSubclass.Student;
 import main.StaticSubclass.Egzamin;
-import main.StaticSubclass.Gimbaza;
-import main.StaticSubclass.Licbaza;
 import main.StaticSubclass.Piwo;
 
 public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
@@ -85,12 +83,12 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         boolean isEndConMeet = StatusChangeLogic(grid, activeNeigh, staticNeigh); //Change status if needed
 
         //GUI.PrintGrid(grid, 1000); //TEMP EACH MOVE GUI UPDATE
-
+  
         if(isEndConMeet)
         {
             System.out.println("End condition nr (1) was met");
         }
-        if(Piwo.amount == 0 && Gimbus.amount == 0 && Podbus.amount == 0 && Patus.amount == 0) 
+        if(Piwo.amount == 0 && Gimbus.amount < 2 && Podbus.amount == 0 && Patus.amount == 0) 
         {
             isEndConMeet = true;
             System.out.println("End condition nr (2) was met");
@@ -99,11 +97,6 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         {
             isEndConMeet = true;
             System.out.println("End condition nr (3) was met");
-        }
-        if(Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0 && Patus.amount == 0)
-        {
-            isEndConMeet = true;
-            System.out.println("End condition nr (4) was met");
         }
         if(Simulation.RoundCount > 500)
         {

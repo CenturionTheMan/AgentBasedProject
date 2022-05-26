@@ -7,7 +7,6 @@ import main.ActiveSubclass.Patus;
 import main.ActiveSubclass.Podbus;
 import main.ActiveSubclass.Student;
 import main.StaticSubclass.Egzamin;
-import main.StaticSubclass.Gimbaza;
 import main.StaticSubclass.Piwo;
 
 public class Entity {
@@ -60,8 +59,9 @@ public class Entity {
         if(grid[pos.x][pos.y].GetOccupant() == null || (grid[pos.x][pos.y].GetOccupant() instanceof Piwo) || (grid[pos.x][pos.y].GetOccupant() instanceof Egzamin)) 
         {
             grid[GetPosition().x][GetPosition().y].SetOccupant(null);
+            ChangeAmountOfGivenSubclass(grid[pos.x][pos.y].GetOccupant(),-1);
             grid[pos.x][pos.y].SetOccupant(this);
-            SetPosition(pos);
+            SetPosition(pos);            
         }
     }
 

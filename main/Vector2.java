@@ -72,6 +72,17 @@ public class Vector2 {
         return new Vector2(first.x + second.x, first.y + second.y);
     }
 
+    //*Returns Vector2 with x = 0 and y = 0
+    public static Vector2 Zero()
+    {
+        return new Vector2(0, 0);
+    }
+
+    //*Returns Vector2 with x = 1 and y = 1
+    public static Vector2 One()
+    {
+        return new Vector2(1, 1);
+    }
     
     @Override
     public String toString() {
