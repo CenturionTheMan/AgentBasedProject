@@ -38,7 +38,7 @@ public class Simulation {
     private static int PodbusInitAmount = 2; //amount of Podbus units placed on map at the beginning of simulation
     private static int StudentInitAmount = 1; //amount of Student units placed on map at the beginning of simulation
 
-    private static int GimbazaInitAmount = 1; //amount of Gimbaza units placed on map at the beginning of simulation
+    private static int GimbazaInitAmount = 2; //amount of Gimbaza units placed on map at the beginning of simulation
     private static int LicbazaInitAmount = 1; //amount of Licbaza units placed on map at the beginning of simulation
     private static int UczelniaInitAmount = 1; //amount of Uczelnia units placed on map at the beginning of simulation
 
