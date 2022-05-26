@@ -1,6 +1,7 @@
 package main;
 
 import main.ActiveSubclass.*;
+import main.DataGathering.SimulationResult;
 import main.GUI.GUI;
 import main.StaticSubclass.*;
 
@@ -10,19 +11,23 @@ public class Simulation {
     private GridMap gridMap; //class used for handling grid
     
     private Thread updateThread; //thread used for performing simulation
-    private int timeBetweenSteps = 100; //time [in ms] between printing grid
-
+    private UpdateThread updateThreadClassObject; //instanciated object of UpdateThreadClass
+    private static int timeBetweenSteps = 500; //time [in ms] between printing grid
     private boolean isRunning = false; //says whether simualtion is running
+
+    private SimulationResult result = new SimulationResult(); //hold results of simulation
 
     public static int RoundCount = 0; //says how many round was already performed
 
     //======================= INIT VALUES ===================================================
-    private static Vector2 gridSize = new Vector2(5, 5); //size of map
+    private static boolean isPrintingGrid = true;//if true grid will be printed in console and in gui
+    
+    private static Vector2 gridSize = new Vector2(10, 10); //size of map
 
     private static Vector2 Debil_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Debil
     private static Vector2 Gimbus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Gimbus
     private static Vector2 Licbus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Licbus
-    private static Vector2 Patus_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Patus
+    private static Vector2 Patus_speedANDvision = new Vector2(1, 1); //idicates speed(amound of moves in one round) and vision range of Patus
     private static Vector2 Podbus_speedANDvision = new Vector2(1, 4); //idicates speed(amound of moves in one round) and vision range of Podbus
     private static Vector2 Student_speedANDvision = new Vector2(1, 2); //idicates speed(amound of moves in one round) and vision range of Student
 
@@ -40,8 +45,14 @@ public class Simulation {
 
     //===============================================================SETTERS && GETTERS
     public void SetGridSize(Vector2 size) { gridSize = size; }
-
     public GridMap GetGridMap() { return gridMap; }
+
+    public SimulationResult GetResult() { return result; }
+
+    public static void SetIsPrintingGrid(boolean val) { isPrintingGrid = val; }
+
+    public static void SetTimeBetweenSteps(int val) { timeBetweenSteps = val; }
+    public static int GetTimeBetweenSteps() { return timeBetweenSteps; }
 
     public void SetDebil_speedANDvision(Vector2 speedANDvision) { Debil_speedANDvision = speedANDvision; }
     public static Vector2 GetDebil_speedANDvision() {return Debil_speedANDvision; }
@@ -82,6 +93,7 @@ public class Simulation {
 
         UpdateThread u = new UpdateThread();
         updateThread = new Thread(u);
+        updateThreadClassObject = u;
     }
 
 
@@ -106,6 +118,18 @@ public class Simulation {
             System.err.println("There must be at least one school of each type on map!");
             return;
         }
+
+
+        result.inicialNumberOfDebil = DebilInitAmount;
+        result.inicialNumberOfGimbus =GimbusInitAmount;
+        result.inicialNumberOfLicbus = LicbusInitAmount;
+        result.inicialNumberOfPatus = PatusInitAmount;
+        result.inicialNumberOfPodbus = PodbusInitAmount;
+        result.inicialNumberStudent = StudentInitAmount;
+        result.inicialNumberOfGimbaza = GimbazaInitAmount;
+        result.inicialNumberOfLicbaza = LicbazaInitAmount;
+        result.inicialNumberOfUczelnia = UczelniaInitAmount;
+        result.gridSize = gridSize;
 
         //Set nodes in grid
         gridMap.InitGrid(gridSize);
@@ -146,7 +170,14 @@ public class Simulation {
 
 
         //print fin grid
-        GUI.PrintGridInConsole(gridMap.GetGrid(),500);
+        if(isPrintingGrid)GUI.PrintGridInConsole(gridMap.GetGrid(),0);
+    }
+
+    //*Runs simulation without awaking new thread
+    public void RunSimulationWithoutNewThred()
+    {
+        isRunning = true;
+        updateThreadClassObject.run();
     }
 
     //*Runs simulation in new thread
@@ -163,7 +194,7 @@ public class Simulation {
     }
 
     //*Will setup values used as begin conditions for simulation
-    public static void SetupSimulationProperties(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision, 
+    public void SetupSimulationProperties(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision, 
     Vector2 patus_speedANDvision, Vector2 podbus_speedANDvision, Vector2 student_speedANDvision, int debilInitAmount, int gimbusInitAmount, int licbusInitAmount, 
     int patusInitAmount, int podbusInitAmount, int studentInitAmount, int gimbazaInitAmount, int licbazaInitAmount, int uczelniaInitAmount)
     {
@@ -195,7 +226,7 @@ public class Simulation {
     {
         @Override
 
-        //*Buffer for running Update
+        //*Buffer for running Update in new thread
         public void run() {
             Update();
         }
@@ -203,6 +234,8 @@ public class Simulation {
         //*Handle turns cycles
         private void Update()
         {
+            int numberOfEndCon = 0;
+
             while(isRunning)
             {
                 for (int i = 0; i < gridMap.GetGrid().length; i++) 
@@ -227,12 +260,8 @@ public class Simulation {
                             if(active.DoMove(gridMap.GetGrid(),null)) //do move
                             {
                                 isRunning = false; //end if cond met
+                                break;
                             }
-                        }
-                        else if(Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0 && Patus.amount == 0)
-                        {
-                            isRunning = false;
-                            System.out.println("End condition nr (4) was met");
                         }
                     }
                 }
@@ -240,8 +269,14 @@ public class Simulation {
                 RoundCount++;
                 System.out.println("Round: [" + RoundCount + "]");
                 
-                GUI.PrintGridInConsole(gridMap.GetGrid(),timeBetweenSteps);
-                GUI.UpdateGridGui(gridMap.GetGrid());
+                if(isPrintingGrid)
+                {
+                    GUI.PrintGridInConsole(gridMap.GetGrid(),timeBetweenSteps);
+                    GUI.UpdateGridGui(gridMap.GetGrid());
+                }
+
+                numberOfEndCon = CheckEndConditions(!isRunning);
+                if(numberOfEndCon != 0) isRunning = false;
 
                 //Set all active entities as open for next round
                 for (Node[] nodes : gridMap.GetGrid()) {
@@ -253,7 +288,54 @@ public class Simulation {
                     }
                 }
             }
+
+
+            result.finNumberOfDebil = Debil.amount;
+            result.finNumberOfEgzamin = Egzamin.amount;
+            result.finNumberOfGimbus = Gimbus.amount;
+            result.finNumberOfLicbus = Licbus.amount;
+            result.finNumberOfPatus = Patus.amount;
+            result.finNumberOfPiwo = Piwo.amount;
+            result.finNumberOfPodbus = Podbus.amount;
+            result.finNumberStudent = Student.amount;
+            
+            result.numberOfRounds = RoundCount;
+            result.numberOfEndCondition = numberOfEndCon;
+
             System.out.println("SIM END");
+        }
+
+        //*Checks whether any of end conditions is met, if so returns it number, otherwise returns 0
+        //boolean isFirstCon - bool retured by DoMove, used to identify condition number 1
+        private int CheckEndConditions(boolean isFirstCon)
+        {
+            if(isFirstCon)
+            {
+                System.out.println("End condition nr (1) was met");
+                return 1;
+            }
+            if(Piwo.amount == 0 && Gimbus.amount < 2 && Podbus.amount == 0 && Patus.amount == 0) 
+            {
+                System.out.println("End condition nr (2) was met");
+                return 2;
+            }
+            if(Egzamin.amount ==0 && Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0)
+            {
+                System.out.println("End condition nr (3) was met");
+                return 3;
+            }
+            if(Student.amount ==0 && Podbus.amount == 0 && Licbus.amount == 0 && Gimbus.amount == 0 && Debil.amount == 0 && Patus.amount == 0)
+            {
+                System.out.println("End condition nr (4) was met");
+                return 4;
+            }
+            if(Simulation.RoundCount == 500)
+            {
+                System.out.println("End condition nr (5) was met");
+                return 5;
+            }
+
+            return 0;
         }
     }
 

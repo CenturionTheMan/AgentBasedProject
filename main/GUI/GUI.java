@@ -112,7 +112,7 @@ public class GUI {
             for (int j = 0; j < gridMap[i].length; j++) {
                 
                 SetPanelByUnit(nodes[i][j], gridMap[i][j].GetOccupant());
-                System.out.println(nodes[i][j].getLocation().x + " " + nodes[i][j].getLocation().y);
+                //System.out.println(nodes[i][j].getLocation().x + " " + nodes[i][j].getLocation().y);
             }
         }
 

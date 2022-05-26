@@ -1,5 +1,6 @@
 package main;
 
+import main.DataGathering.DataGathering;
 import main.GUI.GUI;
 
 /**
@@ -9,6 +10,7 @@ public class Application {
 
     static Simulation simulation;
     static GUI gui;
+    static DataGathering dataGahtering;
     public static void main(String[] args) {
         InitApp();
     }
@@ -18,12 +20,14 @@ public class Application {
     static void InitApp()
     {
         simulation = new Simulation();
-
         simulation.InitSimulation();
 
         gui = new GUI(simulation.GetGridMap().GetGrid()); //GUI 
         
-        simulation.RunSimulation();
+        dataGahtering = new DataGathering(simulation);
+
+        //simulation.RunSimulation();
+        //simulation.RunSimulationWithoutNewThred();
     }
 
 

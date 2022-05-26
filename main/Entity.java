@@ -58,8 +58,11 @@ public class Entity {
     {
         if(grid[pos.x][pos.y].GetOccupant() == null || (grid[pos.x][pos.y].GetOccupant() instanceof Piwo) || (grid[pos.x][pos.y].GetOccupant() instanceof Egzamin)) 
         {
+            // if(grid[pos.x][pos.y].GetOccupant() instanceof Piwo) Piwo.amount--;
+            // if(grid[pos.x][pos.y].GetOccupant() instanceof Egzamin) Egzamin.amount--;
+
             grid[GetPosition().x][GetPosition().y].SetOccupant(null);
-            ChangeAmountOfGivenSubclass(grid[pos.x][pos.y].GetOccupant(),-1);
+            ChangeAmountOfGivenSubclass(grid[pos.x][pos.y].GetOccupant(),-1); //????
             grid[pos.x][pos.y].SetOccupant(this);
             SetPosition(pos);            
         }

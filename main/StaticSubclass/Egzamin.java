@@ -7,7 +7,6 @@ public class Egzamin extends Static_Entity{
 
     public Egzamin(Vector2 position) {
         super(position);
-        amount++;
     }
     
 }
