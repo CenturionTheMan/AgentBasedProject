@@ -6,6 +6,8 @@ import java.io.IOException;
 import main.Simulation;
 import main.Vector2;
 
+//*Raw class for generationg data for statistics
+//*
 public class DataGathering {
     
     Simulation sim;
@@ -16,7 +18,7 @@ public class DataGathering {
         //PodbusScenario();
     }
 
-
+    //*Generates data for scenario with growing podbus amount
     public void PodbusScenario()
     {
         Simulation.SetIsPrintingGrid(false);
@@ -65,6 +67,7 @@ public class DataGathering {
         Simulation.SetIsPrintingGrid(true);
     }
 
+    //*Runs test with given iniciaol values and returns its formated as string results
     private String RunTest(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision, 
     Vector2 patus_speedANDvision, Vector2 podbus_speedANDvision, Vector2 student_speedANDvision, int debilInitAmount, int gimbusInitAmount, int licbusInitAmount, 
     int patusInitAmount, int podbusInitAmount, int studentInitAmount, int gimbazaInitAmount, int licbazaInitAmount, int uczelniaInitAmount)
@@ -74,14 +77,17 @@ public class DataGathering {
         patusInitAmount,podbusInitAmount,studentInitAmount,gimbazaInitAmount,licbazaInitAmount,uczelniaInitAmount);
         sim.InitSimulation();
         sim.RunSimulationWithoutNewThred();
-        return sim.GetResult().GetSummarize() +"\n";
+        return sim.GetResult().toString() +"\n";
     }
 
-    private void WriteToFile(String path, String result)
+    //*Writes string to file with given path
+    //String path - path where file will be writen
+    //String text - text to be written in file
+    private void WriteToFile(String path, String text)
     {
         try {
         FileWriter myWriter = new FileWriter(path);
-        myWriter.write(result);
+        myWriter.write(text);
         myWriter.close();
         } catch (IOException e) {
         System.out.println("An error occurred.");

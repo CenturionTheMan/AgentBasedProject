@@ -2,11 +2,11 @@ package main.DataGathering;
 
 import main.Vector2;
 
+
+//
+//*Class used for gathering data after simulation
+//
 public class SimulationResult {
-    
-    /* 
-    *Class used for gathering data after simulation
-    */
 
     public int numberOfEndCondition;
     public int numberOfRounds;
@@ -32,7 +32,8 @@ public class SimulationResult {
     public int finNumberOfPiwo;
     public int finNumberOfEgzamin;
 
-    public String GetSummarize()
+    @Override
+    public String toString()
     {
         return gridSize.x+ "," +gridSize.y+ "," + numberOfEndCondition + "," + numberOfRounds + "," + inicialNumberOfGimbaza + "," + inicialNumberOfLicbaza + "," + inicialNumberOfUczelnia + "," +  inicialNumberOfPodbus 
         + "," + inicialNumberOfGimbus + "," + inicialNumberOfPatus  + "," + inicialNumberOfLicbus + "," + inicialNumberStudent + "," + inicialNumberOfDebil + "," + finNumberOfPodbus 

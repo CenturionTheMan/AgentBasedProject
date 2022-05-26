@@ -14,7 +14,8 @@ import main.ActiveSubclass.*;
 import main.GUI.CustomActionListener.ActionType;
 import main.StaticSubclass.*;
 
-
+//* Class used for creating and handling GUI
+//*
 public class GUI {
     
     //VALUES
@@ -25,7 +26,6 @@ public class GUI {
     private static JPanel gridBackground;
 
     private static JPanel[][] nodes;
-
 
     private Simulation simulation;
 
@@ -48,7 +48,8 @@ public class GUI {
         InitGUI(sim.GetGridMap().GetGrid());
     }
 
-
+    //*Inits GUI 
+    //Node[][] gridMap - double array with nodes used for simulation
     private void InitGUI(Node[][] gridMap)
     {
         frame = new JFrame();
@@ -69,7 +70,7 @@ public class GUI {
         gridHolder.setBounds(0,0,700,700);
         InicializeNodeGridGui(gridMap);
 
-        SetupButtons();
+        CreateUserHandlingGuiPart();
 
         frame.add(left);
         frame.add(right);
@@ -84,7 +85,8 @@ public class GUI {
 
     }
 
-    private void SetupButtons()
+    //*Creates gui part for changing simulation input values
+    private void CreateUserHandlingGuiPart()
     {
         Dimension d = new Dimension(100,30);
         Dimension activeEnt = new Dimension(50,30);
@@ -153,7 +155,13 @@ public class GUI {
         right.add(line11);
     }
 
-    private JPanel SetupActiveEntityInterface(Dimension activeEnt, ActionType type, String text, int amount, Vector2 set)
+    //*Sets gui row for changing settings of active entity
+    //Dimension d - size of row elements
+    //ActionType type - enum which indicates what acion to perform
+    //String text - name of row
+    //int amount - inicial amount of given active entity
+    //Vector2 speedAndVision - inicial speed and vision range of given active entity
+    private JPanel SetupActiveEntityInterface(Dimension activeEnt, ActionType type, String text, int amount, Vector2 speedAndVision)
     {
         var line = new JPanel();
         line.setLayout(new FlowLayout());
@@ -166,11 +174,11 @@ public class GUI {
         amountTF.setPreferredSize(activeEnt);
         amountTF.addFocusListener(new CustomActionListener(type, simulation, amountTF,null,null));
         
-        var speedTF = new JTextField(Integer.toString(set.x)); 
+        var speedTF = new JTextField(Integer.toString(speedAndVision.x)); 
         speedTF.setPreferredSize(activeEnt);
         speedTF.addFocusListener(new CustomActionListener(type, simulation, null,speedTF,null));
 
-        var visionTF = new JTextField(Integer.toString(set.y)); 
+        var visionTF = new JTextField(Integer.toString(speedAndVision.y)); 
         visionTF.setPreferredSize(activeEnt);
         visionTF.addFocusListener(new CustomActionListener(type, simulation, null,null,visionTF));
 
@@ -181,6 +189,11 @@ public class GUI {
         return line;
     }
 
+    //*Sets gui row for changing settings of schools (static) entity
+    //Dimension d - size of row elements
+    //ActionType type - enum which indicates what acion to perform
+    //String text - name of row
+    //int amount - inicial amount of given school type
     private JPanel SetupSchoolInterface(Dimension d, ActionType type, String text, int amount)
     {
         var line = new JPanel();
@@ -199,6 +212,8 @@ public class GUI {
         return line;
     }
 
+    //*Iniciates gui part which handle showing grid
+    //Node[][] gridMap - double array with nodes used for simulation
     public static void InicializeNodeGridGui(Node[][] gridMap)
     {
         if(gridBackground != null)
@@ -230,6 +245,8 @@ public class GUI {
         gridHolder.revalidate();
     }
 
+    //*Updates grid in gui
+    //Node[][] gridMap - double array with nodes used for simulation
     public static void UpdateGridGui(Node[][] gridMap)
     {
  
@@ -252,6 +269,9 @@ public class GUI {
         gridHolder.revalidate();
     }
 
+    //*Chages color of panel judging by entity which occupies such node
+    //JPanel panel - gui's node in grid
+    //Entity e - entity which based on color is picked
     private static void SetPanelByUnit(JPanel panel, Entity e)
     {
         panel.removeAll();

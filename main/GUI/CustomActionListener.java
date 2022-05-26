@@ -11,6 +11,7 @@ import java.awt.event.*;
 
 public class CustomActionListener implements ActionListener, FocusListener {
 
+    //Defines type of accion
     public static enum ActionType
     {
         CHANGE_GRIDSIZE_X,
@@ -58,6 +59,7 @@ public class CustomActionListener implements ActionListener, FocusListener {
         this.sim = simulation;
     }
 
+    //*Used mostly on buuton pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (actionType) {         
@@ -79,12 +81,13 @@ public class CustomActionListener implements ActionListener, FocusListener {
         //System.out.println("WORKING!");
     }
 
-
+    //*Do stuff when object gain focus 
     @Override
     public void focusGained(FocusEvent e) {  
         //System.out.println("focus gain");     
     }
 
+    //*Do stuff when object lost focus  
     @Override
     public void focusLost(FocusEvent e) {
         int gridOneDImensionSize = (input != null)? GetIntFormJTextField(input) :0;
@@ -160,6 +163,7 @@ public class CustomActionListener implements ActionListener, FocusListener {
         //System.out.println("focus lost");
     }
 
+    //*Converts text from JTextField to int. Return 0 if unable to convert
     private int GetIntFormJTextField(JTextField t)
     {
         try {
