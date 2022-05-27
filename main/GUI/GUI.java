@@ -2,9 +2,6 @@ package main.GUI;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-
-import java.awt.event.*;
 
 import main.Entity;
 import main.Node;
@@ -22,8 +19,11 @@ public class GUI {
     private static JFrame frame;
     private static JPanel left;
     private static JPanel right;
-    public static JLayeredPane gridHolder;
+    private static JLayeredPane gridHolder;
     private static JPanel gridBackground;
+
+    private static JTextArea roundCounter; 
+    private static JTextArea simStatus; 
 
     private static JPanel[][] nodes;
 
@@ -41,6 +41,13 @@ public class GUI {
     static final Color UCZELNIA= new Color(56,156,99);
     static final Color PIWO= new Color(245,226,58);
     static final Color EGZAMIN= new Color(58,108,245);
+
+    //GETTERS && SETTERS
+    public static void SetSimulationStatus(String status) 
+    {
+        if(simStatus == null) return; 
+        simStatus.setText(status); 
+    }
 
     //CTOR
     public GUI(Simulation sim) {
@@ -88,7 +95,7 @@ public class GUI {
     //*Creates gui part for changing simulation input values
     private void CreateUserHandlingGuiPart()
     {
-        Dimension d = new Dimension(100,30);
+        Dimension d = new Dimension(70,30);
         Dimension activeEnt = new Dimension(50,30);
         
         //! ROW 1
@@ -112,29 +119,58 @@ public class GUI {
         line1.add(gridYField);
         right.add(line1);
 
-        //! ROW 2
-        right.add(SetupSchoolInterface(d, ActionType.CHANGE_GIMBAZA, "Gimbaza's amount", simulation.GetGimbazaInitAmount()));
+        //! ROW 
+        right.add(SetupOneValuesChangerInterface(d, ActionType.CHANGE_GIMBAZA, "Gimbaza's amount", simulation.GetGimbazaInitAmount(),GIMBAZA));
 
-        //! ROW 3
-        right.add(SetupSchoolInterface(d, ActionType.CHANGE_LICBAZA, "Licbaza's amount", simulation.GetLicbazaInitAmount()));
+        //! ROW 
+        right.add(SetupOneValuesChangerInterface(d, ActionType.CHANGE_LICBAZA, "Licbaza's amount", simulation.GetLicbazaInitAmount(),LICBAZA));
 
-        //! ROW 4
-        right.add(SetupSchoolInterface(d, ActionType.CHANGE_UCZELNIA, "Uczelnia's amount", simulation.GetUczelniaInitAmount()));
+        //! ROW 
+        right.add(SetupOneValuesChangerInterface(d, ActionType.CHANGE_UCZELNIA, "Uczelnia's amount", simulation.GetUczelniaInitAmount(),UCZELNIA));
 
-        //! ROW 5
-        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_PODBUS, "Podbus settings [amount | speed | vision]:", simulation.GetPodbusInitAmount(), Simulation.GetPodbus_speedANDvision()));
-        //! ROW 6
-        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_GIMBUS, "Gimbus settings [amount | speed | vision]:", simulation.GetGimbusInitAmount(), Simulation.GetGimbus_speedANDvision()));
-        //! ROW 7
-        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_PATUS, "Patus settings [amount | speed | vision]:", simulation.GetPatusInitAmount(), Simulation.GetPatus_speedANDvision()));
-        //! ROW 8
-        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_LICBUS, "Licbus settings [amount | speed | vision]:", simulation.GetLicbusInitAmount(), Simulation.GetLicbus_speedANDvision()));
-        //! ROW 9
-        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_STUDENT, "Student settings [amount | speed | vision]:", simulation.GetStudentInitAmount(), Simulation.GetStudent_speedANDvision()));
-        //! ROW 10
-        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_DEBIL, "Debil settings [amount | speed | vision]:", simulation.GetDebilInitAmount(), Simulation.GetDebil_speedANDvision()));
+        //! ROW 
+        right.add(SetupOneValuesChangerInterface(d, ActionType.CHANGE_PIWO, "Piwo's amount", simulation.GetPiwoInitAmount(),PIWO));
 
-        //! ROW 11
+        //! ROW 
+        right.add(SetupOneValuesChangerInterface(d, ActionType.CHANGE_EGZAMIN, "Egzamin's amount", simulation.GetEgzaminInitAmount(),EGZAMIN));
+
+        //! ROW 
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_PODBUS, "Podbus settings [amount | speed | vision]:", simulation.GetPodbusInitAmount(), Simulation.GetPodbus_speedANDvision(),PODBUS));
+        //! ROW 
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_GIMBUS, "Gimbus settings [amount | speed | vision]:", simulation.GetGimbusInitAmount(), Simulation.GetGimbus_speedANDvision(),GIMBUS));
+        //! ROW 
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_PATUS, "Patus settings [amount | speed | vision]:", simulation.GetPatusInitAmount(), Simulation.GetPatus_speedANDvision(),PATUS));
+        //! ROW 
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_LICBUS, "Licbus settings [amount | speed | vision]:", simulation.GetLicbusInitAmount(), Simulation.GetLicbus_speedANDvision(),LICBUS));
+        //! ROW 
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_STUDENT, "Student settings [amount | speed | vision]:", simulation.GetStudentInitAmount(), Simulation.GetStudent_speedANDvision(),STUDENT));
+        //! ROW 
+        right.add(SetupActiveEntityInterface(activeEnt, ActionType.CHANGE_DEBIL, "Debil settings [amount | speed | vision]:", simulation.GetDebilInitAmount(), Simulation.GetDebil_speedANDvision(),DEBIL));
+
+        //! ROW 
+        right.add(SetupOneValuesChangerInterface(d,new Dimension(250,30), ActionType.CHANGE_TIME_STEPS, "Time between simulation iterations", Simulation.GetTimeBetweenSteps()));
+
+        //! ROW
+        var statusLine = new JPanel();
+        statusLine.setLayout(new FlowLayout());
+
+        roundCounter = new JTextArea("Round number: 0");
+        roundCounter.setPreferredSize(new Dimension(140,40));
+        roundCounter.setBackground(null);
+        roundCounter.setFont(new Font("Serif",Font.BOLD,14));
+
+        simStatus = new JTextArea("Simulation status: INICIALIZED");
+        simStatus.setPreferredSize(new Dimension(220,40));
+        simStatus.setBackground(null);
+        simStatus.setFont(new Font("Serif",Font.BOLD,14));
+        simStatus.setLineWrap(true);
+        simStatus.setWrapStyleWord(true);
+
+        statusLine.add(roundCounter);
+        statusLine.add(simStatus);
+        right.add(statusLine);
+
+        //! ROW 
         var line11 = new JPanel();
         line11.setLayout(new FlowLayout());
 
@@ -151,9 +187,21 @@ public class GUI {
         line11.add(pauseButton);
         line11.add(startButton);
 
-
         right.add(line11);
     }
+
+
+    //*Returns new JPanel with given color and size
+    //Color col - color
+    //Dimension size - size
+    private JPanel CreateJPanelWithColor(Color col, Dimension size)
+    {
+        var temp = new JPanel();
+        temp.setBackground(col);
+        temp.setPreferredSize(size);
+        return temp;
+    }
+
 
     //*Sets gui row for changing settings of active entity
     //Dimension d - size of row elements
@@ -161,7 +209,8 @@ public class GUI {
     //String text - name of row
     //int amount - inicial amount of given active entity
     //Vector2 speedAndVision - inicial speed and vision range of given active entity
-    private JPanel SetupActiveEntityInterface(Dimension activeEnt, ActionType type, String text, int amount, Vector2 speedAndVision)
+    //Color color - color of given entity on map, if null no color
+    private JPanel SetupActiveEntityInterface(Dimension activeEnt, ActionType type, String text, int amount, Vector2 speedAndVision, Color color)
     {
         var line = new JPanel();
         line.setLayout(new FlowLayout());
@@ -182,6 +231,7 @@ public class GUI {
         visionTF.setPreferredSize(activeEnt);
         visionTF.addFocusListener(new CustomActionListener(type, simulation, null,null,visionTF));
 
+        if(color != null)line.add(right.add(CreateJPanelWithColor(color, new Dimension(15,15))));
         line.add(label);
         line.add(amountTF);
         line.add(speedTF);
@@ -189,12 +239,13 @@ public class GUI {
         return line;
     }
 
-    //*Sets gui row for changing settings of schools (static) entity
-    //Dimension d - size of row elements
+    //*Sets gui row for changing settings of one property
+    //Dimension inputFieldSize - size of input field
     //ActionType type - enum which indicates what acion to perform
     //String text - name of row
-    //int amount - inicial amount of given school type
-    private JPanel SetupSchoolInterface(Dimension d, ActionType type, String text, int amount)
+    //int amount - inicial amount of given property
+    //Color color - color of given static entity on map, if null no color
+    private JPanel SetupOneValuesChangerInterface(Dimension inputFieldSize, ActionType type, String text, int amount, Color color)
     {
         var line = new JPanel();
         line.setLayout(new FlowLayout());
@@ -204,7 +255,32 @@ public class GUI {
         label.setPreferredSize(new Dimension(210,30));
 
         var tF = new JTextField(Integer.toString(amount)); 
-        tF.setPreferredSize(d);
+        tF.setPreferredSize(inputFieldSize);
+        tF.addFocusListener(new CustomActionListener(type, simulation, tF,null,null));
+        
+        if(color != null)line.add(right.add(CreateJPanelWithColor(color, new Dimension(15,15))));
+        line.add(label);
+        line.add(tF);
+        return line;
+    }
+
+    //*Sets gui row for changing settings of one property
+    //Dimension inputFieldSize - size of input field
+    //Dimension labelSize - size of label
+    //ActionType type - enum which indicates what acion to perform
+    //String text - name of row
+    //int amount - inicial amount of given property
+    private JPanel SetupOneValuesChangerInterface(Dimension inputFieldSize, Dimension labelSize, ActionType type, String text, int amount)
+    {
+        var line = new JPanel();
+        line.setLayout(new FlowLayout());
+
+        var label = new JLabel(text);
+        label.setFont(new Font("Serif",Font.BOLD,15));
+        label.setPreferredSize(labelSize);
+
+        var tF = new JTextField(Integer.toString(amount)); 
+        tF.setPreferredSize(inputFieldSize);
         tF.addFocusListener(new CustomActionListener(type, simulation, tF,null,null));
         
         line.add(label);
@@ -212,10 +288,14 @@ public class GUI {
         return line;
     }
 
+
+
     //*Iniciates gui part which handle showing grid
     //Node[][] gridMap - double array with nodes used for simulation
     public static void InicializeNodeGridGui(Node[][] gridMap)
     {
+        if(gridHolder == null) return;
+
         if(gridBackground != null)
         {
             gridHolder.removeAll();
@@ -247,7 +327,7 @@ public class GUI {
 
     //*Updates grid in gui
     //Node[][] gridMap - double array with nodes used for simulation
-    public static void UpdateGridGui(Node[][] gridMap)
+    public static void UpdateGridGui(Node[][] gridMap, int roundNumber)
     {
  
 
@@ -255,9 +335,10 @@ public class GUI {
             for (int j = 0; j < gridMap[i].length; j++) {
                 
                 SetPanelByUnit(nodes[i][j], gridMap[i][j].GetOccupant());
-                //System.out.println(nodes[i][j].getLocation().x + " " + nodes[i][j].getLocation().y);
             }
         }
+
+        SetRoundCounter(roundNumber);
 
         // JPanel temp = new JPanel();
         // temp.setBackground(Color.ORANGE);
@@ -332,6 +413,9 @@ public class GUI {
         panel.repaint();
         panel.revalidate();
     }
+
+    //*Updates round number on GUI
+    private static void SetRoundCounter(int roundNumber) { roundCounter.setText("Round number: " + Integer.toString(roundNumber)); }
 
 //===========================================================================================CONSOLE PRINTING
 

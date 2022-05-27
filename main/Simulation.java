@@ -41,6 +41,8 @@ public class Simulation {
     private static int GimbazaInitAmount = 2; //amount of Gimbaza units placed on map at the beginning of simulation
     private static int LicbazaInitAmount = 1; //amount of Licbaza units placed on map at the beginning of simulation
     private static int UczelniaInitAmount = 1; //amount of Uczelnia units placed on map at the beginning of simulation
+    private static int PiwoInitAmount = 0; //amount of Uczelnia units placed on map at the beginning of simulation
+    private static int EgzaminInitAmount = 0; //amount of Uczelnia units placed on map at the beginning of simulation
 
 
     //===============================================================SETTERS && GETTERS
@@ -88,10 +90,14 @@ public class Simulation {
     public int GetLicbazaInitAmount() { return LicbazaInitAmount; }
     public void SetUczelniaInitAmount(int amount) { UczelniaInitAmount = amount; }
     public int GetUczelniaInitAmount() { return UczelniaInitAmount; }
+    public void SetPiwoInitAmount (int amount) {PiwoInitAmount = amount;}
+    public int GetPiwoInitAmount() { return PiwoInitAmount; }
+    public void SetEgzaminInitAmount (int amount) {EgzaminInitAmount = amount;}
+    public int GetEgzaminInitAmount() { return EgzaminInitAmount; }
 
     public int GetAllUnitsInitAmount()
     {
-        return DebilInitAmount + GimbusInitAmount + LicbazaInitAmount + PatusInitAmount + PodbusInitAmount + StudentInitAmount + GimbazaInitAmount + LicbazaInitAmount + UczelniaInitAmount;
+        return PiwoInitAmount + EgzaminInitAmount + DebilInitAmount + GimbusInitAmount + LicbazaInitAmount + PatusInitAmount + PodbusInitAmount + StudentInitAmount + GimbazaInitAmount + LicbazaInitAmount + UczelniaInitAmount;
     }
 
     public boolean IsRunning() { return isRunning; }
@@ -145,6 +151,8 @@ public class Simulation {
         result.inicialNumberOfGimbaza = GimbazaInitAmount;
         result.inicialNumberOfLicbaza = LicbazaInitAmount;
         result.inicialNumberOfUczelnia = UczelniaInitAmount;
+        result.inicialNumberOfPiwo = PiwoInitAmount;
+        result.inicialNumberOfEgzamin = EgzaminInitAmount;
         result.gridSize = gridSize;
 
         //Set nodes in grid
@@ -179,6 +187,12 @@ public class Simulation {
         for (int i = 0; i < UczelniaInitAmount; i++) {
             GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Uczelnia(null));
         }
+        for (int i = 0; i < PiwoInitAmount; i++) {
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Piwo(null));
+        }
+        for (int i = 0; i < EgzaminInitAmount; i++) {
+            GridMap.PlaceUnitOnMap(GridMap.GetEmptyPositionInMap(), new Egzamin(null));
+        }
         //
 
         //SETUP NEIGHB.
@@ -186,8 +200,13 @@ public class Simulation {
 
 
         //print fin grid
-        if(isPrintingGrid)GUI.PrintGridInConsole(gridMap.GetGrid(),0);
-        if(GUI.gridHolder != null && isPrintingGrid)GUI.InicializeNodeGridGui(gridMap.GetGrid());
+        if(isPrintingGrid)
+        {
+            GUI.PrintGridInConsole(gridMap.GetGrid(),0);
+            GUI.InicializeNodeGridGui(gridMap.GetGrid());
+            GUI.SetSimulationStatus("Simulation status: INICIALIZED");
+        }
+        
     }
 
     //*Runs simulation without awaking new thread
@@ -200,6 +219,7 @@ public class Simulation {
     //*Runs simulation in new thread
     public void RunSimulation()
     {
+        GUI.SetSimulationStatus("Simulation status: RUNNING");
         if(!isRunning)
         {
             updateThread = new Thread(updateThreadClassObject);
@@ -218,13 +238,14 @@ public class Simulation {
         if(isRunning)
         {
             updateThread.suspend();
+            GUI.SetSimulationStatus("Simulation status: PAUSED");
         }
     }
 
     //*Will setup values used as begin conditions for simulation
     public void SetupSimulationProperties(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision, 
     Vector2 patus_speedANDvision, Vector2 podbus_speedANDvision, Vector2 student_speedANDvision, int debilInitAmount, int gimbusInitAmount, int licbusInitAmount, 
-    int patusInitAmount, int podbusInitAmount, int studentInitAmount, int gimbazaInitAmount, int licbazaInitAmount, int uczelniaInitAmount)
+    int patusInitAmount, int podbusInitAmount, int studentInitAmount, int gimbazaInitAmount, int licbazaInitAmount, int uczelniaInitAmount, int piwoInitAmount, int egzaminInitAmount)
     {
         Simulation.gridSize = gridSize;
 
@@ -245,6 +266,8 @@ public class Simulation {
         Simulation.GimbazaInitAmount = gimbazaInitAmount;
         Simulation.LicbazaInitAmount = licbazaInitAmount;
         Simulation.UczelniaInitAmount = uczelniaInitAmount;
+        Simulation.PiwoInitAmount = piwoInitAmount;
+        Simulation.EgzaminInitAmount = egzaminInitAmount;
     }
 
 
@@ -300,11 +323,15 @@ public class Simulation {
                 {
                     System.out.println("Round: [" + RoundCount + "]");
                     GUI.PrintGridInConsole(gridMap.GetGrid(),timeBetweenSteps);
-                    GUI.UpdateGridGui(gridMap.GetGrid());
+                    GUI.UpdateGridGui(gridMap.GetGrid(), RoundCount);
                 }
 
                 numberOfEndCon = CheckEndConditions(!isRunning);
-                if(numberOfEndCon != 0) isRunning = false;
+                if(numberOfEndCon != 0) 
+                {
+                    isRunning = false;
+                    GUI.SetSimulationStatus("Simulation status: ENDED WITH CONDITION NUMBER: " + numberOfEndCon);
+                }
 
                 //Set all active entities as open for next round
                 for (Node[] nodes : gridMap.GetGrid()) {

@@ -22,6 +22,8 @@ public class SimulationResult {
     public int inicialNumberOfGimbaza;
     public int inicialNumberOfLicbaza;
     public int inicialNumberOfUczelnia;
+    public int inicialNumberOfPiwo;
+    public int inicialNumberOfEgzamin;
 
     public int finNumberOfDebil;
     public int finNumberOfGimbus;
@@ -35,8 +37,8 @@ public class SimulationResult {
     @Override
     public String toString()
     {
-        return gridSize.x+ "," +gridSize.y+ "," + numberOfEndCondition + "," + numberOfRounds + "," + inicialNumberOfGimbaza + "," + inicialNumberOfLicbaza + "," + inicialNumberOfUczelnia + "," +  inicialNumberOfPodbus 
-        + "," + inicialNumberOfGimbus + "," + inicialNumberOfPatus  + "," + inicialNumberOfLicbus + "," + inicialNumberStudent + "," + inicialNumberOfDebil + "," + finNumberOfPodbus 
+        return gridSize.x+ "," +gridSize.y+ "," + numberOfEndCondition + "," + numberOfRounds + "," + inicialNumberOfGimbaza + "," + inicialNumberOfLicbaza + "," + inicialNumberOfUczelnia + "," + inicialNumberOfPiwo + ", " 
+        +inicialNumberOfEgzamin + ", "+  inicialNumberOfPodbus + "," + inicialNumberOfGimbus + "," + inicialNumberOfPatus  + "," + inicialNumberOfLicbus + "," + inicialNumberStudent + "," + inicialNumberOfDebil + "," + finNumberOfPodbus 
         + "," + finNumberOfGimbus + "," + finNumberOfPatus + "," + finNumberOfLicbus + "," + finNumberStudent + "," + finNumberOfDebil + "," + finNumberOfPiwo + "," + finNumberOfEgzamin; 
     }
 }

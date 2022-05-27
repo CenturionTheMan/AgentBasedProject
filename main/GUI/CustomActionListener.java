@@ -8,6 +8,8 @@ import main.Vector2;
 
 
 import java.awt.event.*;
+import java.nio.file.attribute.AclEntryFlag;
+import java.text.BreakIterator;
 
 public class CustomActionListener implements ActionListener, FocusListener {
 
@@ -29,6 +31,10 @@ public class CustomActionListener implements ActionListener, FocusListener {
         CHANGE_GIMBAZA,
         CHANGE_LICBAZA,
         CHANGE_UCZELNIA,
+        CHANGE_PIWO,
+        CHANGE_EGZAMIN,
+        
+        CHANGE_TIME_STEPS
     }
 
     ActionType actionType;
@@ -154,6 +160,18 @@ public class CustomActionListener implements ActionListener, FocusListener {
 
             case CHANGE_UCZELNIA:
             if(eAmount != -1)sim.SetUczelniaInitAmount(eAmount);
+            break;
+
+            case CHANGE_PIWO:
+            if(eAmount!=-1) sim.SetPiwoInitAmount(eAmount);
+            break;
+
+            case CHANGE_EGZAMIN:
+            if(eAmount != -1) sim.SetEgzaminInitAmount(eAmount);
+            break;
+
+            case CHANGE_TIME_STEPS:
+            Simulation.SetTimeBetweenSteps(eAmount);
             break;
 
             default:
