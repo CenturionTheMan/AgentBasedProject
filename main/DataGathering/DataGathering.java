@@ -15,7 +15,7 @@ public class DataGathering {
     public DataGathering(Simulation sim) {
         this.sim = sim;
 
-        PodbusScenario();
+        //PodbusScenario();
     }
 
     //*Generates data for scenario with growing podbus amount
@@ -23,7 +23,7 @@ public class DataGathering {
     {
         Simulation.SetIsPrintingGrid(false);
         String result = "gridSize.x,gridSize.y,numberOfEndCondition,numberOfRounds,inicialNumberOfGimbaza,inicialNumberOfLicbaza,inicialNumberOfUczelnia,inicialNumberOfPiwo,inicialNumberOfEgzamin,inicialNumberOfPodbus,inicialNumberOfGimbus,inicialNumberOfPatus,inicialNumberOfLicbus,inicialNumberStudent,inicialNumberOfDebil,finNumberOfPodbus,finNumberOfGimbus,finNumberOfPatus,finNumberOfLicbus,finNumberStudent,finNumberOfDebil,finNumberOfPiwo,finNumberOfEgzamin";
-        int repeatAmount = 20;
+        int repeatAmount = 50;
 
         for(int i=0;i<repeatAmount;i++){
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 1, 0, 3, 2, 1,0,0);
