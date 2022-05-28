@@ -67,7 +67,7 @@ public class DataGathering {
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 900, 0, 3, 2, 1,0,0);
         }
         
-        WriteToFile("main\\DataGathering\\PudbusTest", result);
+        WriteToFile("main\\DataGathering\\PudbusTest.txt", result);
 
         Simulation.SetIsPrintingGrid(true);
     }
