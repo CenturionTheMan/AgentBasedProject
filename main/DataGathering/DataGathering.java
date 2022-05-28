@@ -19,7 +19,7 @@ public class DataGathering {
 
         if(doStatiscticGathering)
         {
-            //PodbusScenario();
+            PodbusScenario();
         }
     }
 
@@ -27,7 +27,7 @@ public class DataGathering {
     public void PodbusScenario()
     {
         Simulation.SetIsPrintingGrid(false);
-        String result = "gridSize.x,gridSize.y,numberOfEndCondition,numberOfRounds,inicialNumberOfGimbaza,inicialNumberOfLicbaza,inicialNumberOfUczelnia,inicialNumberOfPiwo,inicialNumberOfEgzamin,inicialNumberOfPodbus,inicialNumberOfGimbus,inicialNumberOfPatus,inicialNumberOfLicbus,inicialNumberStudent,inicialNumberOfDebil,finNumberOfPodbus,finNumberOfGimbus,finNumberOfPatus,finNumberOfLicbus,finNumberStudent,finNumberOfDebil,finNumberOfPiwo,finNumberOfEgzamin";
+        String result = "gridSize.x,gridSize.y,numberOfEndCondition,numberOfRounds,inicialNumberOfGimbaza,inicialNumberOfLicbaza,inicialNumberOfUczelnia,inicialNumberOfPiwo,inicialNumberOfEgzamin,inicialNumberOfPodbus,inicialNumberOfGimbus,inicialNumberOfPatus,inicialNumberOfLicbus,inicialNumberStudent,inicialNumberOfDebil,finNumberOfPodbus,finNumberOfGimbus,finNumberOfPatus,finNumberOfLicbus,finNumberStudent,finNumberOfDebil,finNumberOfPiwo,finNumberOfEgzamin\n";
         int repeatAmount = 50;
 
         for(int i=0;i<repeatAmount;i++){
