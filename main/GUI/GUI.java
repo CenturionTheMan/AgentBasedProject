@@ -53,6 +53,7 @@ public class GUI {
     //CTOR
     public GUI(Simulation sim) {
         simulation = sim;
+
         InitGUI(sim.GetGridMap().GetGrid());
     }
 
@@ -342,12 +343,6 @@ public class GUI {
         }
 
         SetRoundCounter(roundNumber);
-
-        // JPanel temp = new JPanel();
-        // temp.setBackground(Color.ORANGE);
-        // temp.setLocation(nodes[1][1].getLocation());
-        // temp.setSize(nodes[1][1].getSize());
-        // gridHolder.add(temp,JLayeredPane.DRAG_LAYER);
 
         gridHolder.repaint();
         gridHolder.revalidate();

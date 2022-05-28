@@ -1,5 +1,7 @@
 package main;
 
+import static org.junit.Assert.assertThrows;
+
 import main.DataGathering.DataGathering;
 import main.GUI.GUI;
 
@@ -7,6 +9,8 @@ import main.GUI.GUI;
  * Application
  */
 public class Application {
+
+    static final boolean doStatiscicGathering = true;
 
     static Simulation simulation;
     static GUI gui;
@@ -24,6 +28,6 @@ public class Application {
 
         gui = new GUI(simulation); //GUI 
         
-        dataGahtering = new DataGathering(simulation);
+        dataGahtering = new DataGathering(simulation, doStatiscicGathering);
     }
 }
