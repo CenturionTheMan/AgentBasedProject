@@ -6,7 +6,7 @@ import java.io.IOException;
 import main.Simulation;
 import main.Vector2;
 
-//*Raw class for generationg data for statistics
+//*Raw class for generating data for statistics
 //*
 public class DataGathering {
     
@@ -15,14 +15,14 @@ public class DataGathering {
     public DataGathering(Simulation sim) {
         this.sim = sim;
 
-        PodbusScenario();
+       // PodbusScenario();
     }
 
-    //*Generates data for scenario with growing podbus amount
+    //Generates data for scenario with growing Podbus amount
     public void PodbusScenario()
     {
         Simulation.SetIsPrintingGrid(false);
-        String result = "gridSize.x,gridSize.y,numberOfEndCondition,numberOfRounds,inicialNumberOfGimbaza,inicialNumberOfLicbaza,inicialNumberOfUczelnia,inicialNumberOfPiwo,inicialNumberOfEgzamin,inicialNumberOfPodbus,inicialNumberOfGimbus,inicialNumberOfPatus,inicialNumberOfLicbus,inicialNumberStudent,inicialNumberOfDebil,finNumberOfPodbus,finNumberOfGimbus,finNumberOfPatus,finNumberOfLicbus,finNumberStudent,finNumberOfDebil,finNumberOfPiwo,finNumberOfEgzamin";
+        String result = "gridSize.x,gridSize.y,numberOfEndCondition,numberOfRounds,initialNumberOfGimbaza,initialNumberOfLicbaza,initialNumberOfUczelnia,initialNumberOfPiwo,initialNumberOfEgzamin,initialNumberOfPodbus,initialNumberOfGimbus,initialNumberOfPatus,initialNumberOfLicbus,initialNumberStudent,initialNumberOfDebil,finNumberOfPodbus,finNumberOfGimbus,finNumberOfPatus,finNumberOfLicbus,finNumberStudent,finNumberOfDebil,finNumberOfPiwo,finNumberOfEgzamin";
         int repeatAmount = 20;
 
         for(int i=0;i<repeatAmount;i++){
@@ -62,13 +62,13 @@ public class DataGathering {
             result += RunTest(new Vector2(100, 100), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 2), new Vector2(1, 1), new Vector2(1, 4), new Vector2(1, 2), 0, 0, 0, 0, 900, 0, 3, 2, 1,0,0);
         }
         
-        WriteToFile("main\\DataGathering\\PudbusTest", result);
+        WriteToFile("main\\DataGathering\\PodbusTest", result);
 
         Simulation.SetIsPrintingGrid(true);
     }
 
-    //*Runs test with given iniciaol values and returns its formated as string results
-    private String RunTest(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision, 
+    //*Runs test with given initial values and returns its formatted as string results
+    private String RunTest(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision,
     Vector2 patus_speedANDvision, Vector2 podbus_speedANDvision, Vector2 student_speedANDvision, int debilInitAmount, int gimbusInitAmount, int licbusInitAmount, 
     int patusInitAmount, int podbusInitAmount, int studentInitAmount, int gimbazaInitAmount, int licbazaInitAmount, int uczelniaInitAmount, int piwoInitAmount, int egzaminInitAmount)
     {
@@ -81,7 +81,7 @@ public class DataGathering {
     }
 
     //*Writes string to file with given path
-    //String path - path where file will be writen
+    //String path - path where file will be written
     //String text - text to be written in file
     private void WriteToFile(String path, String text)
     {

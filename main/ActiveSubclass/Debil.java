@@ -5,12 +5,24 @@ import java.util.Random;
 import main.*;
 import main.StaticSubclass.Egzamin;
 
+/**
+ * This class represents Debil entity.
+ * It is an entity which Student entity can become randomly every round (10%).
+ * It behaves similarly to Student, except it cannot consume Piwo.
+ * In order to become Student again, Debil needs to stand next to Egzamin.
+ * This action turns Debil back to Student and removes Egzamin.
+ */
 public class Debil extends Active_Entity{
 
     //VALUES
     public static int amount =0;
 
-    //CTOR
+    /**
+     * This constructor creates a new Debil entity.
+     * @param position This parameter sets the position of Debil
+     * @param speedANDvision This parameter sets the speed and vision values of Debil
+     * @param neighbours this parameter lists the current neighbours of the Debil entity
+     */
     public Debil(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
         super(position, speedANDvision, neighbours);
     }

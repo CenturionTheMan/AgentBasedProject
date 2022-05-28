@@ -11,8 +11,9 @@ import main.ActiveSubclass.*;
 import main.GUI.CustomActionListener.ActionType;
 import main.StaticSubclass.*;
 
-//* Class used for creating and handling GUI
-//*
+/**
+ * Class used for creating and handling GUI
+ */
 public class GUI {
     
     //VALUES
@@ -55,8 +56,10 @@ public class GUI {
         InitGUI(sim.GetGridMap().GetGrid());
     }
 
-    //*Inits GUI 
-    //Node[][] gridMap - double array with nodes used for simulation
+    /**
+     * Inits GUI
+     * @param gridMap double array with nodes used for simulation
+     */
     private void InitGUI(Node[][] gridMap)
     {
         frame = new JFrame();
