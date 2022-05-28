@@ -330,7 +330,7 @@ public class Simulation {
                 if(numberOfEndCon != 0) 
                 {
                     isRunning = false;
-                    GUI.SetSimulationStatus("Simulation status: ENDED WITH CONDITION NUMBER: " + numberOfEndCon);
+                    GUI.SetSimulationStatus("Simulation status: ENDED WITH CONDITION NUMBER " + numberOfEndCon);
                 }
 
                 //Set all active entities as open for next round

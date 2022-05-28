@@ -11,11 +11,16 @@ import main.Vector2;
 public class DataGathering {
     
     Simulation sim;
+    boolean doStatiscitcGathering;
     
-    public DataGathering(Simulation sim) {
+    public DataGathering(Simulation sim, boolean doStatiscticGathering) {
         this.sim = sim;
+        this.doStatiscitcGathering = doStatiscticGathering;
 
-        //PodbusScenario();
+        if(doStatiscticGathering)
+        {
+            //PodbusScenario();
+        }
     }
 
     //*Generates data for scenario with growing podbus amount
