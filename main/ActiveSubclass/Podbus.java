@@ -9,7 +9,7 @@ public class Podbus extends Active_Entity{
 
     //VALUES
     private int maxScaredMoves = 2; //indicates how many moves should entity last feared
-    private int scaredMoves = 0; //how moves to stopped being feard is left
+    private int scaredMoves = 0; //how many moves to stopped being feard is left
     private List<Podbus> group; //list of Posbus'es in surranding
 
     public static int amount =0;

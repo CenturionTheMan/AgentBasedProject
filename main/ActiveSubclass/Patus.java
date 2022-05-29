@@ -11,7 +11,7 @@ public class Patus extends Active_Entity{
     //VALUES
     private int fearlessTime = 10; //how many moves should Patus be immune to fear
     private int maxScaredMoves = 2; //how many moves should patus stay feard
-    private int scaredMoves = 0; //how moves to stopped being feard is left
+    private int scaredMoves = 0; //how many moves to stopped being feard is left
 
     public static int amount =0;
 

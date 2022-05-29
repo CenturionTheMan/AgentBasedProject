@@ -10,7 +10,7 @@ public class Licbus extends Active_Entity{
 
     //VALUES
     private int maxScaredMoves = 2;//indicates how many moves should Licbus last feared
-    private int scaredMoves = 0; //how moves to stopped being feard is left
+    private int scaredMoves = 0; //how many moves to stopped being feard is left
 
     public static int amount =0;
 
