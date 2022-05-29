@@ -10,7 +10,7 @@ import main.GUI.GUI;
  */
 public class Application {
 
-    static final boolean doStatiscicGathering = true;
+    static final boolean doStatiscicGathering = false;
 
     static Simulation simulation;
     static GUI gui;
