@@ -200,7 +200,7 @@ public class Simulation {
         if(isPrintingGrid)
         {
             GUI.PrintGridInConsole(gridMap.GetGrid(),0);
-            GUI.InicializeNodeGridGui(gridMap.GetGrid());
+            GUI.InicializeNodeGridGui(gridMap.GetGrid(), 0);
             GUI.SetSimulationStatus("Simulation status: INICIALIZED");
         }
         

@@ -30,18 +30,18 @@ public class GUI {
 
     private Simulation simulation;
 
-    static final Color EMPTY = new Color(192,192,192);
-    static final Color PODBUS = new Color(102,255,255);
-    static final Color GIMBUS = new Color(138,79,226);
-    static final Color PATUS = new Color(255,153,153);
-    static final Color LICBUS = new Color(79,226,143);
-    static final Color STUDENT= new Color(216,79,226);
-    static final Color DEBIL= new Color(79,226,187);
-    static final Color GIMBAZA= new Color(81,186,186);
-    static final Color LICBAZA= new Color(79,48,127);
-    static final Color UCZELNIA= new Color(56,156,99);
+    static final Color EMPTY = new Color(234,234,234);
+    static final Color PODBUS = new Color(147,255,0);
+    static final Color GIMBUS = new Color(35,243,254);
+    static final Color PATUS = new Color(255,0,0);
+    static final Color LICBUS = new Color(248,0,255);
+    static final Color STUDENT= new Color(128,24,230);
+    static final Color DEBIL= new Color(255,94,153);
+    static final Color GIMBAZA= new Color(64,193,153);
+    static final Color LICBAZA= new Color(77,136,172);
+    static final Color UCZELNIA= new Color(211,112,214);
     static final Color PIWO= new Color(245,226,58);
-    static final Color EGZAMIN= new Color(58,108,245);
+    static final Color EGZAMIN= new Color(242,127,13);
 
     //GETTERS && SETTERS
     public static void SetSimulationStatus(String status) 
@@ -79,7 +79,7 @@ public class GUI {
         right.setLayout(new BoxLayout(right, BoxLayout.PAGE_AXIS));
 
         gridHolder.setBounds(0,0,700,700);
-        InicializeNodeGridGui(gridMap);
+        InicializeNodeGridGui(gridMap, 0);
 
         CreateUserHandlingGuiPart();
 
@@ -296,13 +296,18 @@ public class GUI {
 
     //*Iniciates gui part which handle showing grid
     //Node[][] gridMap - double array with nodes used for simulation
-    public static void InicializeNodeGridGui(Node[][] gridMap)
+    public static void InicializeNodeGridGui(Node[][] gridMap, int roundNumber)
     {
         if(gridHolder == null) return;
 
         if(gridBackground != null)
         {
             gridHolder.removeAll();
+        }
+
+        if(roundCounter != null)
+        {
+            SetRoundCounter(roundNumber);
         }
 
         nodes = new JPanel[gridMap.length][gridMap[0].length];

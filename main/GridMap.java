@@ -49,8 +49,11 @@ public class GridMap {
         Entity.ChangeAmountOfGivenSubclass(grid[pos.x][pos.y].GetOccupant(), -1);
         Entity.ChangeAmountOfGivenSubclass(unit, 1);
 
+        boolean isLocalOpen = (grid[pos.x][pos.y].GetOccupant() == null || grid[pos.x][pos.y].GetOccupant() instanceof Static_Entity)? true:false;
+
         grid[pos.x][pos.y].SetOccupant(unit);
         unit.SetPosition(pos);
+        if(isLocalOpen == false)unit.IsOpen();
     }
 
     //*Returns global position of random node (without any occupant) in grid

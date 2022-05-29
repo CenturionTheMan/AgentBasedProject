@@ -53,8 +53,10 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         if(IsOpen()) movesLeft = speed;
     
         if(movesLeft <= 0)return false;
-        else
+        else {
             movesLeft--;
+            DoMove(grid, forcedDir);
+        }
 
         List<Active_Entity> activeNeigh = GetActiveNeighbours(grid);
         List<Static_Entity> staticNeigh = GetStaticNeighbours(grid);
