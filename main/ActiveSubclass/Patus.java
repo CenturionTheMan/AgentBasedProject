@@ -19,8 +19,8 @@ public class Patus extends Active_Entity{
     public void SetScaredMoves(int val) { scaredMoves = val; }
 
     //CTOR
-    public Patus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
-        super(position, speedANDvision, neighbours);
+    public Patus(Vector2 position, Vector2 speedANDvision) {
+        super(position, speedANDvision);
     }
     public Patus(Vector2 speedANDvision)
     {

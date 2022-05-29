@@ -15,8 +15,8 @@ public class Licbus extends Active_Entity{
     public static int amount =0;
 
     //CTOR
-    public Licbus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
-        super(position, speedANDvision, neighbours);
+    public Licbus(Vector2 position, Vector2 speedANDvision) {
+        super(position, speedANDvision);
     }
     public Licbus(Vector2 speedANDvision)
     {

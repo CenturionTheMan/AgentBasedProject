@@ -18,8 +18,8 @@ public class Gimbus extends Active_Entity {
     public void SetScaredMoves(int val) { scaredMoves = val; }
 
     //CTOR
-    public Gimbus(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
-        super(position, speedANDvision, neighbours);
+    public Gimbus(Vector2 position, Vector2 speedANDvision) {
+        super(position, speedANDvision);
     }
     public Gimbus(Vector2 speedANDvision)
     {

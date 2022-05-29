@@ -195,9 +195,6 @@ public class Simulation {
         }
         //
 
-        //SETUP NEIGHB.
-        gridMap.SetupNeighbours();
-
 
         //print fin grid
         if(isPrintingGrid)

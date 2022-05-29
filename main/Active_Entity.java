@@ -7,15 +7,11 @@ import java.util.List;
 public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     //=======================================================================VALUES
-    private List<Entity> neighbours;    //entities in neighbourhood
     private int speed;  //amount of squares can unit travel in round
     private int visionRange;    //range of awarness
     private int movesLeft =0;   //moves left in given round
 
     //=====================================================================GETTERS && SETTERS
-    public List<Entity> GetNeighbours() { return neighbours; }
-    public void SetNeighbours(List<Entity> neighbours) { this.neighbours = neighbours; }
-
     public int GetSpeed() { return speed; }
     public void SetSpeed(int speed) { this.speed = speed; }
 
@@ -25,16 +21,14 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
     public void AddMoves(int amount) { movesLeft += amount; }
 
     //==============================================================================================CTOR
-    public Active_Entity(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
+    public Active_Entity(Vector2 position, Vector2 speedANDvision) {
         super(position);
-        this.neighbours = neighbours;
         this.speed = speedANDvision.x;
         this.visionRange = speedANDvision.y;
     }
 
-    public Active_Entity(Vector2 position,int speed, int visionRange, List<Entity> neighbours) {
+    public Active_Entity(Vector2 position,int speed, int visionRange) {
         super(position);
-        this.neighbours = neighbours;
         this.speed = speed;
         this.visionRange = visionRange;
     }

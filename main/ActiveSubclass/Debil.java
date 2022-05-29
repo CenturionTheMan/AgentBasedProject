@@ -11,8 +11,8 @@ public class Debil extends Active_Entity{
     public static int amount =0;
 
     //CTOR
-    public Debil(Vector2 position, Vector2 speedANDvision, List<Entity> neighbours) {
-        super(position, speedANDvision, neighbours);
+    public Debil(Vector2 position, Vector2 speedANDvision) {
+        super(position, speedANDvision);
     }
     public Debil(Vector2 speedANDvision)
     {
