@@ -6,13 +6,19 @@ import java.io.IOException;
 import main.Simulation;
 import main.Vector2;
 
-//*Raw class for generating data for statistics
-//*
+/**
+ * This is a raw class designed for generating data for statistics
+ */
 public class DataGathering {
     
     Simulation sim;
     boolean doStatiscitcGathering;
-    
+
+    /**
+     * This method is used to gather generated data
+     * @param sim This parameter is used to execute commands regarding simulation
+     * @param doStatiscticGathering This parameter sets a boolean value for gathering of the statistics. True allows it.
+     */
     public DataGathering(Simulation sim, boolean doStatiscticGathering) {
         this.sim = sim;
         this.doStatiscitcGathering = doStatiscticGathering;
@@ -23,11 +29,13 @@ public class DataGathering {
         }
     }
 
-    //*Generates data for scenario with growing podbus amount
+    /**
+     * This method generates data for scenario with growing Podbus amount
+     */
     public void PodbusScenario()
     {
         Simulation.SetIsPrintingGrid(false);
-        String result = "gridSize.x,gridSize.y,numberOfEndCondition,numberOfRounds,inicialNumberOfGimbaza,inicialNumberOfLicbaza,inicialNumberOfUczelnia,inicialNumberOfPiwo,inicialNumberOfEgzamin,inicialNumberOfPodbus,inicialNumberOfGimbus,inicialNumberOfPatus,inicialNumberOfLicbus,inicialNumberStudent,inicialNumberOfDebil,finNumberOfPodbus,finNumberOfGimbus,finNumberOfPatus,finNumberOfLicbus,finNumberStudent,finNumberOfDebil,finNumberOfPiwo,finNumberOfEgzamin\n";
+        String result = "gridSize.x,gridSize.y,numberOfEndCondition,numberOfRounds,initialNumberOfGimbaza,initialNumberOfLicbaza,initialNumberOfUczelnia,initialNumberOfPiwo,initialNumberOfEgzamin,initialNumberOfPodbus,initialNumberOfGimbus,initialNumberOfPatus,initialNumberOfLicbus,initialNumberStudent,initialNumberOfDebil,finNumberOfPodbus,finNumberOfGimbus,finNumberOfPatus,finNumberOfLicbus,finNumberStudent,finNumberOfDebil,finNumberOfPiwo,finNumberOfEgzamin\n";
         int repeatAmount = 50;
 
         for(int i=0;i<repeatAmount;i++){
@@ -72,7 +80,27 @@ public class DataGathering {
         Simulation.SetIsPrintingGrid(true);
     }
 
-    //*Runs test with given initial values and returns its formatted as string results
+    /**
+     * This method runs test with given initial values and returns its formatted as string results
+     * @param gridSize This parameter indicates the size of the grid
+     * @param debil_speedANDvision This parameter sets the speed and vision amount for Debil entities
+     * @param gimbus_speedANDvision This parameter sets the speed and vision amount for Gimbus entities
+     * @param licbus_speedANDvision This parameter sets the speed and vision amount for Licbus entities
+     * @param patus_speedANDvision This parameter sets the speed and vision amount for Patus entities
+     * @param podbus_speedANDvision This parameter sets the speed and vision amount for Podbus entities
+     * @param student_speedANDvision This parameter sets the speed and vision amount for Student entities
+     * @param debilInitAmount This parameter sets the initial amount of Debil entities
+     * @param gimbusInitAmount This parameter sets the initial amount of Gimbus entities
+     * @param licbusInitAmount This parameter sets the initial amount of Licbus entities
+     * @param patusInitAmount This parameter sets the initial amount of Patus entities
+     * @param podbusInitAmount This parameter sets the initial amount of Podbus entities
+     * @param studentInitAmount This parameter sets the initial amount of Student entities
+     * @param gimbazaInitAmount This parameter sets the initial amount of Gimbaza entities
+     * @param licbazaInitAmount This parameter sets the initial amount of Licbaza entities
+     * @param uczelniaInitAmount This parameter sets the initial amount of Uczelnia entities
+     * @param piwoInitAmount This parameter sets the initial amount of Piwo entities
+     * @param egzaminInitAmount This parameter sets the initial amount of Egzamin entities
+     */
     private String RunTest(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision, 
     Vector2 patus_speedANDvision, Vector2 podbus_speedANDvision, Vector2 student_speedANDvision, int debilInitAmount, int gimbusInitAmount, int licbusInitAmount, 
     int patusInitAmount, int podbusInitAmount, int studentInitAmount, int gimbazaInitAmount, int licbazaInitAmount, int uczelniaInitAmount, int piwoInitAmount, int egzaminInitAmount)
@@ -85,9 +113,11 @@ public class DataGathering {
         return sim.GetResult().toString() +"\n";
     }
 
-    //*Writes string to file with given path
-    //String path - path where file will be written
-    //String text - text to be written in file
+    /**
+     * This method writes string to file with given path
+     * @param path This parameter indicates path where file will be written
+     * @param text This parameter indicates text to be written in file
+     */
     private void WriteToFile(String path, String text)
     {
         try {

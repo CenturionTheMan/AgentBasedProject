@@ -6,6 +6,14 @@ import main.*;
 import main.StaticSubclass.Egzamin;
 import main.StaticSubclass.Piwo;
 
+/**
+ * This class represents Patus entity.
+ * It's a special entity which two Gimbus entities can turn into after meeting each other (33% chance).
+ * It scares groups of Podbus entities up to 3 members. Higher amounts will scare Patus instead.
+ * It is always going to be scared by either Student or Debil.
+ * Patus entities have 20% chance of leaving a Piwo entity behind them every round.
+ * In order to become Licbus, Podbus entity needs to consume Egzamin.
+ */
 public class Patus extends Active_Entity{
 
     //VALUES
@@ -16,12 +24,28 @@ public class Patus extends Active_Entity{
     public static int amount =0;
 
     //SETTERS && GETTERS
+
+    /**
+     * This setter sets the scared moves if right conditions are met
+     * @param val This parameter indicates the amount of scared moves to be set
+     */
     public void SetScaredMoves(int val) { scaredMoves = val; }
 
     //CTOR
+
+    /**
+     * This constructor creates a new Patus entity
+     * @param position This parameter sets the position of Patus
+     * @param speedANDvision This parameter sets the speed and vision values of Patus
+     */
     public Patus(Vector2 position, Vector2 speedANDvision) {
         super(position, speedANDvision);
     }
+
+    /**
+     * This constructor behaves the same as the previous one, except it takes fewer parameters
+     * @param speedANDvision This parameter sets the speed and vision values of Patus
+     */
     public Patus(Vector2 speedANDvision)
     {
         super(speedANDvision);
@@ -30,6 +54,14 @@ public class Patus extends Active_Entity{
 
     //METHODS
 
+    /**
+     * This method defines the logic of Patus' movement.
+     * It's main use is controlling the fear of Patus regarding the presence of certain entities in its neighbourhood.
+     * It also makes it attracted to nearby Egzamin static entities.
+     * @param grid This parameter represents map used for the simulation
+     * @param activeNeigh This parameter lists ActiveSubclass neighbours visible to the Patus entity
+     * @param staticNeigh This parameter lists StaticSubclass neighbours visible to the Patus entity
+     */
     @Override
     protected Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
     
@@ -60,7 +92,15 @@ public class Patus extends Active_Entity{
         Vector2 dir = GetMovementVectorToStaticEntity(staticNeigh, Egzamin.class);
         return dir;
     }
-    
+
+    /**
+     * This method defines possible changes in the Patus entity itself.
+     * Patus entity has 20% chance of dropping a Piwo entity behind it every round.
+     * It changes to Licbus entity when stationed next to Egzamin.
+     * @param grid This parameter represents map used for the simulation
+     * @param activeNeigh This parameter lists ActiveSubclass neighbours visible to the Patus entity
+     * @param staticNeigh This parameter lists StaticSubclass neighbours visible to the Patus entity
+     */
     @Override
     protected boolean StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         

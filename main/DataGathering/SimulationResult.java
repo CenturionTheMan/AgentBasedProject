@@ -2,10 +2,9 @@ package main.DataGathering;
 
 import main.Vector2;
 
-
-//
-//*Class used for gathering data after simulation
-//
+/**
+ * This class is used for gathering data after simulation
+ */
 public class SimulationResult {
 
     public int numberOfEndCondition;
@@ -34,6 +33,9 @@ public class SimulationResult {
     public int finNumberOfPiwo;
     public int finNumberOfEgzamin;
 
+    /**
+     * This method returns all the crucial data after finishing the simulation
+     */
     @Override
     public String toString()
     {

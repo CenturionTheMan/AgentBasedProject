@@ -6,6 +6,13 @@ import main.*;
 import main.StaticSubclass.Egzamin;
 import main.StaticSubclass.Uczelnia;
 
+/**
+ * This class represents Licbus entity.
+ * It's an entity which Gimbus can change into after standing next to Licbaza or Patus, after consuming Egzamin.
+ * It is always going to be scared by either Student or Debil.
+ * Licbus entities have 20% chance of leaving an Egzamin entity behind every round.
+ * In order to become Student, it needs to place itself next to Uczelnia static entity.
+ */
 public class Licbus extends Active_Entity{
 
     //VALUES
@@ -15,9 +22,20 @@ public class Licbus extends Active_Entity{
     public static int amount =0;
 
     //CTOR
+
+    /**
+     * This constructor creates a new Licbus entity
+     * @param position This parameter sets the position of Licbus
+     * @param speedANDvision This parameter sets the speed and vision values of Licbus
+     */
     public Licbus(Vector2 position, Vector2 speedANDvision) {
         super(position, speedANDvision);
     }
+
+    /**
+     * This constructor behaves the same as the previous one, except it takes fewer parameters
+     * @param speedANDvision This parameter sets the speed and vision values of Licbus
+     */
     public Licbus(Vector2 speedANDvision)
     {
         super(speedANDvision);
@@ -26,6 +44,13 @@ public class Licbus extends Active_Entity{
 
     //METHODS
 
+    /**
+     * This method defines the logic of Licbus' movement.
+     * Its main usage is to either set scared moves for the entity when right conditions are met or attract it to nearby Uczelnia static entities.
+     * @param grid This parameter represents map used for the simulation
+     * @param activeNeigh This parameter lists ActiveSubclass neighbours visible to the Licbus entity
+     * @param staticNeigh This parameter lists StaticSubclass neighbours visible to the Licbus entity
+     */
     @Override
     protected Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         Vector2 dir = null;
@@ -49,7 +74,15 @@ public class Licbus extends Active_Entity{
         dir = GetMovementVectorToStaticEntity(staticNeigh, Uczelnia.class);
         return dir;
     }
-    
+
+    /**
+     * This method defines possible changes in the Licbus entity itself.
+     * Licbus entity has 20% chance of dropping an Egzamin entity behind it every round.
+     * It changes to Student entity when stationed next to Uczelnia.
+     * @param grid This parameter represents map used for the simulation
+     * @param activeNeigh This parameter lists ActiveSubclass neighbours visible to the Licbus entity
+     * @param staticNeigh This parameter lists StaticSubclass neighbours visible to the Licbus entity
+     */
     @Override
     protected boolean StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         

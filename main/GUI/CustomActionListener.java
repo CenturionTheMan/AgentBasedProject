@@ -9,9 +9,12 @@ import main.Vector2;
 
 import java.awt.event.*;
 
+/**
+ * This class makes it possible to customise simulation
+ */
 public class CustomActionListener implements ActionListener, FocusListener {
 
-    //Defines type of accion
+    //Defines type of action
     public static enum ActionType
     {
         CHANGE_GRIDSIZE_X,

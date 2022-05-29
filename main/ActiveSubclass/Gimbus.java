@@ -5,6 +5,15 @@ import java.util.Random;
 import main.*;
 import main.StaticSubclass.Licbaza;
 
+/**
+ * This class represents Gimbus entity.
+ * It's an entity which Podbus can change into after standing next to Gimbaza static entity.
+ * It scares groups of Podbus entities up to 3 members. Higher amounts will scare Gimbus instead.
+ * It is always going to be scared by either Student or Debil.
+ * If two Gimbus entities stand next to eachother, they can either both become Patus entities; eliminate eachother; or nothing could happen.
+ * Each of these events has 33% chance of occuring.
+ * In order to become Licbus, Gimbus must stand next to Licbaza static entity.
+ */
 public class Gimbus extends Active_Entity {
 
     //VALUES
@@ -15,12 +24,28 @@ public class Gimbus extends Active_Entity {
     public static int amount =0;
 
     //SETTERS && GETTERS
+
+    /**
+     * This setter sets the scared moves if right conditions are met
+     * @param val This parameter indicates the amount of scared moves to be set
+     */
     public void SetScaredMoves(int val) { scaredMoves = val; }
 
     //CTOR
+
+    /**
+     * This constructor creates a new Gimbus entity
+     * @param position This parameter sets the position of Gimbus
+     * @param speedANDvision This parameter sets the speed and vision values of Gimbus
+     */
     public Gimbus(Vector2 position, Vector2 speedANDvision) {
         super(position, speedANDvision);
     }
+
+    /**
+     * This constructor behaves the same as the previous one, except it takes fewer parameters
+     * @param speedANDvision This parameter sets the speed and vision values of Gimbus
+     */
     public Gimbus(Vector2 speedANDvision)
     {
         super(speedANDvision);
@@ -28,6 +53,15 @@ public class Gimbus extends Active_Entity {
 
     
     //METHODS
+
+    /**
+     * This method defines the logic of Gimbus' movement.
+     * It's main use is controlling the fear of Gimbus regarding the presence of certain entities in its neighbourhood.
+     * It also makes it attracted to nearby Licbaza static entities.
+     * @param grid This parameter represents map used for the simulation
+     * @param activeNeigh This parameter lists ActiveSubclass neighbours visible to the Gimbus entity
+     * @param staticNeigh This parameter lists StaticSubclass neighbours visible to the Gimbus entity
+     */
     @Override
     protected Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         if(fearlessTime <= 0)
@@ -57,6 +91,14 @@ public class Gimbus extends Active_Entity {
         return dir;
     }
 
+    /**
+     * This method defines possible changes in the Gimbus entity itself.
+     * It changes to Licbus entity when stationed next to Licbaza.
+     * When it meets another Gimbus entity, they both have 33% chance of either doing nothing, being removed from the grid or turning to Patus entities.
+     * @param grid This parameter represents map used for the simulation
+     * @param activeNeigh This parameter lists ActiveSubclass neighbours visible to the Gimbus entity
+     * @param staticNeigh This parameter lists StaticSubclass neighbours visible to the Gimbus entity
+     */
     @Override
     protected boolean StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh) {
         

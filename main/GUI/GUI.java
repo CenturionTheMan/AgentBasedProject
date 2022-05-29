@@ -12,7 +12,7 @@ import main.GUI.CustomActionListener.ActionType;
 import main.StaticSubclass.*;
 
 /**
- * Class used for creating and handling GUI
+ * This class is used for creating and handling GUI
  */
 public class GUI {
     
