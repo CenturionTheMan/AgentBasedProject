@@ -1,6 +1,5 @@
 package main;
 
-import static org.junit.Assert.assertThrows;
 
 import main.DataGathering.DataGathering;
 import main.GUI.GUI;
