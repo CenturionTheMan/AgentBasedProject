@@ -5,7 +5,7 @@ import main.DataGathering.DataGathering;
 import main.GUI.GUI;
 
 /**
- * Application
+ * This class represents the application itself
  */
 public class Application {
 
@@ -14,12 +14,14 @@ public class Application {
     static Simulation simulation;
     static GUI gui;
     static DataGathering dataGahtering;
+
     public static void main(String[] args) {
         InitApp();
     }
 
-
-    //*Inits application
+    /**
+     * This method is used to initialise the application
+     */
     static void InitApp()
     {
         simulation = new Simulation();

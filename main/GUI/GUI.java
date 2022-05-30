@@ -58,8 +58,8 @@ public class GUI {
     }
 
     /**
-     * Inits GUI
-     * @param gridMap double array with nodes used for simulation
+     * This method is used to initialise GUI
+     * @param gridMap This parameter represents a double array with nodes used for simulation
      */
     private void InitGUI(Node[][] gridMap)
     {
@@ -96,7 +96,9 @@ public class GUI {
 
     }
 
-    //*Creates gui part for changing simulation input values
+    /**
+     * This method creates GUI part for changing simulation input values
+     */
     private void CreateUserHandlingGuiPart()
     {
         Dimension d = new Dimension(70,30);
@@ -194,10 +196,11 @@ public class GUI {
         right.add(line11);
     }
 
-
-    //*Returns new JPanel with given color and size
-    //Color col - color
-    //Dimension size - size
+    /**
+     * This method returns new JPanel with given colour and size
+     * @param col This parameter represents the colour
+     * @param size This parameter represents the size
+     */
     private JPanel CreateJPanelWithColor(Color col, Dimension size)
     {
         var temp = new JPanel();
@@ -206,14 +209,15 @@ public class GUI {
         return temp;
     }
 
-
-    //*Sets gui row for changing settings of active entity
-    //Dimension d - size of row elements
-    //ActionType type - enum which indicates what acion to perform
-    //String text - name of row
-    //int amount - inicial amount of given active entity
-    //Vector2 speedAndVision - inicial speed and vision range of given active entity
-    //Color color - color of given entity on map, if null no color
+    /**
+     * This method sets a GUI row for changing settings of active entity
+     * @param activeEnt This parameter represents size of row elements
+     * @param type This parameter enumerates which indicates what action to perform
+     * @param text This parameter represents name of a row
+     * @param amount This parameter represents the initial amount of given active entity
+     * @param speedAndVision This parameter represents the initial speed and vision range of given active entity
+     * @param color This parameter represents color of given entity on map, if null - no color
+     */
     private JPanel SetupActiveEntityInterface(Dimension activeEnt, ActionType type, String text, int amount, Vector2 speedAndVision, Color color)
     {
         var line = new JPanel();
@@ -243,12 +247,14 @@ public class GUI {
         return line;
     }
 
-    //*Sets gui row for changing settings of one property
-    //Dimension inputFieldSize - size of input field
-    //ActionType type - enum which indicates what acion to perform
-    //String text - name of row
-    //int amount - inicial amount of given property
-    //Color color - color of given static entity on map, if null no color
+    /**
+     * This method sets a GUI row for changing settings of one property
+     * @param inputFieldSize This parameter represents the size of input field
+     * @param type This parameter enumerates which indicates what action to perform
+     * @param text This parameter represents name of a row
+     * @param amount This parameter represents the initial amount of given active entity
+     * @param color This parameter represents color of given entity on map, if null - no color
+     */
     private JPanel SetupOneValuesChangerInterface(Dimension inputFieldSize, ActionType type, String text, int amount, Color color)
     {
         var line = new JPanel();
@@ -268,12 +274,14 @@ public class GUI {
         return line;
     }
 
-    //*Sets gui row for changing settings of one property
-    //Dimension inputFieldSize - size of input field
-    //Dimension labelSize - size of label
-    //ActionType type - enum which indicates what acion to perform
-    //String text - name of row
-    //int amount - inicial amount of given property
+    /**
+     * This method sets a GUI row for changing settings of one property
+     * @param inputFieldSize This parameter represents the size of input field
+     * @param labelSize This parameter represents the size of a label
+     * @param type This parameter enumerates which indicates what action to perform
+     * @param text This parameter represents name of a row
+     * @param amount This parameter represents the initial amount of given active entity
+     */
     private JPanel SetupOneValuesChangerInterface(Dimension inputFieldSize, Dimension labelSize, ActionType type, String text, int amount)
     {
         var line = new JPanel();
@@ -292,10 +300,11 @@ public class GUI {
         return line;
     }
 
-
-
-    //*Iniciates gui part which handle showing grid
-    //Node[][] gridMap - double array with nodes used for simulation
+    /**
+     * This method initiates GUI part which handles showing the grid
+     * @param gridMap This parameter represents a double array with nodes used for simulation
+     * @param roundNumber This parameter represents a round number
+     */
     public static void InicializeNodeGridGui(Node[][] gridMap, int roundNumber)
     {
         if(gridHolder == null) return;
@@ -334,8 +343,11 @@ public class GUI {
         gridHolder.revalidate();
     }
 
-    //*Updates grid in gui
-    //Node[][] gridMap - double array with nodes used for simulation
+    /**
+     * This method updates grid in GUI
+     * @param gridMap This parameter represents a double array with nodes used for simulation
+     * @param roundNumber This parameter represents a round number
+     */
     public static void UpdateGridGui(Node[][] gridMap, int roundNumber)
     {
  
@@ -353,9 +365,11 @@ public class GUI {
         gridHolder.revalidate();
     }
 
-    //*Chages color of panel judging by entity which occupies such node
-    //JPanel panel - gui's node in grid
-    //Entity e - entity which based on color is picked
+    /**
+     * This method changes colour of the panel, judging by an entity which occupies such node
+     * @param panel This parameter represents a GUI's node in grid
+     * @param e This parameter represents an entity which based on color is picked
+     */
     private static void SetPanelByUnit(JPanel panel, Entity e)
     {
         panel.removeAll();
@@ -417,23 +431,30 @@ public class GUI {
         panel.revalidate();
     }
 
-    //*Updates round number on GUI
+    /**
+     * This method updates round number on GUI
+     * @param roundNumber This parameter represents a round number
+     */
     private static void SetRoundCounter(int roundNumber) { roundCounter.setText("Round number: " + Integer.toString(roundNumber)); }
 
 //===========================================================================================CONSOLE PRINTING
 
-    //*Prints grid in console and put thred to sleep for given amount
-    //Node[][] grid - double array with nodes used for simulation
-    //int timeBetweenSteps - idicates how long should thred sleep after printing grid
+    /**
+     * This method prints grid in console and put thread to sleep for given amount
+     * @param gridMap This parameter represents a double array with nodes used for simulation
+     * @param timeBetweenSteps This parameter indicates how long should a thread sleep after printing grid
+     */
     public static void PrintGridInConsole(Node[][] gridMap, int timeBetweenSteps)
     {
         GUI.GridCreatorForConsole(gridMap);
         try { Thread.sleep(timeBetweenSteps); } 
         catch (InterruptedException e) { e.printStackTrace(); }
     }
-    
-    //*Prints grid console
-    //Node[][] grid - double array with nodes used for simulation
+
+    /**
+     * This method prints a grid console
+     * @param grid This parameter represents a double array with nodes used for simulation
+     */
     private static void GridCreatorForConsole(Node[][] grid)
     {
         for (int i = 0; i < grid[0].length; i++) {

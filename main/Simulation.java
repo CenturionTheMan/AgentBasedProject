@@ -5,6 +5,9 @@ import main.DataGathering.SimulationResult;
 import main.GUI.GUI;
 import main.StaticSubclass.*;
 
+/**
+ * This class represents the simulation process of the program
+ */
 public class Simulation {
     
     //===============================================================VALUES
@@ -46,65 +49,252 @@ public class Simulation {
 
 
     //===============================================================SETTERS && GETTERS
+
+    /**
+     * This setter sets the size of the gridMap
+     * @param size This parameter represents the size of the grid to be set
+     */
     public void SetGridSize(Vector2 size) { gridSize = size; }
+
+    /**
+     * This getter returns the gridMap's size
+     */
     public Vector2 GetGridSize() { return gridSize; }
-    
+
+    /**
+     * This getter returns the gridMap
+     */
     public GridMap GetGridMap() { return gridMap; }
 
+    /**
+     * This getter returns the results
+     */
     public SimulationResult GetResult() { return result; }
 
+    /**
+     * This setter sets the boolean value of the isPrintingGrid property
+     * @param val This parameter represents a boolean value
+     */
     public static void SetIsPrintingGrid(boolean val) { isPrintingGrid = val; }
 
+    /**
+     * This setter sets time between steps of an entity
+     * @param val This parameter represents the time
+     */
     public static void SetTimeBetweenSteps(int val) { timeBetweenSteps = val; }
+
+    /**
+     * This getter returns the time between steps of an entity
+     */
     public static int GetTimeBetweenSteps() { return timeBetweenSteps; }
 
+    /**
+     * This setter sets the speed and vision values of Debil entity
+     * @param speedANDvision This parameter represents these values
+     */
     public void SetDebil_speedANDvision(Vector2 speedANDvision) { Debil_speedANDvision = speedANDvision; }
+
+    /**
+     * This getter returns the values of Debil's speed and vision
+     */
     public static Vector2 GetDebil_speedANDvision() {return Debil_speedANDvision; }
+
+    /**
+     * This setter sets the speed and vision values of Gimbus entity
+     * @param speedANDvision This parameter represents these values
+     */
     public void SetGimbus_speedANDvision(Vector2 speedANDvision) { Gimbus_speedANDvision = speedANDvision; }
+
+    /**
+     * This getter returns the values of Gimbus' speed and vision
+     */
     public static Vector2 GetGimbus_speedANDvision() {return Gimbus_speedANDvision; }
+
+    /**
+     * This setter sets the speed and vision values of Licbus entity
+     * @param speedANDvision This parameter represents these values
+     */
     public void SetLicbus_speedANDvision(Vector2 speedANDvision) { Licbus_speedANDvision = speedANDvision; }
+
+    /**
+     * This getter returns the values of Licbus' speed and vision
+     */
     public static Vector2 GetLicbus_speedANDvision() {return Licbus_speedANDvision; }
+
+    /**
+     * This setter sets the speed and vision values of Patus entity
+     * @param speedANDvision This parameter represents these values
+     */
     public void SetPatus_speedANDvision(Vector2 speedANDvision) { Patus_speedANDvision = speedANDvision; }
+
+    /**
+     * This getter returns the values of Patus' speed and vision
+     */
     public static Vector2 GetPatus_speedANDvision() { return Patus_speedANDvision; }
+
+    /**
+     * This setter sets the speed and vision values of Podbus entity
+     * @param speedANDvision This parameter represents these values
+     */
     public void SetPodbus_speedANDvision(Vector2 speedANDvision) { Podbus_speedANDvision = speedANDvision; }
+
+    /**
+     * This getter returns the values of Podbus' speed and vision
+     */
     public static Vector2 GetPodbus_speedANDvision() { return Podbus_speedANDvision; }
+
+    /**
+     * This setter sets the speed and vision values of Student entity
+     * @param speedANDvision This parameter represents these values
+     */
     public void SetStudent_speedANDvision(Vector2 speedANDvision) { Student_speedANDvision = speedANDvision; }
+
+    /**
+     * This getter returns the values of Student's speed and vision
+     */
     public static Vector2 GetStudent_speedANDvision() { return Student_speedANDvision; }
 
+    /**
+     * This setter sets the initial amount of Debil entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetDebilInitAmount(int amount) { DebilInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Debil entities
+     */
     public int GetDebilInitAmount() { return DebilInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Gimbus entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetGimbusInitAmount(int amount) { GimbusInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Gimbus entities
+     */
     public int GetGimbusInitAmount() { return GimbusInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Licbus entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetLicbusInitAmount(int amount) { LicbusInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Licbus entities
+     */
     public int GetLicbusInitAmount() { return LicbusInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Patus entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetPatusInitAmount(int amount) { PatusInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Patus entities
+     */
     public int GetPatusInitAmount() { return PatusInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Podbus entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetPodbusInitAmount(int amount) { PodbusInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Podbus entities
+     */
     public int GetPodbusInitAmount() { return PodbusInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Student entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetStudentInitAmount(int amount) { StudentInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Student entities
+     */
     public int GetStudentInitAmount() { return StudentInitAmount; }
 
+    /**
+     * This setter sets the initial amount of Gimbaza entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetGimbazaInitAmount(int amount) { GimbazaInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Gimbaza entities
+     */
     public int GetGimbazaInitAmount() { return GimbazaInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Licbaza entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetLicbazaInitAmount(int amount) { LicbazaInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Licbaza entities
+     */
     public int GetLicbazaInitAmount() { return LicbazaInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Uczelnia entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetUczelniaInitAmount(int amount) { UczelniaInitAmount = amount; }
+
+    /**
+     * This getter returns the amount of Uczelnia entities
+     */
     public int GetUczelniaInitAmount() { return UczelniaInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Piwo entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetPiwoInitAmount (int amount) {PiwoInitAmount = amount;}
+
+    /**
+     * This getter returns the amount of Piwo entities
+     */
     public int GetPiwoInitAmount() { return PiwoInitAmount; }
+
+    /**
+     * This setter sets the initial amount of Egzamin entities on the gridMap
+     * @param amount This parameter represents the amount of entities
+     */
     public void SetEgzaminInitAmount (int amount) {EgzaminInitAmount = amount;}
+
+    /**
+     * This getter returns the amount of Egzamin entities
+     */
     public int GetEgzaminInitAmount() { return EgzaminInitAmount; }
 
+    /**
+     * This getter returns the amount of all entities
+     */
     public int GetAllUnitsInitAmount()
     {
         return PiwoInitAmount + EgzaminInitAmount + DebilInitAmount + GimbusInitAmount + LicbazaInitAmount + PatusInitAmount + PodbusInitAmount + StudentInitAmount + GimbazaInitAmount + LicbazaInitAmount + UczelniaInitAmount;
     }
 
+    /**
+     * This boolean returns true or false whether the simulation is running
+     */
     public boolean IsRunning() { return isRunning; }
 
 
 
     //==================================================CTOR
+
+    /**
+     * This constructor creates the simulation
+     */
     public Simulation() {
         gridMap = new GridMap(gridSize);
 
@@ -115,9 +305,10 @@ public class Simulation {
 
 
     //==================================================METHODS
-    
-    
-    //*Inits grid for simulation
+
+    /**
+     * This method initiates grid for simulation
+     */
     public void InitSimulation()
     {
         Entity.ResetAmountOfAllSubclasses();
@@ -206,14 +397,18 @@ public class Simulation {
         
     }
 
-    //*Runs simulation without awaking new thread
+    /**
+     * This method runs simulation without awaking new thread
+     */
     public void RunSimulationWithoutNewThred()
     {
         isRunning = true;
         updateThreadClassObject.run();
     }
 
-    //*Runs simulation in new thread
+    /**
+     * This method runs simulation in new thread
+     */
     public void RunSimulation()
     {
         GUI.SetSimulationStatus("Simulation status: RUNNING");
@@ -229,7 +424,9 @@ public class Simulation {
         }
     }
 
-    //*Will pause simulation if any is currently running
+    /**
+     * This method will pause simulation if any is currently running
+     */
     public void PauseSimulation()
     {
         if(isRunning)
@@ -239,7 +436,27 @@ public class Simulation {
         }
     }
 
-    //*Will setup values used as begin conditions for simulation
+    /**
+     * This method will setup values used as begin conditions for simulation
+     * @param gridSize This parameter represents the size of the gridMap
+     * @param debil_speedANDvision This parameter represents the speed and vision values of Debil entity
+     * @param gimbus_speedANDvision This parameter represents the speed and vision values of Gimbus entity
+     * @param licbus_speedANDvision This parameter represents the speed and vision values of Licbus entity
+     * @param patus_speedANDvision This parameter represents the speed and vision values of Patus entity
+     * @param podbus_speedANDvision This parameter represents the speed and vision values of Podbus entity
+     * @param student_speedANDvision This parameter represents the speed and vision values of Student entity
+     * @param debilInitAmount This parameter represents the initial amount of Debil entities
+     * @param gimbusInitAmount This parameter represents the initial amount of Gimbus entities
+     * @param licbusInitAmount This parameter represents the initial amount of Licbus entities
+     * @param patusInitAmount This parameter represents the initial amount of Patus entities
+     * @param podbusInitAmount This parameter represents the initial amount of Podbus entities
+     * @param studentInitAmount This parameter represents the initial amount of Student entities
+     * @param gimbazaInitAmount This parameter represents the initial amount of Gimbaza entities
+     * @param licbazaInitAmount This parameter represents the initial amount of Licbaza entities
+     * @param uczelniaInitAmount This parameter represents the initial amount of Uczelnia entities
+     * @param piwoInitAmount This parameter represents the initial amount of Piwo entities
+     * @param egzaminInitAmount This parameter represents the initial amount of Egzamin entities
+     */
     public void SetupSimulationProperties(Vector2 gridSize, Vector2 debil_speedANDvision, Vector2 gimbus_speedANDvision, Vector2 licbus_speedANDvision, 
     Vector2 patus_speedANDvision, Vector2 podbus_speedANDvision, Vector2 student_speedANDvision, int debilInitAmount, int gimbusInitAmount, int licbusInitAmount, 
     int patusInitAmount, int podbusInitAmount, int studentInitAmount, int gimbazaInitAmount, int licbazaInitAmount, int uczelniaInitAmount, int piwoInitAmount, int egzaminInitAmount)
@@ -267,9 +484,9 @@ public class Simulation {
         Simulation.EgzaminInitAmount = egzaminInitAmount;
     }
 
-
-
-    //Class for handling multithreading
+    /**
+     * This class is for handling multithreading
+     */
     class UpdateThread implements Runnable
     {
         @Override
@@ -278,8 +495,10 @@ public class Simulation {
         public void run() {
             Update();
         }
-        
-        //*Handle turns cycles
+
+        /**
+         * This method is used to handle turns cycles
+         */
         private void Update()
         {
             int numberOfEndCon = 0;
@@ -357,8 +576,10 @@ public class Simulation {
             System.out.println("SIM END");
         }
 
-        //*Checks whether any of end conditions is met, if so returns it number, otherwise returns 0
-        //boolean isFirstCon - bool retured by DoMove, used to identify condition number 1
+        /**
+         * This method checks whether any of end conditions is met, if so returns it number, otherwise returns 0
+         * @param isFirstCon This parameter is a bool returned by DoMove, used to identify condition number 1
+         */
         private int CheckEndConditions(boolean isFirstCon)
         {
             if(isFirstCon)

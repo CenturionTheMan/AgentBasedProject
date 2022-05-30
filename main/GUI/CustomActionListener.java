@@ -46,12 +46,26 @@ public class CustomActionListener implements ActionListener, FocusListener {
     JTextField speed;
     JTextField visionRange;
 
+    /**
+     * A constructor regarding the simulation #1
+     * @param type This parameter represents the type of action to be done with the GUI
+     * @param simulation This parameter represents the simulation itself
+     * @param input This parameter represents user's input
+     */
     public CustomActionListener(ActionType type, Simulation simulation, JTextField input) {
         actionType = type;
         this.sim = simulation;
         this.input = input;
     }
 
+    /**
+     * A constructor regarding the simulation #2
+     * @param type This parameter represents the type of action to be done with the GUI
+     * @param simulation This parameter represents the simulation itself
+     * @param amount This parameter represents user's input of the amount of entities
+     * @param speed This parameter represents user's input of the speed of entities
+     * @param visionRange This parameter represents user's input of the range of vision of entities
+     */
     public CustomActionListener(ActionType type, Simulation simulation, JTextField amount, JTextField speed, JTextField visionRange)
     {
         actionType = type;
@@ -61,12 +75,20 @@ public class CustomActionListener implements ActionListener, FocusListener {
         this.visionRange = visionRange;
     }
 
+    /**
+     * A constructor regarding the simulation #3
+     * @param type This parameter represents the type of action to be done with the GUI
+     * @param simulation This parameter represents the simulation itself
+     */
     public CustomActionListener(ActionType type, Simulation simulation) {
         actionType = type;
         this.sim = simulation;
     }
 
-    //*Used mostly on buuton pressed
+    /**
+     * This method is used mostly for the pressing of the buttons
+     * @param e This parameter represents the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (actionType) {         
@@ -88,13 +110,21 @@ public class CustomActionListener implements ActionListener, FocusListener {
         //System.out.println("WORKING!");
     }
 
-    //*Do stuff when object gain focus 
+    /**
+     * This method is used to do certain tasks when an object gains focus
+     * @param e This parameter represents the event to be processed
+     */
     @Override
     public void focusGained(FocusEvent e) {  
         //System.out.println("focus gain");     
     }
 
-    //*Do stuff when object lost focus  
+    //*Do stuff when object lost focus
+
+    /**
+     * This method is used to do certain tasks when an object loses focus
+     * @param e This parameter represents the event to be processed
+     */
     @Override
     public void focusLost(FocusEvent e) {
         int gridOneDImensionSize = (input != null)? GetIntFormJTextField(input) :0;
@@ -182,7 +212,10 @@ public class CustomActionListener implements ActionListener, FocusListener {
         //System.out.println("focus lost");
     }
 
-    //*Converts text from JTextField to int. Return 0 if unable to convert
+    /**
+     * This method converts text from JTextField to integer value. Returns 0 if unable to convert
+     * @param t This parameter is used to yield the text value
+     */
     private int GetIntFormJTextField(JTextField t)
     {
         try {

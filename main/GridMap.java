@@ -8,6 +8,9 @@ import java.util.Random;
 import main.StaticSubclass.Egzamin;
 import main.StaticSubclass.Piwo;
 
+/**
+ * This class defines the gridMap used for the simulation
+ */
 public class GridMap {
     
     //PROPERTIES
@@ -15,10 +18,19 @@ public class GridMap {
 
 
     //GETTERS && SETTERS
+
+    /**
+     * This getter is used to return the grid property
+     */
     public Node[][] GetGrid() { return grid; }
 
 
     //CTOR
+
+    /**
+     * This constructor is used to generate a new gridMap
+     * @param size This parameter indicates the size of the gridMap
+     */
     public GridMap(Vector2 size) {
         grid = new Node[size.x][size.y];
     }
@@ -26,8 +38,10 @@ public class GridMap {
 
     //METHODS
 
-    //*Inits grid size and inicialize each node
-    //Vector2 gridSize - indicates grid size
+    /**
+     * This method initiates grid size and initialises each node
+     * @param gridSize This parameter indicates grid size
+     */
     public void InitGrid(Vector2 gridSize) //setup
     {
         grid = new Node[gridSize.x][gridSize.y];
@@ -41,9 +55,11 @@ public class GridMap {
         }
     }
 
-    //*Sets unit on given position position
-    //Vector2 pos - point on map where entity will be placed
-    //Entity unit - instanciated Entity object
+    /**
+     * This method sets a unit on a given position
+     * @param pos This parameter represents a point on map where entity will be placed
+     * @param unit This parameter represents an instanced Entity object
+     */
     public static void PlaceUnitOnMap(Vector2 pos, Entity unit)
     {
         Entity.ChangeAmountOfGivenSubclass(grid[pos.x][pos.y].GetOccupant(), -1);
@@ -56,7 +72,9 @@ public class GridMap {
         if(isLocalOpen == false)unit.IsOpen();
     }
 
-    //*Returns global position of random node (without any occupant) in grid
+    /**
+     * This method returns global position of random node (without any occupant) in grid
+     */
     public static Vector2 GetEmptyPositionInMap()
     {
         Random rand = new Random();
@@ -85,9 +103,11 @@ public class GridMap {
         }
     }
 
-    //*Returns the closest position to given target from positions list
-    //List<Vector2> points - list of points to choose from
-    //Vector2 target - position to choose the smallest distance to
+    /**
+     * This method returns the closest position to given target from positions list
+     * @param points This parameter lists points to choose from
+     * @param target This parameter represents a position to choose the smallest distance to
+     */
     public static Vector2 GetTheClosestPointToTargetFromPoints(List<Vector2> points, Vector2 target)
     {
         if(points == null || points.size() < 1)return null;
@@ -104,11 +124,13 @@ public class GridMap {
         return res;
     }
 
-    //*Returns closest (free) node to target position from nodes which surrounds given point (center).
-    //*Nodes occupied by Egzamin or Piwo are treated as free. 
-    //*Will return null if there is no free node in surrounding
-    //Vector2 center - point from which surranding nodes are being choosen
-    //Vector2 targetPos - position to choose the smallest distance to
+    /**
+     * This method returns closest (free) node to target position from nodes which surrounds given point (center).
+     * Nodes occupied by Egzamin or Piwo are treated as free.
+     * Will return null if there is no free node in surrounding
+     * @param center This parameter represents a point from which surrounding nodes are being chosen
+     * @param targetPos This parameter represents a position to choose the smallest distance to
+     */
     public static Node GetClosestToPointNodeInUnitSquare(Vector2 center, Vector2 targetPos)
     {
         List<Node> neigh = GridMap.GetNeighbourNodes(center, 1);
@@ -144,8 +166,10 @@ public class GridMap {
         return null;
     }
 
-    //*Checks whether position is iside grid boundries
-    //Vector2 pos - position to check
+    /**
+     * This method checks whether position is inside a grid's boundaries
+     * @param pos This parameter represents a position to be checked
+     */
     public static boolean IsOnGrid(Vector2 pos)
     {
         if(pos.x < 0 || pos.x >= grid.length) { return false; }
@@ -153,10 +177,12 @@ public class GridMap {
         return true;
     }
 
-    //*Returns position of random free node from nodes in surrounding of node with given position.
-    //*Nodes occupied by Egzamin or Piwo are treated as free. 
-    //*Returns Vector2 = [0,0] if there is no free node
-    //Vector2 position - point from which surranding nodes are being choosen
+    /**
+     * This method returns position of random free node from nodes in surrounding of node with given position.
+     * Nodes occupied by Egzamin or Piwo are treated as free.
+     * Returns Vector2 = [0,0] if there is no free node.
+     * @param position This parameter represents a point from which surrounding nodes are being chosen
+     */
     public static Vector2 GetFreePositionInNeighbourhood(Vector2 position)
     {
         List<Node> neigh = GetNeighbourNodes(position, 1);
@@ -176,12 +202,12 @@ public class GridMap {
         return filtred.get(new Random().nextInt(filtred.size())).GetPosition();
     }
 
-
-    //*Returns list of nodes which surrounds node with given cords (center)
-    //*Deepness indicates to which extends nodes as treated as surranding 
-    //*deepness = n: returns list of nodes which distance to center is smaller or equal to sqrt(2*n^2)
-    //Vector2 center - point from which surranding nodes are being choosen
-    //int deepness - indicates how many neighbours should be taken into consideration
+    /**
+     * This method returns a list of nodes which surround the node with given coordinates (center).
+     * Deepness indicates to which extends nodes as treated as surrounding.
+     * @param center This parameter represents a point from which surrounding nodes are being chosen
+     * @param deepness This parameter ndicates how many neighbours should be taken into consideration
+     */
     public static List<Node> GetNeighbourNodes(Vector2 center, int deepness)
     {
         List<Node> neigh = new ArrayList<Node>();

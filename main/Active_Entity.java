@@ -3,7 +3,9 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class is used to program entities capable of moving on the map / grid
+ */
 public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
 
     //=======================================================================VALUES
@@ -12,26 +14,64 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
     private int movesLeft =0;   //moves left in given round
 
     //=====================================================================GETTERS && SETTERS
+
+    /**
+     * This getter returns the speed value of an entity
+     */
     public int GetSpeed() { return speed; }
+
+    /**
+     * This setter sets a given speed to an entity
+     * @param speed This parameter yields the speed value to be given
+     */
     public void SetSpeed(int speed) { this.speed = speed; }
 
+    /**
+     * This getter returns the range of an entity's vision
+     */
     public int GetVisionRange() { return visionRange; }
+
+    /**
+     * This setter sets a given amount of vision range for a certain entity
+     * @param visionRange This parameter yields the vision range value to be given
+     */
     public void SetVisionRange(int visionRange) { this.visionRange = visionRange; }
 
+    /**
+     * This setter adds a given number of moves to an entity
+     * @param amount This parameter yields the number of moves to be given
+     */
     public void AddMoves(int amount) { movesLeft += amount; }
 
     //==============================================================================================CTOR
+
+    /**
+     * This constructor is used to create a new active entity
+     * @param position This parameter sets the position of an entity
+     * @param speedANDvision This parameter sets the speed and vision values of an entity
+     */
     public Active_Entity(Vector2 position, Vector2 speedANDvision) {
         super(position);
         this.speed = speedANDvision.x;
         this.visionRange = speedANDvision.y;
     }
 
+    /**
+     * This constructor is used to create a new active entity
+     * @param position This parameter sets the position of an entity
+     * @param speed This parameter sets the speed of an entity
+     * @param visionRange This parameter sets the vision value of an entity
+     */
     public Active_Entity(Vector2 position,int speed, int visionRange) {
         super(position);
         this.speed = speed;
         this.visionRange = visionRange;
     }
+
+    /**
+     * This constructor is used to create a new active entity
+     * @param speedANDvision This parameter sets the speed and vision values of an entity
+     */
     public Active_Entity(Vector2 speedANDvision) 
     {
         speed = speedANDvision.x;
@@ -44,10 +84,12 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
     
     //=======================================================================================METHODS
 
-    //*Inits entity movement
-    //*Returns true if any of end condition (of simulation) is meet
-    //Vector2 forcedDir - if not null, direction given by it is being used as movement vector
-    //Node[][] grid - double array with nodes used for simulation
+    /**
+     * This method initialises an entity's movement.
+     * Returns true if any of end condition (of simulation) is meet
+     * @param grid This parameter represents a double array with nodes used for simulation
+     * @param forcedDir This parameter gives direction. If not null, direction given by it is being used as movement vector
+     */
     public final boolean DoMove(Node[][] grid, Vector2 forcedDir) //HUB used for moving entities
     {
         if(IsOpen()) movesLeft = speed;
@@ -73,22 +115,26 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         return isEndConMeet;
     }
 
-    //*Returns local movement vector which indicates direction to which will entity go in given round
-    //List<Active_Entity> activeNeigh - list of active entities in vision range of given unit
-    //List<Static_Entity> staticNeigh - list of static entities in vision range of given unit
-    //Node[][] grid - double array with nodes used for simulation
+    /**
+     * This method returns local movement vector which indicates direction to which will entity go in given round
+     * @param grid This parameter represents a double array with nodes used for simulation
+     * @param activeNeigh This parameter lists active neighbours visible to an entity
+     * @param staticNeigh This parameter lists static neighbours visible to an entity
+     */
     protected abstract Vector2 MovementLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Get MovementVector to change unit position
-    
-    //*Returns true if any of end conditions is met
-    //List<Active_Entity> activeNeigh - list of active entities in vision range of given unit
-    //List<Static_Entity> staticNeigh - list of static entities in vision range of given unit
-    //Node[][] grid - double array with nodes used for simulation
-    protected abstract boolean StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Check status if needed; should return true if enticy = student and piwo was eatn in turn
 
+    /**
+     * This method returns true if any of end conditions is met
+     * @param grid This parameter represents a double array with nodes used for simulation
+     * @param activeNeigh This parameter lists active neighbours visible to an entity
+     * @param staticNeigh This parameter lists static neighbours visible to an entity
+     */
+    protected abstract boolean StatusChangeLogic(Node[][] grid, List<Active_Entity> activeNeigh, List<Static_Entity> staticNeigh); //Check status if needed; should return true if entity = Student and Piwo was consumed in turn
 
-
-    //*Returns active entitites in vision range
-    //Node[][] grid - double array with nodes used for simulation
+    /**
+     * This method returns active entities in vision range
+     * @param grid This parameter represents a double array with nodes used for simulation
+     */
     private List<Active_Entity> GetActiveNeighbours(Node[][] grid)
     {
         List<Active_Entity> arr = new ArrayList<Active_Entity>();   
@@ -104,8 +150,10 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         return arr;
     }
 
-    //*Returns static entitites in vision range
-    //Node[][] grid - double array with nodes used for simulation
+    /**
+     * This method returns static entities in vision range
+     * @param grid This parameter represents a double array with nodes used for simulation
+     */
     private List<Static_Entity> GetStaticNeighbours(Node[][] grid)
     {
         List<Static_Entity> arr = new ArrayList<Static_Entity>();
@@ -120,9 +168,11 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         return arr;
     }
 
-    //*Returns true if tere is given static entity in any of surranding nodes
-    //List<Static_Entity> staticNeigh - list of static entities in vision range of given unit
-    //Class<? extends Static_Entity> target - sub class which extends from Static_Entity class
+    /**
+     * This method returns true if there is a given static entity in any of surrounding nodes
+     * @param staticNeigh This parameter lists static neighbours visible to an entity
+     * @param target This parameter represents a subclass which extends from Static_Entity class
+     */
     protected boolean IsStaticEntityInNeighborhood(List<Static_Entity> staticNeigh ,Class<? extends Static_Entity> target)
     {
         if(staticNeigh != null && staticNeigh.size() > 0)
@@ -137,11 +187,12 @@ public abstract class Active_Entity extends Entity { //klasa abstrakcyjna
         return false;
     }
 
-
-    //*Returns local vector to given static entity. 
-    //*Will return random local vector if no object of choosen subclass is in vision range
-    //List<Static_Entity> staticNeigh - list of static entities in vision range of given unit
-    //Class<? extends Static_Entity> target - sub class which extends from Static_Entity class
+    /**
+     * This method returns a local vector to given static entity.
+     * Will return a random local vector if no object of chosen subclass is in vision range
+     * @param staticNeigh This parameter lists static neighbours visible to an entity
+     * @param targetClass This parameter represents a subclass which extends from Static_Entity class
+     */
     protected Vector2 GetMovementVectorToStaticEntity(List<Static_Entity>staticNeigh, Class<? extends Static_Entity> targetClass)
     {
         Vector2 baza = null;
