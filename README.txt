@@ -1,3 +1,5 @@
+  WPROWADZENIE DO PROJEKTU
+
 Na planszy, o z góry ustalonym rozmiarze, znajdują się dwa rodzaje bytów: nieruchome i ruchome. Do nieruchomych należą:
 - Podbazy
 - Gimbazy
