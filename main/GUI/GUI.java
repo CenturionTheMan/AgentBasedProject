@@ -30,7 +30,7 @@ public class GUI {
 
     private Simulation simulation;
 
-    static final Color EMPTY = new Color(224,224,224);
+    static final Color EMPTY = new Color(41,41,41);
     static final Color PODBUS = new Color(147,255,0);
     static final Color GIMBUS = new Color(35,243,254);
     static final Color PATUS = new Color(255,0,0);

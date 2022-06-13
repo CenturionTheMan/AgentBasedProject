@@ -15,7 +15,7 @@ public class Simulation {
     
     private Thread updateThread; //thread used for performing simulation
     private UpdateThread updateThreadClassObject; //instanciated object of UpdateThreadClass
-    private static int timeBetweenSteps = 500; //time [in ms] between printing grid
+    private static int timeBetweenSteps = 1000; //time [in ms] between printing grid
     private boolean isRunning = false; //says whether simualtion is running
 
     private SimulationResult result = new SimulationResult(); //hold results of simulation
@@ -36,12 +36,12 @@ public class Simulation {
 
     private static int DebilInitAmount = 0; //amount of Debils units placed on map at the beginning of simulation
     private static int GimbusInitAmount = 0; //amount of Gimbus units placed on map at the beginning of simulation
-    private static int LicbusInitAmount = 1; //amount of Licbis units placed on map at the beginning of simulation
-    private static int PatusInitAmount = 1; //amount of Patus units placed on map at the beginning of simulation
-    private static int PodbusInitAmount = 2; //amount of Podbus units placed on map at the beginning of simulation
-    private static int StudentInitAmount = 1; //amount of Student units placed on map at the beginning of simulation
+    private static int LicbusInitAmount = 0; //amount of Licbis units placed on map at the beginning of simulation
+    private static int PatusInitAmount = 0; //amount of Patus units placed on map at the beginning of simulation
+    private static int PodbusInitAmount = 10; //amount of Podbus units placed on map at the beginning of simulation
+    private static int StudentInitAmount = 0; //amount of Student units placed on map at the beginning of simulation
 
-    private static int GimbazaInitAmount = 2; //amount of Gimbaza units placed on map at the beginning of simulation
+    private static int GimbazaInitAmount = 1; //amount of Gimbaza units placed on map at the beginning of simulation
     private static int LicbazaInitAmount = 1; //amount of Licbaza units placed on map at the beginning of simulation
     private static int UczelniaInitAmount = 1; //amount of Uczelnia units placed on map at the beginning of simulation
     private static int PiwoInitAmount = 0; //amount of Uczelnia units placed on map at the beginning of simulation
